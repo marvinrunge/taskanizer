@@ -1,0 +1,15 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title>
+      Lists
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-list>
+    <app-task-listitem *ngFor="let task of (tasks$ | async)" [task]=task></app-task-listitem>
+  </ion-list>
+
+  <ion-button (click)="addTask()"></ion-button>
+</ion-content>

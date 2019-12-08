@@ -1,0 +1,76 @@
+@import '../../../theme/variables.scss';
+
+.listitem {
+    display: table;
+    min-height: 50px;
+    padding: 0px;
+    width: 100%;
+}
+
+mat-checkbox {
+    padding: 0px 17px 0px 17px;
+    display: table-cell;
+    vertical-align: middle;
+    width: 50px;
+}
+
+#arrow {
+    padding: 0px 16px 0px 8px;
+    display: table-cell;
+    vertical-align: middle;    
+    width: 16px;
+    min-width: 16px;
+}
+
+#text {
+    display: table-cell;
+    vertical-align: middle;
+    color: var(--text-primary-color);
+    padding: 10px 0px 10px 0px;
+}
+
+#title {
+    font-size: 16px;
+    font-weight: bold;
+    color: #222;
+    letter-spacing: .0125em;
+}
+
+#subtitle {
+    font-size: 13px;
+    color: var(--text-primary-color);
+    letter-spacing: .0125em;
+    vertical-align: middle;
+    padding-top: 2px;
+}
+
+#subtitle ion-icon {
+    font-size: 16px;
+    margin-top: -3px;    
+    vertical-align: middle;
+}
+
+#priority1 {
+    color: darkcyan;
+}
+
+#priority2 {
+    color: orange;
+}
+
+#priority3 {
+    color: red;
+}
+
+.tag {
+    background-color: var(--primary-color);
+    color: var(--text-primary-darker-color);
+    border-radius: 1rem;
+    font-size: 13px;
+    text-shadow: none;
+    width: fit-content;
+    padding: 0rem 0.3rem;
+    float: left;
+    margin-right: 0.5rem;
+    margin-top: 4px;
+}
