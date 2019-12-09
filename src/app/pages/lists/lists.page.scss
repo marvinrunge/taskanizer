@@ -2,3 +2,14 @@ app-task-listitem {
     display: block;
     border-bottom: #00000011 solid 1px;
 }
+
+.add-button {
+    position: fixed;
+    bottom: 1rem;
+    right: 1rem;
+}
+
+ion-list {
+    padding-top: 0px;
+    padding-bottom: 5.5rem;
+}

@@ -15,6 +15,7 @@ import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RootStoreModule } from './root-store';
+import { TranslateModule } from '@ngx-translate/core';
 
 @NgModule({
   declarations: [AppComponent],

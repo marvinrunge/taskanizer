@@ -3,6 +3,7 @@ import { Task } from 'src/app/models';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { RootStoreState, TaskActions, TaskSelectors } from 'src/app/root-store';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lists',
@@ -34,10 +35,9 @@ export class ListsPage {
 
   addTask() {
     const task = new Task();
-    task._id = undefined;
     task.title = 'E-Mail beantworten';
     task.details = undefined;
-    task.duration = '3d verbleibend';
+    task.deadline = moment().add(1, 'd');
     task.level = 0;
     task.priority = 3;
     task.reminder = true;

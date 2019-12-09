@@ -1,11 +1,11 @@
 <div class="listitem" [style.padding-left.px]="(task.level*12)">
-    <mat-checkbox>&nbsp;</mat-checkbox>
+    <mat-checkbox></mat-checkbox>
     <div id="text">
         <div id="title">{{ task.title }}</div>
         <div id="subtitle" *ngIf="task.hasSubtitle()">
             <ion-icon id="priority" *ngIf="task.priority !== 0" name="ios-flame" [id]="'priority' + task.priority"></ion-icon>
-            <span *ngIf="task.duration && (task.priority !== 0)"> - </span>
-            <span *ngIf="task.duration"><ion-icon name="calendar"></ion-icon> {{ task.duration }}</span>
+            <span *ngIf="task.deadline && (task.priority !== 0)"> - </span>
+            <span *ngIf="task.deadline">{{ 'task_item.due' | translate }} {{ task.deadline.fromNow() }}</span>
             <span *ngIf="task.reminder || task.attachment || task.repeat"> - </span>
             <ion-icon name="md-alarm" *ngIf="task.reminder"></ion-icon>
             <ion-icon name="md-repeat" *ngIf="task.repeat"></ion-icon>

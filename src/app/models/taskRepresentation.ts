@@ -1,8 +1,11 @@
+import { Task } from '.';
+import * as moment from 'moment';
+
 export class TaskRepresentation {
     _id: string;
     title: string;
     details: string;
-    duration: string;
+    deadline: string;
     level: number;
     priority: number;
     reminder: boolean;
@@ -11,28 +14,17 @@ export class TaskRepresentation {
     mainTask: boolean;
     tags: string[];
 
-    constructor(
-    $id: string, $title: string, $details: string, $duration: string, $level: number, $priority: number,
-    $reminder: boolean, $repeat: boolean, $attachment: boolean, $mainTask: boolean, $tags: string[]) {
-        this._id = $id;
-        this.title = $title;
-        this.details = $details;
-        this.priority = $priority;
-        this.duration = $duration;
-        this.reminder = $reminder;
-        this.repeat = $repeat;
-        this.attachment = $attachment;
-        this.level = $level;
-        this.mainTask = $mainTask;
-        this.tags = $tags;
-    }
-
-    hasSubtitle() {
-        if (this.priority || this.duration || this.reminder ||
-            this.repeat || this.attachment || this.tags) {
-            return true;
-        } else {
-            return false;
-        }
+    constructor(task: Task) {
+        this._id = task.id;
+        this.title = task.title;
+        this.details = task.details;
+        this.priority = task.priority;
+        this.deadline = moment.utc(task.deadline).format();
+        this.reminder = task.reminder;
+        this.repeat = task.repeat;
+        this.attachment = task.attachment;
+        this.level = task.level;
+        this.mainTask = task.mainTask;
+        this.tags = task.tags;
     }
 }

@@ -11,5 +11,7 @@
     <app-task-listitem *ngFor="let task of (tasks$ | async)" [task]=task></app-task-listitem>
   </ion-list>
 
-  <ion-button (click)="addTask()"></ion-button>
+  <button class="add-button" (click)="addTask()" mat-fab aria-label="add task button">
+    <mat-icon>add</mat-icon>
+  </button>
 </ion-content>

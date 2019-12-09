@@ -1,10 +1,11 @@
 import { TaskRepresentation } from './taskRepresentation';
+import * as moment from 'moment';
 
 export class Task {
-    _id: string;
+    id: string;
     title: string;
     details: string;
-    duration: string;
+    deadline: moment.Moment;
     level: number;
     priority: number;
     reminder: boolean;
@@ -17,10 +18,10 @@ export class Task {
     constructor(taskRepresentation: TaskRepresentation)
     constructor(taskRepresentation?: TaskRepresentation) {
         if (taskRepresentation) {
-            this._id = taskRepresentation._id;
+            this.id = taskRepresentation._id;
             this.title = taskRepresentation.title;
             this.details = taskRepresentation.details;
-            this.duration = taskRepresentation.duration;
+            this.deadline = moment.utc(taskRepresentation.deadline).local();
             this.level = taskRepresentation.level;
             this.priority = taskRepresentation.priority;
             this.reminder = taskRepresentation.reminder;
@@ -32,7 +33,7 @@ export class Task {
     }
 
     hasSubtitle() {
-        if (this.priority || this.duration || this.reminder ||
+        if (this.priority || this.deadline || this.reminder ||
             this.repeat || this.attachment || this.tags) {
             return true;
         } else {

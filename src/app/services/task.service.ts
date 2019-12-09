@@ -23,7 +23,8 @@ export class TaskService {
   }
 
   add(task: Task): Promise<any> {
-    return this.db.post(task);
+    const taskRepresentation = new TaskRepresentation(task);
+    return this.db.post(taskRepresentation);
   }
 
   update(task: Task): Promise<any> {
@@ -36,18 +37,14 @@ export class TaskService {
 
   getAll(): Observable<Task[]> {
     return from(
-      this.initDB()
-      .then(() => {
+      this.initDB().then(() => {
         return this.db.allDocs({ include_docs: true });
       })
       .then(docs => {
         let tasks: Task[] = [];
-        // Each row has a .doc object and we just want to send an
-        // array of birthday objects back to the calling code,
-        // so let's map the array to contain just the .doc objects.
-
         tasks = docs.rows.map(row => {
-          const task = new Task(row.doc);
+          const taskRepresentation: TaskRepresentation = row.doc;
+          const task = new Task(taskRepresentation);
           return task;
         });
         return tasks;
