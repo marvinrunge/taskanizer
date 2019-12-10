@@ -7,11 +7,8 @@
 </ion-header>
 
 <ion-content>
+  <app-create-task></app-create-task>
   <ion-list>
     <app-task-listitem *ngFor="let task of (tasks$ | async)" [task]=task></app-task-listitem>
   </ion-list>
-
-  <button class="add-button" (click)="addTask()" mat-fab aria-label="add task button">
-    <mat-icon>add</mat-icon>
-  </button>
 </ion-content>

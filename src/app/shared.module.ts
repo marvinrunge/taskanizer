@@ -6,31 +6,36 @@ import { MaterialModule } from './material.module';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-
-export function HttpLoaderFactory(http: HttpClient) {
-  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}
+import { TaskCreateComponent } from './components/create-task/create-task.component';
+import { FlexLayoutModule } from '@angular/flex-layout';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule, MatFormFieldModule } from '@angular/material';
 
 @NgModule({
   declarations: [
-    TaskListitemComponent
+    TaskListitemComponent,
+    TaskCreateComponent
   ],
   imports: [
     CommonModule,
     IonicModule,
     HttpClientModule,
-    TranslateModule.forRoot({
-      loader: {
-        provide: TranslateLoader,
-        useFactory: HttpLoaderFactory,
-        deps: [HttpClient]
-      }
-    }),
-    MaterialModule
+    FlexLayoutModule,
+    MaterialModule,
+    TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
   ],
   exports: [
     TaskListitemComponent,
+    TaskCreateComponent,
     TranslateModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
   ]
 })
 export class SharedModule { }

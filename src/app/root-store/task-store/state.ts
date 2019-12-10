@@ -10,7 +10,7 @@ export interface TaskState extends EntityState<Task> {
 
 /** function to determine which field to use as a ID inside the store */
 export function selectTaskId(task: Task): string {
-  return task.id;
+  return task._id;
 }
 
 export const taskAdapter: EntityAdapter<Task> = createEntityAdapter<Task>({

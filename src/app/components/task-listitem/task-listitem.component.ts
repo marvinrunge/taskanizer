@@ -1,5 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from 'src/app/models/task';
+import { RootStoreState, TaskActions } from 'src/app/root-store';
+import { Store } from '@ngrx/store';
+import * as moment from 'moment';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-task-listitem',
@@ -9,9 +13,35 @@ import { Task } from 'src/app/models/task';
 export class TaskListitemComponent implements OnInit {
 
   @Input() task: Task;
+  right = '';
+  opacity = '1';
+  maxHeight = '200px';
 
-  constructor() { }
+  constructor(private store$: Store<RootStoreState.State>) { }
 
   ngOnInit() {}
+
+  onSwipeLeft(e) {
+    if (e.direction === 2) {
+      this.right = '3.5rem';
+      this.opacity = '0';
+      this.maxHeight = '0px';
+      setTimeout(() => {
+        this.store$.dispatch(
+          TaskActions.deleteRequest({ task: this.task })
+        );
+      },
+      1000);
+    }
+  }
+
+  getDueTime() {
+    if (this.task.deadline) {
+      console.log(this.task);
+      return moment(this.task.deadline).fromNow();
+    } else {
+      return '';
+    }
+  }
 
 }

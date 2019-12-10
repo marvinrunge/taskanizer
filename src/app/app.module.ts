@@ -13,9 +13,18 @@ import { MaterialModule } from './material.module';
 import { SharedModule } from './shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
+import { FlexLayoutModule } from '@angular/flex-layout';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RootStoreModule } from './root-store';
-import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { MatInputModule, MatFormFieldModule } from '@angular/material';
+import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { HttpClient } from '@angular/common/http';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http, './../assets/i18n/', '.json');
+}
 
 @NgModule({
   declarations: [AppComponent],
@@ -27,6 +36,18 @@ import { TranslateModule } from '@ngx-translate/core';
     BrowserAnimationsModule,
     MaterialModule,
     SharedModule,
+    TranslateModule.forRoot({
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
+    FlexLayoutModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MatInputModule,
+    MatFormFieldModule,
     RootStoreModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

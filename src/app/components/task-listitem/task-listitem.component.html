@@ -1,22 +1,29 @@
-<div class="listitem" [style.padding-left.px]="(task.level*12)">
-    <mat-checkbox></mat-checkbox>
-    <div id="text">
-        <div id="title">{{ task.title }}</div>
-        <div id="subtitle" *ngIf="task.hasSubtitle()">
-            <ion-icon id="priority" *ngIf="task.priority !== 0" name="ios-flame" [id]="'priority' + task.priority"></ion-icon>
-            <span *ngIf="task.deadline && (task.priority !== 0)"> - </span>
-            <span *ngIf="task.deadline">{{ 'task_item.due' | translate }} {{ task.deadline.fromNow() }}</span>
-            <span *ngIf="task.reminder || task.attachment || task.repeat"> - </span>
-            <ion-icon name="md-alarm" *ngIf="task.reminder"></ion-icon>
-            <ion-icon name="md-repeat" *ngIf="task.repeat"></ion-icon>
-            <ion-icon name="attach" *ngIf="task.attachment"></ion-icon>
+<div class="listitem" [style.right]="right" [style.opacity]="opacity" [style.maxHeight]="maxHeight" [style.padding-left.px]="(task.level*12)" (swipeleft)="onSwipeLeft($event)">
+    <div fxLayout="row" fxLayoutAlign="start center" [style.height]="50">
+        <div fxFlex="15%" fxLayoutAlign="center center">
+            <mat-checkbox></mat-checkbox>
         </div>
-        <div id="tags">
-            <div class="tag" *ngFor="let tag of task.tags">
-                •
-                <span>{{ tag }}</span>
-            </div>   
+        <div id="text">
+            <div id="title">{{ task.title }}</div>
+            <div id="subtitle" *ngIf="task.hasSubtitle()">
+                <ion-icon id="priority" *ngIf="task.priority" name="ios-flame" [id]="'priority' + task.priority"></ion-icon>
+                <span *ngIf="task.deadline && (task.priority)"> - </span>
+                <span *ngIf="task.deadline">{{ 'task_item.due' | translate }} {{ getDueTime() }}</span>
+                <span *ngIf="task.reminder || task.attachment || task.repeat"> - </span>
+                <ion-icon name="md-alarm" *ngIf="task.reminder"></ion-icon>
+                <ion-icon name="md-repeat" *ngIf="task.repeat"></ion-icon>
+                <ion-icon name="attach" *ngIf="task.attachment"></ion-icon>
+            </div>
+            <div id="tags">
+                <div class="tag" *ngFor="let tag of task.tags">
+                    •
+                    <span>{{ tag }}</span>
+                </div>   
+            </div>
+        </div>
+        <div>
+            <ion-icon id="arrow" *ngIf="task.mainTask" name="ios-arrow-down"></ion-icon>
         </div>
     </div>
-    <ion-icon id="arrow" *ngIf="task.mainTask" name="ios-arrow-down"></ion-icon>
+    <div id="line"></div>
 </div>

@@ -2,7 +2,6 @@ import { TaskRepresentation } from './taskRepresentation';
 import * as moment from 'moment';
 
 export class Task {
-    id: string;
     title: string;
     details: string;
     deadline: moment.Moment;
@@ -13,15 +12,18 @@ export class Task {
     attachment: boolean;
     mainTask: boolean;
     tags: string[];
+    _id: string;
+    _rev: string;
 
     constructor()
     constructor(taskRepresentation: TaskRepresentation)
     constructor(taskRepresentation?: TaskRepresentation) {
         if (taskRepresentation) {
-            this.id = taskRepresentation._id;
+            this._id = taskRepresentation._id;
+            this._rev = taskRepresentation._rev;
             this.title = taskRepresentation.title;
             this.details = taskRepresentation.details;
-            this.deadline = moment.utc(taskRepresentation.deadline).local();
+            this.deadline = taskRepresentation.deadline ? moment.utc(taskRepresentation.deadline).local() : undefined;
             this.level = taskRepresentation.level;
             this.priority = taskRepresentation.priority;
             this.reminder = taskRepresentation.reminder;

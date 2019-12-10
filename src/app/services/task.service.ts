@@ -28,11 +28,14 @@ export class TaskService {
   }
 
   update(task: Task): Promise<any> {
-    return this.db.put(task);
+    const taskRepresentation = new TaskRepresentation(task);
+    return this.db.put(taskRepresentation);
   }
 
   delete(task: Task): Promise<any> {
-    return this.db.remove(task);
+    const taskRepresentation = new TaskRepresentation(task);
+    console.log(task);
+    return this.db.remove(taskRepresentation);
   }
 
   getAll(): Observable<Task[]> {
@@ -63,15 +66,3 @@ export class TaskService {
     });
   }
 }
-
-// export const tasks: Task[] = [
-//   new Task(1, 'E-Mail beantworten', undefined, '3d verbleibend', 0, 3, true, true, true, true, ['Etikett 1', 'Etikett 2']),
-//   new Task(2, 'Empfänger angeben', undefined, undefined, 1, 0, false, false, false, false, undefined),
-//   new Task(3, 'Betreff angeben', undefined, undefined, 1, 0, false, false, false, false, undefined),
-//   new Task(4, 'Text schreiben', undefined, undefined, 1, 0, false, false, false, true, undefined),
-//   new Task(5, 'Begrüßung', undefined, undefined, 2, 0, false, false, false, false, undefined),
-//   new Task(6, 'Haupteil', undefined, undefined, 2, 0, false, false, false, false, undefined),
-//   new Task(7, 'Verabschiedung', undefined, undefined, 2, 0, false, false, false, false, undefined),
-//   new Task(8, 'Versenden', undefined, undefined, 2, 0, false, false, false, false, undefined),
-//   new Task(9, 'Papierkorb leeren', undefined, undefined, 0, 0, false, false, false, false, undefined)
-// ];

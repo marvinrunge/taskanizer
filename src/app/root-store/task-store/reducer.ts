@@ -15,14 +15,20 @@ export const taskReducer = createReducer(
   on(TaskActions.loadFailure, (state, { error }) => ({
     ...state, isLoading: false, error
   })),
-  on(TaskActions.updateSuccess, (state, { task }) => {
+  on(TaskActions.addUpdateSuccess, (state, { task }) => {
     return taskAdapter.upsertOne(task, {
       ...state, isLoading: false, error: undefined });
   }),
+  on(TaskActions.deleteRequest, state => ({
+    ...state, isLoading: true, error: undefined
+  })),
   on(TaskActions.deleteSuccess, (state, { id }) => {
     return taskAdapter.removeOne(id, {
       ...state, isLoading: false, error: undefined });
   }),
+  on(TaskActions.deleteFailure, (state, { error }) => ({
+    ...state, isLoading: false, error
+  })),
   on(TaskActions.addRequest, state => ({
     ...state, isLoading: true, error: undefined
   })),

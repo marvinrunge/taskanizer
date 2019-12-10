@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
 import { Action } from '@ngrx/store';
 import { Observable, of, concat } from 'rxjs';
-import { catchError, map, mergeMap, switchMap } from 'rxjs/operators';
+import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { from } from 'rxjs';
 
 import { TaskService } from '../../services/task.service';
@@ -17,13 +17,15 @@ export class TaskStoreEffects {
   addRequestEffect$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
       ofType(taskActions.addRequest),
-      mergeMap(action => from(this.taskService.add(action.task))
-        .pipe(
-          map(() => taskActions.addSuccess(),
-          catchError(error => of(taskActions.addFailure({ error }))))
-        )
-      )
-    )
+      tap(action => from(this.taskService.add(action.task)))
+    ), { dispatch: false }
+  );
+
+  deleteRequestEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(taskActions.deleteRequest),
+      tap(action => from(this.taskService.delete(action.task)))
+    ), { dispatch: false }
   );
 
   loadRequestEffect$: Observable<Action> = createEffect(() =>
@@ -38,10 +40,10 @@ export class TaskStoreEffects {
 
   changedTasks$: Observable<Action> = this.taskService.getChanges().pipe(
     map(change => {
-      if (change._deleted) {
-        return taskActions.deleteSuccess({ id: change._id });
+      if (change.doc._deleted) {
+        return taskActions.deleteSuccess({ id: change.doc._id });
       } else {
-        return taskActions.updateSuccess({ task: new Task(change.doc) });
+        return taskActions.addUpdateSuccess({ task: new Task(change.doc) });
       }
     })
   );
