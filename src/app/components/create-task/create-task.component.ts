@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { RootStoreState, TaskActions } from 'src/app/root-store';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models';
@@ -22,6 +22,8 @@ export class TaskCreateComponent implements OnInit {
   backgroundColor = '#00000000';
   opacity = '0';
 
+  @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
+
   ngOnInit() {
   }
 
@@ -31,11 +33,14 @@ export class TaskCreateComponent implements OnInit {
       this.borderColor = '#00000011';
       this.backgroundColor = '#fff';
       this.opacity = '1';
+      this.titleInput.nativeElement.focus();
     } else {
       const task = new Task();
       task.title = this.title ;
       task.deadline = this.deadline ? moment(this.deadline) : undefined;
       task.details = this.details;
+      this.title = '';
+      this.titleInput.nativeElement.focus();
 
       console.log(task);
 
@@ -44,5 +49,4 @@ export class TaskCreateComponent implements OnInit {
       );
     }
   }
-
 }

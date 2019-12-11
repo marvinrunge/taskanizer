@@ -4,7 +4,7 @@
       <div fxLayout="row wrap" fxLayoutGap="1rem" class="header-row">
         <div fxFlex fxLayoutAlign="start end">
           <mat-form-field class="title" [style.opacity]="opacity">
-            <input matInput [(ngModel)]="title" class="title" placeholder="Title" type="text" value="test">
+            <input matInput #titleInput [(ngModel)]="title" class="title" placeholder="Title" type="text">
           </mat-form-field>
         </div>
         <div fxFlex="none" fxLayoutAlign="start center" class="button">
