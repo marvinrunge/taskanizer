@@ -14,6 +14,8 @@ export class ListsPage {
   error$: Observable<any>;
   isLoading$: Observable<boolean>;
 
+  top = 'calc(100vh - 5rem - 3.5rem)';
+
   constructor(private store$: Store<RootStoreState.State>) {
     this.store$.dispatch(
       TaskActions.loadRequest()
@@ -30,6 +32,14 @@ export class ListsPage {
     this.isLoading$ = this.store$.pipe(
       select(TaskSelectors.selectTaskIsLoading)
     );
+  }
+
+  onSwipeUp(e) {
+    this.top = '3.5rem';
+  }
+
+  onSwipeDown(e) {
+    this.top = 'calc(100vh - 5rem - 3.5rem)';
   }
 }
 

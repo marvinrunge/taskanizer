@@ -5,10 +5,9 @@ app-task-listitem {
 app-create-task {
     position: fixed;
     width: 100%;
-    bottom: 0;
-    left: 0;
+    top: calc(100vh - 5rem - 3.5rem);
     z-index: 1;
-    border-top: #00000011 solid 1px
+    transition: top 1s ease;
 }
 
 ion-list {

@@ -17,20 +17,32 @@ export class TaskCreateComponent implements OnInit {
   deadline: string;
   details: string;
 
+  onlyAddButton = true;
+  borderColor = '#00000000';
+  backgroundColor = '#00000000';
+  opacity = '0';
+
   ngOnInit() {
   }
 
   addTask() {
-    const task = new Task();
-    task.title = this.title ;
-    task.deadline = this.deadline ? moment(this.deadline) : undefined;
-    task.details = this.details;
+    if (this.onlyAddButton) {
+      this.onlyAddButton = false;
+      this.borderColor = '#00000011';
+      this.backgroundColor = '#fff';
+      this.opacity = '1';
+    } else {
+      const task = new Task();
+      task.title = this.title ;
+      task.deadline = this.deadline ? moment(this.deadline) : undefined;
+      task.details = this.details;
 
-    console.log(task);
+      console.log(task);
 
-    this.store$.dispatch(
-      TaskActions.addRequest({ task })
-    );
+      this.store$.dispatch(
+        TaskActions.addRequest({ task })
+      );
+    }
   }
 
 }

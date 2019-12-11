@@ -1,9 +1,9 @@
-<div class="create-task-container">
+<div class="create-task-container" [style.borderColor]="borderColor" [style.backgroundColor]="backgroundColor">
     <div class="task-header">
-      <mat-icon class="arrow">keyboard_arrow_up</mat-icon>
-      <div fxLayout="row wrap" fxLayoutGap="1rem">
+      <mat-icon class="arrow" [style.opacity]="opacity">keyboard_arrow_up</mat-icon>
+      <div fxLayout="row wrap" fxLayoutGap="1rem" class="header-row">
         <div fxFlex fxLayoutAlign="start end">
-          <mat-form-field class="title">
+          <mat-form-field class="title" [style.opacity]="opacity">
             <input matInput [(ngModel)]="title" class="title" placeholder="Title" type="text" value="test">
           </mat-form-field>
         </div>
@@ -14,11 +14,11 @@
         </div>
       </div>
     </div>
-    <div class="task-body">
+    <div class="task-body" [style.opacity]="opacity">
       <div>
         <mat-form-field appearance="fill" class="input">
           <mat-label>Deadline</mat-label>
-          <input matInput [matDatepicker]="picker">
+          <input matInput [(ngModel)]="deadline" [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
         </mat-form-field>

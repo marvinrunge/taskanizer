@@ -7,7 +7,7 @@
 </ion-header>
 
 <ion-content>
-  <app-create-task></app-create-task>
+  <app-create-task (swipeup)="onSwipeUp($event)" (swipedown)="onSwipeDown($event)" [style.top]="top"></app-create-task>
   <ion-list>
     <app-task-listitem *ngFor="let task of (tasks$ | async)" [task]=task></app-task-listitem>
   </ion-list>
