@@ -42,8 +42,6 @@ export class TaskCreateComponent implements OnInit {
       this.title = '';
       this.titleInput.nativeElement.focus();
 
-      console.log(task);
-
       this.store$.dispatch(
         TaskActions.addRequest({ task })
       );

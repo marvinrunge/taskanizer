@@ -37,7 +37,6 @@ export class TaskListitemComponent implements OnInit {
 
   getDueTime() {
     if (this.task.deadline) {
-      console.log(this.task);
       return moment(this.task.deadline).fromNow();
     } else {
       return '';

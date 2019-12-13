@@ -34,7 +34,6 @@ export class TaskService {
 
   delete(task: Task): Promise<any> {
     const taskRepresentation = new TaskRepresentation(task);
-    console.log(task);
     return this.db.remove(taskRepresentation);
   }
 
