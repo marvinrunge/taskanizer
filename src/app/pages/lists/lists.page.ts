@@ -14,7 +14,8 @@ export class ListsPage {
   error$: Observable<any>;
   isLoading$: Observable<boolean>;
 
-  top = 'calc(100vh - 5rem - 3.5rem)';
+  top = 'calc(100% - 4.5rem)';
+  overflowY = 'hidden';
 
   constructor(private store$: Store<RootStoreState.State>) {
     this.store$.dispatch(
@@ -34,12 +35,18 @@ export class ListsPage {
     );
   }
 
-  onSwipeUp(e) {
+  onSwipeUp() {
     this.top = '3.5rem';
+    this.overflowY = 'scroll';
   }
 
-  onSwipeDown(e) {
-    this.top = 'calc(100vh - 5rem - 3.5rem)';
+  onSwipeDown() {
+    this.top = 'calc(100% - 4.5rem)';
+    this.overflowY = 'hidden';
+  }
+
+  toggle(state: boolean) {
+    state ? this.onSwipeDown() : this.onSwipeUp();
   }
 }
 

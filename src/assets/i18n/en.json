@@ -1,4 +1,10 @@
 {
+  "overview": {
+    "today": "Today"
+  },
+  "lists": {
+    "lists": "Lists"
+  },
   "task_item": {
     "due": "due"
   }

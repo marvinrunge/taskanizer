@@ -5,8 +5,11 @@ app-task-listitem {
 app-create-task {
     position: fixed;
     width: 100%;
-    top: calc(100vh - 5rem - 3.5rem);
+    height: 100%;
+    top: calc(100% - 4rem);
+    background-color: white;
     z-index: 1;
+    overflow-y: auto;
     transition: top 1s ease;
 }
 

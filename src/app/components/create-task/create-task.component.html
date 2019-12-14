@@ -1,26 +1,39 @@
-<div class="create-task-container" [style.borderColor]="borderColor" [style.backgroundColor]="backgroundColor">
+<div class="create-task-container">
     <div class="task-header">
-      <mat-icon class="arrow" [style.opacity]="opacity">keyboard_arrow_up</mat-icon>
+      <mat-icon (click)="press()" [style.transform]="arrowRotation" class="arrow">keyboard_arrow_up</mat-icon>
       <div fxLayout="row wrap" fxLayoutGap="1rem" class="header-row">
         <div fxFlex fxLayoutAlign="start end">
-          <mat-form-field class="title" [style.opacity]="opacity">
+          <mat-form-field class="title">
             <input matInput #titleInput [(ngModel)]="title" class="title" placeholder="Title" type="text">
           </mat-form-field>
         </div>
         <div fxFlex="none" fxLayoutAlign="start center" class="button">
-          <button class="add-button" (click)="addTask()" mat-fab aria-label="add task button">
+          <button class="add-button" (click)="addTask()" mat-mini-fab aria-label="add task button">
             <mat-icon>add</mat-icon>
           </button>
         </div>
       </div>
     </div>
-    <div class="task-body" [style.opacity]="opacity">
+    <div class="task-body">
       <div>
         <mat-form-field appearance="fill" class="input">
           <mat-label>Deadline</mat-label>
           <input matInput [(ngModel)]="deadline" [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="input">
+          <mat-label>Description</mat-label>
+          <textarea matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10 
+          #autosize="matTextareaAutosize"></textarea>
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="input">
+          <mat-label>Deadline</mat-label>
+          <input matInput [(ngModel)]="deadline">
         </mat-form-field>
       </div>
       <div>

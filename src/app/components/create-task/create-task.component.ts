@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
 import { RootStoreState, TaskActions } from 'src/app/root-store';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models';
@@ -11,20 +11,30 @@ import * as moment from 'moment';
 })
 export class TaskCreateComponent implements OnInit {
 
+  @Output() arrowPressed = new EventEmitter<boolean>();
+  @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
+
   constructor(private store$: Store<RootStoreState.State>) { }
 
   title = '';
   deadline: string;
   details: string;
 
+  createState = false;
+  arrowRotation = 'rotate(0deg)';
+
   onlyAddButton = true;
   borderColor = '#00000000';
   backgroundColor = '#00000000';
   opacity = '0';
 
-  @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
-
   ngOnInit() {
+  }
+
+  press() {
+    this.arrowRotation = this.createState ? 'rotate(0deg)' : 'rotate(180deg)';
+    this.arrowPressed.emit(this.createState);
+    this.createState = !this.createState;
   }
 
   addTask() {

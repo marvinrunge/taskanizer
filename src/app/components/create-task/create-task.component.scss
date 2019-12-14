@@ -1,9 +1,7 @@
 .create-task-container {
     width: 100%;
-    background-color: #fff;
+    height: 100%;
     border-top: hsla(0, 0%, 0%, 0.067) solid 1px;
-    height: calc(100vh - 7rem);
-    transition: all 0.5s ease;
 }
 
 .task-header {
@@ -15,7 +13,7 @@
 }
 
 .header-row {
-    height: 5rem;
+    height: 4.5rem;
 }
 
 .task-body {
@@ -41,9 +39,12 @@
 
 .arrow {
     position: absolute;
+    width: fit-content;
+    padding: 0 2rem 0 2rem;
     left: 0; 
     right: 0; 
     margin-left: auto; 
     margin-right: auto;
+    z-index: 2;
     transition: all 0.5s ease;
 }

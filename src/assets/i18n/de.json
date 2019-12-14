@@ -1,4 +1,10 @@
 {
+  "overview": {
+    "today": "Heute"
+  },
+  "lists": {
+    "lists": "Listen"
+  },
   "task_item": {
     "due": "fällig"
   }
