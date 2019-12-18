@@ -23,11 +23,6 @@ export class TaskCreateComponent implements OnInit {
   createState = false;
   arrowRotation = 'rotate(0deg)';
 
-  onlyAddButton = true;
-  borderColor = '#00000000';
-  backgroundColor = '#00000000';
-  opacity = '0';
-
   ngOnInit() {
   }
 
@@ -38,23 +33,15 @@ export class TaskCreateComponent implements OnInit {
   }
 
   addTask() {
-    if (this.onlyAddButton) {
-      this.onlyAddButton = false;
-      this.borderColor = '#00000011';
-      this.backgroundColor = '#fff';
-      this.opacity = '1';
-      this.titleInput.nativeElement.focus();
-    } else {
-      const task = new Task();
-      task.title = this.title ;
-      task.deadline = this.deadline ? moment(this.deadline) : undefined;
-      task.details = this.details;
-      this.title = '';
-      this.titleInput.nativeElement.focus();
+    const task = new Task();
+    task.title = this.title ;
+    task.deadline = this.deadline ? moment(this.deadline) : undefined;
+    task.details = this.details;
+    this.title = '';
+    this.titleInput.nativeElement.focus();
 
-      this.store$.dispatch(
-        TaskActions.addRequest({ task })
-      );
-    }
+    this.store$.dispatch(
+      TaskActions.addRequest({ task })
+    );
   }
 }

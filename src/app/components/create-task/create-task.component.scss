@@ -1,7 +1,6 @@
 .create-task-container {
     width: 100%;
     height: 100%;
-    border-top: hsla(0, 0%, 0%, 0.067) solid 1px;
 }
 
 .task-header {
@@ -28,7 +27,6 @@
 .title {
     width: 100%;
     top: 0.5rem;
-    transition: all 0.5s ease;
 }
 
 .input {
@@ -46,5 +44,5 @@
     margin-left: auto; 
     margin-right: auto;
     z-index: 2;
-    transition: all 0.5s ease;
+    transition: transform 0.8s ease;
 }

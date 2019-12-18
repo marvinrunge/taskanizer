@@ -30,3 +30,11 @@ ion-tab-button {
     --color-selected: var(--primary-color);
     --color: var(--text-primary-lighter-color);
 }
+
+ion-content {
+    --background: #fafafa;
+}
+
+ion-list {
+    --background: #ffffffff;
+}

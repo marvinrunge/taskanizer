@@ -8,7 +8,9 @@
 
 <ion-content>
   <app-create-task (arrowPressed)="toggle($event)" [style.overflowY]="overflowY" [style.top]="top"></app-create-task>
-  <ion-list>
-    <app-task-listitem *ngFor="let task of (tasks$ | async)" [task]=task></app-task-listitem>
-  </ion-list>
+  <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
+    <ion-reorder *ngFor="let task of (tasks$ | async)">
+      <app-task-listitem [task]="task"></app-task-listitem>
+    </ion-reorder>
+  </ion-reorder-group>
 </ion-content>

@@ -4,12 +4,12 @@
       <div fxLayout="row wrap" fxLayoutGap="1rem" class="header-row">
         <div fxFlex fxLayoutAlign="start end">
           <mat-form-field class="title">
-            <input matInput #titleInput [(ngModel)]="title" class="title" placeholder="Title" type="text">
+            <input matInput #titleInput [(ngModel)]="title" (keyup.enter)="addTask()" class="title" placeholder="Title" autocomplete="off" type="text">
           </mat-form-field>
         </div>
         <div fxFlex="none" fxLayoutAlign="start center" class="button">
-          <button class="add-button" (click)="addTask()" mat-mini-fab aria-label="add task button">
-            <mat-icon>add</mat-icon>
+          <button class="add-button" (click)="addTask()" color="primary" mat-icon-button type="submit" aria-label="add task button">
+            <mat-icon>send</mat-icon>
           </button>
         </div>
       </div>
@@ -21,19 +21,6 @@
           <input matInput [(ngModel)]="deadline" [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field appearance="fill" class="input">
-          <mat-label>Description</mat-label>
-          <textarea matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10 
-          #autosize="matTextareaAutosize"></textarea>
-        </mat-form-field>
-      </div>
-      <div>
-        <mat-form-field appearance="fill" class="input">
-          <mat-label>Deadline</mat-label>
-          <input matInput [(ngModel)]="deadline">
         </mat-form-field>
       </div>
       <div>

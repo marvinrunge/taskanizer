@@ -1,9 +1,18 @@
 {
   "overview": {
-    "today": "Heute"
+    "today": "Heute",
+    "week": "Innerhalb einer Woche",
+    "overdue": "Überfällig",
+    "all": "Alle"
   },
   "lists": {
     "lists": "Listen"
+  },
+  "notifications": {
+    "notifications": "Notifications"
+  },
+  "settings": {
+    "settings": "Settings"
   },
   "task_item": {
     "due": "fällig"

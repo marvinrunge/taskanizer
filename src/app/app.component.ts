@@ -6,6 +6,8 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import * as moment from 'moment';
 import { LOCATION_INITIALIZED } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
+import { Store } from '@ngrx/store';
+import { RootStoreState, TaskActions } from './root-store';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +20,8 @@ export class AppComponent {
     private splashScreen: SplashScreen,
     private statusBar: StatusBar,
     private injector: Injector,
-    private translate: TranslateService
+    private translate: TranslateService,
+    private store$: Store<RootStoreState.State>
   ) {
     this.initializeApp();
   }
@@ -27,6 +30,9 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.initLocale();
+      this.store$.dispatch(
+        TaskActions.loadRequest()
+      );
       this.splashScreen.hide();
     });
   }

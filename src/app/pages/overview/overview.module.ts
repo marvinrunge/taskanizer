@@ -5,6 +5,7 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { OverviewPage } from './overview.page';
 import { SharedModule } from 'src/app/shared.module';
+import { MaterialModule } from 'src/app/material.module';
 
 @NgModule({
   imports: [
@@ -12,6 +13,7 @@ import { SharedModule } from 'src/app/shared.module';
     CommonModule,
     FormsModule,
     SharedModule,
+    MaterialModule,
     RouterModule.forChild([{ path: '', component: OverviewPage }])
   ],
   declarations: [OverviewPage]

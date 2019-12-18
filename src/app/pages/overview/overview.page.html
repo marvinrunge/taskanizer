@@ -1,11 +1,34 @@
 <ion-header>
   <ion-toolbar>
+    <ion-buttons slot="start">    
+      <button [matMenuTriggerFor]="menu" mat-icon-button aria-label="select time span">
+        <mat-icon>arrow_drop_down</mat-icon>
+      </button>
+    </ion-buttons>
     <ion-title>
-      {{ 'overview.today' | translate }}
+      {{ 'overview.' + title | translate }}
     </ion-title>
+    <ion-buttons slot="end">    
+      <button mat-icon-button aria-label="search task">
+        <mat-icon>search</mat-icon>
+      </button>
+      <button mat-icon-button aria-label="search task">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </ion-buttons>
+    <mat-menu #menu="matMenu">
+      <button mat-menu-item (click)="selectMaxDeadline('today')">
+        {{ 'overview.today' | translate }}</button>
+      <button mat-menu-item (click)="selectMaxDeadline('week')">
+        {{ 'overview.week' | translate }}</button>
+      <button mat-menu-item (click)="selectMaxDeadline('overdue')">
+        {{ 'overview.overdue' | translate }}</button>
+      <button mat-menu-item (click)="selectMaxDeadline('all')">
+        {{ 'overview.all' | translate }}</button>
+    </mat-menu>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
+  <app-task-listitem *ngFor="let task of (tasks$ | async)" [task]="task"></app-task-listitem>
 </ion-content>
