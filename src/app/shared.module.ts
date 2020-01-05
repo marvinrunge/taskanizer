@@ -27,16 +27,17 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule,
+    MatFormFieldModule
   ],
   exports: [
     TaskListitemComponent,
     TaskCreateComponent,
+    TaskListComponent,
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule,
+    MatFormFieldModule
   ]
 })
 export class SharedModule { }
