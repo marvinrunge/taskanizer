@@ -1,7 +1,3 @@
-app-task-listitem {
-    display: block;
-}
-
 app-create-task {
     position: fixed;
     border-radius: 1rem;
@@ -17,10 +13,4 @@ app-create-task {
     z-index: 1;
     overflow-y: auto;
     transition: top 0.8s ease;
-}
-
-ion-reorder-group {
-    padding-top: 0px;
-    padding-bottom: 5.5rem;
-    background: none;
 }

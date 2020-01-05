@@ -15,7 +15,7 @@ export class TaskListComponent implements OnInit {
 
   ngOnInit() {}
 
-  drop(event: CdkDragDrop<string[]>) {
+  drop(event: CdkDragDrop<Task[]>) {
     moveItemInArray(this.tasks, event.previousIndex, event.currentIndex);
   }
 
