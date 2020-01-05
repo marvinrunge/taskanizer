@@ -8,5 +8,5 @@
 
 <ion-content>
   <app-create-task (arrowPressed)="toggle($event)" [style.overflowY]="overflowY" [style.top]="top"></app-create-task>
-  <app-task-list [tasks]="(tasks$ | async)"></app-task-list>
+  <app-task-list [tasks]="(tasks$ | async)" [draggable]="true"></app-task-list>
 </ion-content>

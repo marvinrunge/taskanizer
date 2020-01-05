@@ -1,8 +1,13 @@
-<div cdkDropList class="list" (cdkDropListDropped)="drop($event)">
+<div *ngIf="draggable" cdkDropList class="list" (cdkDropListDropped)="drop($event)">
     <div class="item" fxLayout="row" *ngFor="let task of tasks" cdkDrag cdkDragLockAxis="y">
-        <app-task-listitem fxFlex="90%" [task]="task"></app-task-listitem>
-        <div class="drag-handle" fxFlex="10%" fxLayoutAlign="center center" cdkDragHandle>
+        <app-task-listitem fxFlex="85%" [task]="task"></app-task-listitem>
+        <div class="drag-handle" fxFlex="15%" fxLayoutAlign="center center" cdkDragHandle>
             <mat-icon>drag_handle</mat-icon>
         </div>
+    </div>
+</div>
+<div *ngIf="!draggable" class="list" (cdkDropListDropped)="drop($event)">
+    <div class="item" fxLayout="row" *ngFor="let task of tasks">
+        <app-task-listitem fxFlex="100%" [task]="task"></app-task-listitem>
     </div>
 </div>

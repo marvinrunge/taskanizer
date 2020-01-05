@@ -10,6 +10,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 export class TaskListComponent implements OnInit {
 
   @Input() tasks: Task[];
+  @Input() draggable: boolean;
 
   constructor() { }
 
