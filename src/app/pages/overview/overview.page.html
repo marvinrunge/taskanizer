@@ -1,18 +1,19 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">    
-      <button [matMenuTriggerFor]="menu" mat-icon-button aria-label="select time span">
+      <button *ngIf="!searchMode" [matMenuTriggerFor]="menu" mat-icon-button aria-label="select time span">
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
     </ion-buttons>
-    <ion-title>
+    <ion-title *ngIf="!searchMode">
       {{ 'overview.' + title | translate }}
     </ion-title>
+    <ion-searchbar *ngIf="searchMode" (input)="search($event)"></ion-searchbar>
     <ion-buttons slot="end">    
-      <button mat-icon-button aria-label="search task">
+      <button mat-icon-button aria-label="search task" (click)="toggleSearchMode()">
         <mat-icon>search</mat-icon>
       </button>
-      <button mat-icon-button aria-label="search task">
+      <button mat-icon-button aria-label="more">
         <mat-icon>more_vert</mat-icon>
       </button>
     </ion-buttons>

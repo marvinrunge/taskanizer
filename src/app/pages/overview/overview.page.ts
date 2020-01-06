@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/models';
 import { TaskSelectors, RootStoreState, TaskActions } from 'src/app/root-store';
@@ -19,7 +19,11 @@ export class OverviewPage {
   maxDeadline: moment.Moment = moment().add(1, 'd');
   title = 'today';
 
-  constructor(private store$: Store<RootStoreState.State>) {
+  searchMode = false;
+
+  constructor(
+    private store$: Store<RootStoreState.State>,
+    private cd: ChangeDetectorRef) {
     this.tasks$ = this.store$.pipe(
       select(TaskSelectors.selectTasksOrderedByDeadline(this.maxDeadline))
     );
@@ -51,5 +55,22 @@ export class OverviewPage {
     this.tasks$ = this.store$.pipe(
       select(TaskSelectors.selectTasksOrderedByDeadline(this.maxDeadline))
     );
+  }
+
+  toggleSearchMode() {
+    this.searchMode = !this.searchMode;
+    if (this.searchMode === false) {
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectTasksOrderedByDeadline(this.maxDeadline))
+      );
+    }
+  }
+
+  search(event) {
+    if (this.searchMode) {
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectTasksByName(event.target.value))
+      );
+    }
   }
 }
