@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
-import { RootStoreState, TaskActions } from 'src/app/root-store';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
+import { RootStoreState, TaskActions, TaskSelectors } from 'src/app/root-store';
+import { Store, select } from '@ngrx/store';
 import { Task } from 'src/app/models';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-task',
@@ -11,6 +12,7 @@ import * as moment from 'moment';
 })
 export class TaskCreateComponent implements OnInit {
 
+  @Input() maxIndex;
   @Output() arrowPressed = new EventEmitter<boolean>();
   @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
 
@@ -37,6 +39,7 @@ export class TaskCreateComponent implements OnInit {
     task.title = this.title ;
     task.deadline = this.deadline ? moment(this.deadline) : undefined;
     task.details = this.details;
+    task.index = this.maxIndex;
     this.title = '';
     this.titleInput.nativeElement.focus();
 

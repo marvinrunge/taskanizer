@@ -17,6 +17,7 @@ export class OverviewPage {
   isLoading$: Observable<boolean>;
 
   maxDeadline: moment.Moment = moment().add(1, 'd');
+  minDeadline: moment.Moment = moment().startOf('day');
   title = 'today';
 
   searchMode = false;
@@ -25,7 +26,7 @@ export class OverviewPage {
     private store$: Store<RootStoreState.State>,
     private cd: ChangeDetectorRef) {
     this.tasks$ = this.store$.pipe(
-      select(TaskSelectors.selectTasksOrderedByDeadline(this.maxDeadline))
+      select(TaskSelectors.selectTasksOrderedByDeadline(this.minDeadline, this.maxDeadline))
     );
 
     this.error$ = this.store$.pipe(
@@ -40,20 +41,24 @@ export class OverviewPage {
   selectMaxDeadline(deadline: string) {
     if (deadline === 'today') {
       this.title = 'today';
-      this.maxDeadline = moment().add(1, 'd');
+      this.minDeadline = moment().startOf('day');
+      this.maxDeadline = moment().endOf('day');
     } else if (deadline === 'week') {
       this.title = 'week';
-      this.maxDeadline = moment().add(7, 'd');
+      this.minDeadline = moment().startOf('day');
+      this.maxDeadline = moment().add(7, 'd').endOf('day');
     } else if (deadline === 'overdue') {
       this.title = 'overdue';
+      this.minDeadline = moment().subtract(10, 'y').startOf('day');
       this.maxDeadline = moment();
     } else if (deadline === 'all') {
       this.title = 'all';
-      this.maxDeadline = moment().add(10, 'y');
+      this.minDeadline = moment().subtract(10, 'y').startOf('day');
+      this.maxDeadline = moment().add(10, 'y').endOf('day');
     }
 
     this.tasks$ = this.store$.pipe(
-      select(TaskSelectors.selectTasksOrderedByDeadline(this.maxDeadline))
+      select(TaskSelectors.selectTasksOrderedByDeadline(this.minDeadline, this.maxDeadline))
     );
   }
 
@@ -61,7 +66,7 @@ export class OverviewPage {
     this.searchMode = !this.searchMode;
     if (this.searchMode === false) {
       this.tasks$ = this.store$.pipe(
-        select(TaskSelectors.selectTasksOrderedByDeadline(this.maxDeadline))
+        select(TaskSelectors.selectTasksOrderedByDeadline(this.minDeadline, this.maxDeadline))
       );
     }
   }

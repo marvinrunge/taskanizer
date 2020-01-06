@@ -24,7 +24,7 @@ export class TaskService {
 
   addUpdateMultipleDocs(tasks: Task[]) {
     const taskRepresentations: TaskRepresentation[] = tasks.map(task => {
-       return new TaskRepresentation(task)
+       return new TaskRepresentation(task);
     });
     return this.db.bulkDocs(taskRepresentations);
   }

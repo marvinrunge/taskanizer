@@ -14,6 +14,7 @@ export class ListsPage {
   tasks$: Observable<Task[]>;
   error$: Observable<any>;
   isLoading$: Observable<boolean>;
+  maxIndex$: Observable<number>;
 
   top = 'calc(100% - 4.5rem)';
   overflowY = 'hidden';
@@ -29,6 +30,10 @@ export class ListsPage {
 
     this.isLoading$ = this.store$.pipe(
       select(TaskSelectors.selectTaskIsLoading)
+    );
+
+    this.maxIndex$ = this.store$.pipe(
+      select(TaskSelectors.selectMaxIndex)
     );
   }
 

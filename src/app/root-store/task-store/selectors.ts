@@ -30,14 +30,20 @@ export const selectTaskIsLoading = createSelector(
   (state: fromTasks.TaskState) => state.isLoading
 );
 
-export const selectTasksByMaxDeadline = (max: moment.Moment) => createSelector(
+
+export const selectMaxIndex = createSelector(
   selectAllTasks,
-  tasks => tasks.filter(
-    task => task.deadline ? task.deadline.isBefore(max) : false)
+  tasks => tasks.length
 );
 
-export const selectTasksOrderedByDeadline = (max: moment.Moment) => createSelector(
-  selectTasksByMaxDeadline(max),
+export const selectTasksByMaxDeadline = (min: moment.Moment, max: moment.Moment) => createSelector(
+  selectAllTasks,
+  tasks => tasks.filter(
+    task => task.deadline ? task.deadline.isBefore(max) && task.deadline.isAfter(min) : false)
+);
+
+export const selectTasksOrderedByDeadline = (min: moment.Moment, max: moment.Moment) => createSelector(
+  selectTasksByMaxDeadline(min, max),
   tasks => tasks.sort(
     (a, b) => a.deadline.diff(b.deadline))
 );
