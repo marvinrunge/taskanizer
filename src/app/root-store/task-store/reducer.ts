@@ -2,6 +2,8 @@ import { Action, createReducer, on } from '@ngrx/store';
 
 import * as TaskActions from './actions';
 import { TaskState, initialTaskState, taskAdapter } from './state';
+import { Update } from '@ngrx/entity';
+import { Task } from 'src/app/models';
 
 export const taskReducer = createReducer(
   initialTaskState,
@@ -16,8 +18,19 @@ export const taskReducer = createReducer(
     ...state, isLoading: false, error
   })),
   on(TaskActions.addUpdateSuccess, (state, { task }) => {
-    return taskAdapter.upsertOne(task, {
-      ...state, isLoading: false, error: undefined });
+    const id = task._id as string;
+    const ids = state.ids as string[];
+    if (ids.includes(id)) {
+      const update: Update<Task> = {
+        id: task._id,
+        changes: task as Task
+      };
+      return taskAdapter.updateOne(update, {
+        ...state, isLoading: false, error: undefined });
+    } else {
+      return taskAdapter.upsertOne(task, {
+        ...state, isLoading: false, error: undefined });
+    }
   }),
   on(TaskActions.deleteRequest, state => ({
     ...state, isLoading: true, error: undefined

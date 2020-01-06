@@ -1,5 +1,6 @@
 import { Task } from '.';
 import * as moment from 'moment';
+import { NumberSymbol } from '@angular/common';
 
 export class TaskRepresentation {
     title: string;
@@ -11,7 +12,9 @@ export class TaskRepresentation {
     repeat: boolean;
     attachment: boolean;
     mainTask: boolean;
+    index: number;
     tags: string[];
+    isDone: boolean;
     _id: string;
     _deleted: boolean;
     _rev: string;
@@ -28,7 +31,9 @@ export class TaskRepresentation {
         this.attachment = task.attachment;
         this.level = task.level;
         this.mainTask = task.mainTask;
+        this.index = task.index;
         this.tags = task.tags;
+        this.isDone = task.isDone;
         this._deleted = false;
     }
 }

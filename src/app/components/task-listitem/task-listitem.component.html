@@ -1,11 +1,11 @@
 <div class="listitem" [style.right]="right" [style.opacity]="opacity" [style.maxHeight]="maxHeight" [style.padding-left.px]="(task.level*12)" (swipeleft)="onSwipeLeft($event)">
     <div fxLayout="row" fxLayoutAlign="start center" [style.height]="50">
         <div fxFlex="15%" fxLayoutAlign="center center">
-            <mat-checkbox></mat-checkbox>
+            <mat-checkbox [(ngModel)]="task.isDone" (change)="check()"></mat-checkbox>
         </div>
         <div fxFlex class="text">
             <div class="title">{{ task.title }}</div>
-            <div class="subtitle" *ngIf="task.hasSubtitle()">
+            <div class="subtitle" *ngIf="hasSubtitle()">
                 <ion-icon class="priority" *ngIf="task.priority" name="ios-flame" [id]="'priority' + task.priority"></ion-icon>
                 <span *ngIf="task.deadline && (task.priority)"> - </span>
                 <span *ngIf="task.deadline">{{ 'task_item.due' | translate }} {{ getDueTime() }}</span>

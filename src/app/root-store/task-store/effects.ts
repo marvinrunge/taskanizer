@@ -9,6 +9,7 @@ import { TaskService } from '../../services/task.service';
 
 import * as taskActions from './actions';
 import { Task } from 'src/app/models';
+import { Update } from '@ngrx/entity';
 
 @Injectable()
 export class TaskStoreEffects {
@@ -18,6 +19,13 @@ export class TaskStoreEffects {
     this.actions$.pipe(
       ofType(taskActions.addRequest),
       tap(action => from(this.taskService.add(action.task)))
+    ), { dispatch: false }
+  );
+
+  updateRequestEffect$: Observable<Action> = createEffect(() =>
+    this.actions$.pipe(
+      ofType(taskActions.updateRequest),
+      tap(action => from(this.taskService.update(action.task)))
     ), { dispatch: false }
   );
 

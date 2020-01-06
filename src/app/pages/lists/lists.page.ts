@@ -15,8 +15,6 @@ export class ListsPage {
   error$: Observable<any>;
   isLoading$: Observable<boolean>;
 
-  @ViewChild(IonReorderGroup, { static: true }) reorderGroup: IonReorderGroup;
-
   top = 'calc(100% - 4.5rem)';
   overflowY = 'hidden';
 

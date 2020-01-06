@@ -9,5 +9,8 @@
 <div *ngIf="!draggable" class="list" (cdkDropListDropped)="drop($event)">
     <div class="item" fxLayout="row" *ngFor="let task of tasks">
         <app-task-listitem fxFlex="100%" [task]="task"></app-task-listitem>
+        <div class="drag-handle" fxFlex="15%" fxLayoutAlign="center center" cdkDragHandle>
+            <mat-icon>keyboard_arrow_right</mat-icon>
+        </div>
     </div>
 </div>
