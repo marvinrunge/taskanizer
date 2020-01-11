@@ -20,6 +20,7 @@ export class TaskCreateComponent implements OnInit {
 
   title = '';
   deadline: string;
+  time: string;
   details: string;
 
   createState = false;
@@ -35,16 +36,24 @@ export class TaskCreateComponent implements OnInit {
   }
 
   addTask() {
-    const task = new Task();
-    task.title = this.title ;
-    task.deadline = this.deadline ? moment(this.deadline) : undefined;
-    task.details = this.details;
-    task.index = this.maxIndex;
-    this.title = '';
-    this.titleInput.nativeElement.focus();
+    if (this.title !== '') {
+      const task = new Task();
+      task.title = this.title ;
 
-    this.store$.dispatch(
-      TaskActions.addRequest({ task })
-    );
+      if (this.deadline && !this.time) {
+        task.deadline = moment(this.deadline).startOf('day');
+      } else if (this.deadline && this.time) {
+        task.deadline = moment(this.deadline).add(this.time.substring(0, 2), 'hours').add(this.time.substring(3, 5), 'minutes');
+      }
+
+      task.details = this.details;
+      task.index = this.maxIndex;
+      this.title = '';
+      this.titleInput.nativeElement.focus();
+
+      this.store$.dispatch(
+        TaskActions.addRequest({ task })
+      );
+    }
   }
 }
