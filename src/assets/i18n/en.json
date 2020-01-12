@@ -11,7 +11,10 @@
     "lists": "Lists"
   },
   "notifications": {
-    "notifications": "Notifications"
+    "notifications": "Notifications",
+    "features": "Funktionsumfang",
+    "version": "Version",
+    "content": "Lists\n  - add tasks\n    - title\n    - date + time\n    - description\n  - sort tasks by drag-and-drop\n\nOverview\n  - choose a timespan\n  - search tasks\n\nGeneral\n  - delete tasks (left swipe)\n  - check Tasks\n  - hide and show checked tasks (3-dot-menu)"
   },
   "settings": {
     "settings": "Settings"

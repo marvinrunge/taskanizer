@@ -11,7 +11,10 @@
     "lists": "Listen"
   },
   "notifications": {
-    "notifications": "Benachrichtigungen"
+    "notifications": "Benachrichtigungen",
+    "features": "Funktionsumfang",
+    "version": "Version",
+    "content": "Listen\n  - Aufgaben hinzufügen\n    - Titel\n    - Datum + Zeit\n    - Beschreibung\n  - Aufgaben sortieren per Drag-and-Drop\n\nÜbersicht\n  - Zeitspanne wählen\n  - Suchen\n\nAllgemein\n  - Aufgaben löschen (nach links wischen)\n  - Aufgaben als erledigt markieren\n  - Erledigte Aufgaben ein- und ausblenden\n  - Englische und deutsche Übersetzungen",
   },
   "settings": {
     "settings": "Einstellungen"
