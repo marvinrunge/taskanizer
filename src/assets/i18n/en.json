@@ -3,16 +3,18 @@
     "today": "Today",
     "week": "Within a week",
     "overdue": "Overdue",
-    "all": "Alle"
+    "all": "Alle",
+    "showChecked": "show done Tasks",
+    "hideChecked": "hide done Tasks"
   },
   "lists": {
     "lists": "Lists"
   },
   "notifications": {
-    "notifications": "Nachrichten"
+    "notifications": "Notifications"
   },
   "settings": {
-    "settings": "Einstellungen"
+    "settings": "Settings"
   },
   "task_item": {
     "due": "due"

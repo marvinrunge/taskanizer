@@ -3,16 +3,18 @@
     "today": "Heute",
     "week": "Innerhalb einer Woche",
     "overdue": "Überfällig",
-    "all": "Alle"
+    "all": "Alle",
+    "showChecked": "erledigte Aufgaben anzeigen",
+    "hideChecked": "erledigte Aufgaben ausblenden"
   },
   "lists": {
     "lists": "Listen"
   },
   "notifications": {
-    "notifications": "Notifications"
+    "notifications": "Benachrichtigungen"
   },
   "settings": {
-    "settings": "Settings"
+    "settings": "Einstellungen"
   },
   "task_item": {
     "due": "fällig"

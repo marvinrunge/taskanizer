@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">    
-      <button *ngIf="!searchMode" [matMenuTriggerFor]="menu" mat-icon-button aria-label="select time span">
+      <button mat-icon-button *ngIf="!searchMode" [matMenuTriggerFor]="timespan" aria-label="select time span">
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
     </ion-buttons>
@@ -13,11 +13,11 @@
       <button mat-icon-button aria-label="search task" (click)="toggleSearchMode()">
         <mat-icon>search</mat-icon>
       </button>
-      <button mat-icon-button aria-label="more">
+      <button mat-icon-button [matMenuTriggerFor]="options" aria-label="more">
         <mat-icon>more_vert</mat-icon>
       </button>
     </ion-buttons>
-    <mat-menu #menu="matMenu">
+    <mat-menu #timespan="matMenu">
       <button mat-menu-item (click)="selectMaxDeadline('today')">
         {{ 'overview.today' | translate }}</button>
       <button mat-menu-item (click)="selectMaxDeadline('week')">
@@ -26,6 +26,14 @@
         {{ 'overview.overdue' | translate }}</button>
       <button mat-menu-item (click)="selectMaxDeadline('all')">
         {{ 'overview.all' | translate }}</button>
+    </mat-menu>
+    <mat-menu #options="matMenu">
+      <button *ngIf="!showDoneTasks" (click)="toggleShowDoneTasks()" mat-menu-item>
+        <mat-icon>visibility</mat-icon>
+        {{ 'overview.showChecked' | translate }}</button>
+      <button *ngIf="showDoneTasks" (click)="toggleShowDoneTasks()" mat-menu-item>
+        <mat-icon>visibility_off</mat-icon>
+        {{ 'overview.hideChecked' | translate }}</button>
     </mat-menu>
   </ion-toolbar>
 </ion-header>

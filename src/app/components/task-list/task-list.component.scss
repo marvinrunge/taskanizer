@@ -10,7 +10,8 @@
 .list {
     max-width: 100%;
     display: block;
-    overflow: hidden;
+    overflow-y: scroll;
+    padding-bottom: 4.5rem;
 }
 
 .drag-handle {

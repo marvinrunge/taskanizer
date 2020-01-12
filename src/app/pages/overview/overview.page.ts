@@ -20,13 +20,13 @@ export class OverviewPage {
   minDeadline: moment.Moment = moment().startOf('day');
   title = 'today';
 
+  showDoneTasks = false;
   searchMode = false;
 
   constructor(
-    private store$: Store<RootStoreState.State>,
-    private cd: ChangeDetectorRef) {
+    private store$: Store<RootStoreState.State>) {
     this.tasks$ = this.store$.pipe(
-      select(TaskSelectors.selectTasksOrderedByDeadline(this.minDeadline, this.maxDeadline))
+      select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
     );
 
     this.error$ = this.store$.pipe(
@@ -58,7 +58,7 @@ export class OverviewPage {
     }
 
     this.tasks$ = this.store$.pipe(
-      select(TaskSelectors.selectTasksOrderedByDeadline(this.minDeadline, this.maxDeadline))
+      select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
     );
   }
 
@@ -66,7 +66,7 @@ export class OverviewPage {
     this.searchMode = !this.searchMode;
     if (this.searchMode === false) {
       this.tasks$ = this.store$.pipe(
-        select(TaskSelectors.selectTasksOrderedByDeadline(this.minDeadline, this.maxDeadline))
+        select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
       );
     }
   }
@@ -77,5 +77,12 @@ export class OverviewPage {
         select(TaskSelectors.selectTasksByName(event.target.value))
       );
     }
+  }
+
+  toggleShowDoneTasks() {
+    setTimeout(() => {
+      this.showDoneTasks = !this.showDoneTasks;
+      this.selectMaxDeadline(this.title);
+    }, 200);
   }
 }

@@ -18,10 +18,11 @@ export class ListsPage {
 
   top = 'calc(100% - 4.5rem)';
   overflowY = 'hidden';
+  showDoneTasks = false;
 
   constructor(private store$: Store<RootStoreState.State>) {
     this.tasks$ = this.store$.pipe(
-      select(TaskSelectors.selectAllTasks)
+      select(TaskSelectors.selectDoneTasks(this.showDoneTasks))
     );
 
     this.error$ = this.store$.pipe(
@@ -49,6 +50,15 @@ export class ListsPage {
 
   toggle(state: boolean) {
     state ? this.onSwipeDown() : this.onSwipeUp();
+  }
+
+  toggleShowDoneTasks() {
+    setTimeout(() => {
+      this.showDoneTasks = !this.showDoneTasks;
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectDoneTasks(this.showDoneTasks))
+      );
+    }, 200);
   }
 }
 

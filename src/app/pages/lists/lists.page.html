@@ -3,6 +3,19 @@
     <ion-title>
       {{ 'lists.lists' | translate }}
     </ion-title>
+    <ion-buttons slot="end">
+      <button mat-icon-button [matMenuTriggerFor]="options" aria-label="more">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </ion-buttons>
+    <mat-menu #options="matMenu">
+      <button *ngIf="!showDoneTasks" (click)="toggleShowDoneTasks()" mat-menu-item>
+        <mat-icon>visibility</mat-icon>
+        {{ 'overview.showChecked' | translate }}</button>
+      <button *ngIf="showDoneTasks" (click)="toggleShowDoneTasks()" mat-menu-item>
+        <mat-icon>visibility_off</mat-icon>
+        {{ 'overview.hideChecked' | translate }}</button>
+    </mat-menu>
   </ion-toolbar>
 </ion-header>
 

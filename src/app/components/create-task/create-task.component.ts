@@ -38,7 +38,8 @@ export class TaskCreateComponent implements OnInit {
   addTask() {
     if (this.title !== '') {
       const task = new Task();
-      task.title = this.title ;
+      task.title = this.title;
+      task.isDone = false;
 
       if (this.deadline && !this.time) {
         task.deadline = moment(this.deadline).startOf('day');
