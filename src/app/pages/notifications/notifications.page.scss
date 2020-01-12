@@ -2,6 +2,11 @@
     white-space: pre-wrap;
 }
 
-ion-card {
-    background-color: white;
+.header-image {
+    background-image: url('../../../assets/icon/taskanizer.png');
+    background-size: cover;
+}
+
+mat-card {
+    margin: 0.5rem;
 }
