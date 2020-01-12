@@ -6,4 +6,17 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <mat-list>
+    <mat-list-item>
+      <mat-icon matListIcon disable>info</mat-icon>
+      <span matLine>Taskanizer Version 0.0.1</span>
+    </mat-list-item>
+  </mat-list>
+  <mat-action-list>
+    <mat-list-item (click)="reset()">
+      <mat-icon matListIcon>sync</mat-icon>
+      <span matLine>{{ 'settings.clear' | translate }}</span>
+    </mat-list-item>
+  </mat-action-list>
+</ion-content>

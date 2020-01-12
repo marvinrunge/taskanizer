@@ -50,7 +50,18 @@ export const taskReducer = createReducer(
   })),
   on(TaskActions.addFailure, (state, { error }) => ({
     ...state, isLoading: false, error
-  }))
+  })),
+  on(TaskActions.resetRequest, state => ({
+    ...state, isLoading: true, error: undefined
+  })),
+  on(TaskActions.resetSuccess, state => {
+    return taskAdapter.removeAll({
+      ...state, isLoading: false, error: undefined
+    });
+  }),
+  on(TaskActions.resetFailure, (state, { error }) => ({
+    ...state, isLoading: false, error
+  })),
 );
 
 export function taskreducer(state: TaskState | undefined, action: Action) {

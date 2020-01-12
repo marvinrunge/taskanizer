@@ -71,4 +71,10 @@ export class TaskService {
         });
     });
   }
+
+  reset(): Promise<any> {
+    return this.db.destroy().then(() => {
+      this.db = new PouchDB('tasks');
+    });
+  }
 }

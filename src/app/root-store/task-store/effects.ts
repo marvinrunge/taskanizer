@@ -9,11 +9,11 @@ import { TaskService } from '../../services/task.service';
 
 import * as taskActions from './actions';
 import { Task } from 'src/app/models';
-import { Update } from '@ngrx/entity';
+import { MatSnackBar } from '@angular/material';
 
 @Injectable()
 export class TaskStoreEffects {
-  constructor(private taskService: TaskService, private actions$: Actions) {}
+  constructor(private taskService: TaskService, private actions$: Actions, private snackBar: MatSnackBar) {}
 
   addRequestEffect$: Observable<Action> = createEffect(() =>
     this.actions$.pipe(
@@ -42,6 +42,20 @@ export class TaskStoreEffects {
       switchMap(() => concat(this.allTasks$, this.changedTasks$))
     )
   );
+
+  resetRequestEffect$ = createEffect(() =>
+    this.actions$.pipe(
+      ofType(taskActions.resetRequest),
+      mergeMap(() => from(this.taskService.reset()).pipe(
+        map(() => {
+          this.snackBar.open('Reset successful');
+          return taskActions.resetSuccess();
+        }),
+        catchError(error => of(taskActions.resetFailure({ error })))
+      ))
+    )
+  );
+
 
   allTasks$ = this.taskService.getAll().pipe(
     map(tasks => taskActions.loadSuccess({ tasks })));

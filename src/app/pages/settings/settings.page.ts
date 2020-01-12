@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Store } from '@ngrx/store';
+import { RootStoreState, TaskActions } from 'src/app/root-store';
 
 @Component({
   selector: 'app-settings',
@@ -7,6 +9,11 @@ import { Component } from '@angular/core';
 })
 export class SettingsPage {
 
-  constructor() {}
+  constructor(private store$: Store<RootStoreState.State>) {}
 
+  reset() {
+    this.store$.dispatch(
+      TaskActions.resetRequest()
+    );
+  }
 }

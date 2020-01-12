@@ -12,12 +12,13 @@
   },
   "notifications": {
     "notifications": "Notifications",
-    "features": "Funktionsumfang",
+    "features": "Features - 12/01/2020",
     "version": "Version",
-    "content": "Lists\n  - add tasks\n    - title\n    - date + time\n    - description\n  - sort tasks by drag-and-drop\n\nOverview\n  - choose a timespan\n  - search tasks\n\nGeneral\n  - delete tasks (left swipe)\n  - check Tasks\n  - hide and show checked tasks (3-dot-menu)"
+    "content": "Lists\n  - add tasks\n    - title\n    - date + time\n    - description\n  - sort tasks by drag-and-drop\n\nOverview\n  - choose a timespan\n  - search tasks\n\nGeneral\n  - delete tasks (left swipe)\n  - check Tasks\n  - hide and show checked tasks (3-dot-menu)  - german and english translations"
   },
   "settings": {
-    "settings": "Settings"
+    "settings": "Settings",
+    "clear": "Reset to factory defaults"
   },
   "task_item": {
     "due": "due"
