@@ -42,6 +42,24 @@ export const selectDoneTasks = (value: boolean) => createSelector(
     task => (task.isDone === value || task.isDone === false))
 );
 
+export const selectTasksOrderedByTitle = (value: boolean) => createSelector(
+  selectDoneTasks(value),
+  tasks => tasks.sort(
+    (a, b) => a.title.localeCompare(b.title))
+);
+
+export const selectTasksWithoutDeadline = (value: boolean) => createSelector(
+  selectDoneTasks(value),
+  tasks => tasks.filter(
+    task => (!task.deadline))
+);
+
+export const selectTasksWithoutDeadlineOrderedByTitle = (value: boolean) => createSelector(
+  selectTasksWithoutDeadline(value),
+  tasks => tasks.sort(
+    (a, b) => a.title.localeCompare(b.title))
+);
+
 export const selectTasksByMaxDeadline = (value: boolean, min: moment.Moment, max: moment.Moment) => createSelector(
   selectDoneTasks(value),
   tasks => tasks.filter(

@@ -3,6 +3,7 @@
     "today": "Today",
     "week": "Within a week",
     "overdue": "Overdue",
+    "withoutDeadline": "Without Deadline",
     "all": "Alle",
     "showChecked": "show done Tasks",
     "hideChecked": "hide done Tasks"

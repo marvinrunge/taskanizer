@@ -43,23 +43,34 @@ export class OverviewPage {
       this.title = 'today';
       this.minDeadline = moment().startOf('day');
       this.maxDeadline = moment().endOf('day');
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
+      );
     } else if (deadline === 'week') {
       this.title = 'week';
       this.minDeadline = moment().startOf('day');
       this.maxDeadline = moment().add(7, 'd').endOf('day');
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
+      );
     } else if (deadline === 'overdue') {
       this.title = 'overdue';
       this.minDeadline = moment().subtract(10, 'y').startOf('day');
       this.maxDeadline = moment();
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
+      );
+    } else if (deadline === 'withoutDeadline') {
+      this.title = 'withoutDeadline';
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectTasksWithoutDeadlineOrderedByTitle(this.showDoneTasks))
+      );
     } else if (deadline === 'all') {
       this.title = 'all';
-      this.minDeadline = moment().subtract(10, 'y').startOf('day');
-      this.maxDeadline = moment().add(10, 'y').endOf('day');
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectTasksOrderedByTitle(this.showDoneTasks))
+      );
     }
-
-    this.tasks$ = this.store$.pipe(
-      select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
-    );
   }
 
   toggleSearchMode() {

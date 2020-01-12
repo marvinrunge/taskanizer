@@ -3,6 +3,7 @@
     "today": "Heute",
     "week": "Innerhalb einer Woche",
     "overdue": "Überfällig",
+    "withoutDeadline": "Ohne Fälligkeitsdatum",
     "all": "Alle",
     "showChecked": "erledigte Aufgaben anzeigen",
     "hideChecked": "erledigte Aufgaben ausblenden"
