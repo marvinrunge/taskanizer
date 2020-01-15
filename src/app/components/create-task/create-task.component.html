@@ -4,7 +4,7 @@
       <div fxLayout="row wrap" fxLayoutGap="1rem" class="header-row">
         <div fxFlex fxLayoutAlign="start end">
           <mat-form-field class="title">
-            <input matInput #titleInput [(ngModel)]="title" (keyup.enter)="addTask()" class="title" placeholder="Title" autocomplete="off" type="text" required>
+            <input matInput #titleInput [(ngModel)]="title" (keyup.enter)="addTask()" class="title" placeholder="Title" autocomplete="off" type="text">
           </mat-form-field>
         </div>
         <div fxFlex="none" fxLayoutAlign="start center" class="button">
