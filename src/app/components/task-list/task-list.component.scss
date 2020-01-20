@@ -1,21 +1,15 @@
 @import '../../../theme/variables.scss';
 
-.item {
-    cursor: move;
-    display: flex;
-    border-bottom: 1px solid #00000011;
-    background: white;
+.drag-handle {
+    width: 100%;
+    text-align: center;
+    max-height: 24px;
 }
 
 .list {
     max-width: 100%;
     display: block;
-    overflow-y: scroll;
     padding-bottom: 4.5rem;
-}
-
-.drag-handle {
-    color: lightgray;
 }
 
 .cdk-drag-preview {

@@ -12,6 +12,14 @@
     transition: right 0.5s ease, opacity 0.5s ease, max-height 0.5s ease;
 }
 
+.flex-wrapper {
+    border-bottom: 1px solid #00000011;
+}
+
+mat-checkbox {
+    display: contents;
+}
+
 .text {
     color: var(--text-primary-color);
     padding: 10px 0px 10px 0px;
@@ -61,4 +69,8 @@
     float: left;
     margin-right: 0.5rem;
     margin-top: 4px;
+}
+
+.drag-handle {
+    color: lightgray;
 }

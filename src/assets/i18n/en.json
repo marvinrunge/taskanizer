@@ -4,22 +4,23 @@
     "week": "Within a week",
     "overdue": "Overdue",
     "withoutDeadline": "Without Deadline",
+    "relevant": "Relevant Tasks",
     "all": "Alle",
     "showChecked": "show done Tasks",
     "hideChecked": "hide done Tasks"
   },
   "lists": {
-    "lists": "Lists"
+    "lists": "My List"
   },
   "notifications": {
     "notifications": "Notifications",
     "features": "Features - 12/01/2020",
     "version": "Version",
-    "content": "Lists\n  - add tasks\n    - title\n    - date + time\n    - description\n  - sort tasks by drag-and-drop\n\nOverview\n  - choose a timespan\n  - search tasks\n\nGeneral\n  - delete tasks (left swipe)\n  - check Tasks\n  - hide and show checked tasks (3-dot-menu)  - german and english translations"
+    "content": "Lists\n  - add tasks\n    - title\n    - date + time\n    - description\n  - sort tasks by drag-and-drop\n\nOverview\n  - choose a timespan\n  - search tasks\n\nGeneral\n  - delete tasks (left swipe)\n  - check Tasks\n  - hide and show checked tasks (3-dot-menu)\n  - german and english translations\n  - reset to factory defaults"
   },
   "settings": {
     "settings": "Settings",
-    "clear": "Reset to factory defaults"
+    "reset": "Reset to factory defaults"
   },
   "task_item": {
     "due": "due"

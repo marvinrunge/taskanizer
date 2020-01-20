@@ -47,9 +47,10 @@ export class TaskStoreEffects {
     this.actions$.pipe(
       ofType(taskActions.resetRequest),
       mergeMap(() => from(this.taskService.reset()).pipe(
-        map(() => {
+        switchMap(() => {
           this.snackBar.open('Reset successful');
-          return taskActions.resetSuccess();
+          window.location.href = '/';
+          return [taskActions.resetSuccess(), taskActions.loadRequest()];
         }),
         catchError(error => of(taskActions.resetFailure({ error })))
       ))

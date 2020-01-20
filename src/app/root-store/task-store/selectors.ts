@@ -3,6 +3,7 @@ import { ActionReducerMap, createFeatureSelector, createSelector } from '@ngrx/s
 import { taskreducer } from './reducer';
 import * as fromTasks from './state';
 import * as moment from 'moment';
+import { Task } from 'src/app/models';
 
 export interface State {
   tasks: fromTasks.TaskState;
@@ -70,6 +71,13 @@ export const selectTasksOrderedByDeadline = (value: boolean, min: moment.Moment,
   selectTasksByMaxDeadline(value, min, max),
   tasks => tasks.sort(
     (a, b) => a.deadline.diff(b.deadline))
+);
+
+export const selectRelevantTasks = (value: boolean) => createSelector(
+  selectTasksOrderedByDeadline(value, moment().subtract(10, 'years'), moment().add(7, 'days')),
+  selectTasksWithoutDeadlineOrderedByTitle(value),
+  (tasksOrderedByDeadline: Task[], tasksWithoutDeadlineOrderedByTitle: Task[]) =>
+    tasksOrderedByDeadline.concat(tasksWithoutDeadlineOrderedByTitle)
 );
 
 export const selectTasksByName = (substring: string) => createSelector(

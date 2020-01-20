@@ -1,5 +1,5 @@
 <div class="listitem" [style.right]="right" [style.opacity]="opacity" [style.maxHeight]="maxHeight" [style.padding-left.px]="(task.level*12)" (swipeleft)="onSwipeLeft($event)">
-    <div fxLayout="row" fxLayoutAlign="start center" [style.height]="50">
+    <div class="flex-wrapper" fxLayout="row" fxLayoutAlign="start center" [style.height]="50">
         <div fxFlex="15%" fxLayoutAlign="center center">
             <mat-checkbox [(ngModel)]="task.isDone" (change)="check()"></mat-checkbox>
         </div>
@@ -20,6 +20,9 @@
                     <span>{{ tag }}</span>
                 </div>   
             </div>
+        </div>
+        <div fxFlex="15%" fxLayoutAlign="center center">
+            <ng-content></ng-content>
         </div>
     </div>
 </div>

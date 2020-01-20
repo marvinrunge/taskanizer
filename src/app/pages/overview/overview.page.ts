@@ -18,16 +18,14 @@ export class OverviewPage {
 
   maxDeadline: moment.Moment = moment().add(1, 'd');
   minDeadline: moment.Moment = moment().startOf('day');
-  title = 'today';
+  title = 'relevant';
 
   showDoneTasks = false;
   searchMode = false;
 
   constructor(
     private store$: Store<RootStoreState.State>) {
-    this.tasks$ = this.store$.pipe(
-      select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
-    );
+    this.selectMaxDeadline(this.title);
 
     this.error$ = this.store$.pipe(
       select(TaskSelectors.selectTaskError)
@@ -64,6 +62,11 @@ export class OverviewPage {
       this.title = 'withoutDeadline';
       this.tasks$ = this.store$.pipe(
         select(TaskSelectors.selectTasksWithoutDeadlineOrderedByTitle(this.showDoneTasks))
+      );
+    } else if (deadline === 'relevant') {
+      this.title = 'relevant';
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectRelevantTasks(this.showDoneTasks))
       );
     } else if (deadline === 'all') {
       this.title = 'all';
