@@ -38,3 +38,9 @@ ion-content {
 ion-list {
     --background: #ffffffff;
 }
+
+.snackbar {
+    background-color: white;
+    margin-bottom: 4rem !important;
+    color: var(--text-primary-lighter-color);
+}

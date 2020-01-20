@@ -2,46 +2,37 @@
 
 .listitem {
     display: block;
-    // border-top-left-radius: 1rem;
     background-color: #fff;
     box-sizing: border-box;
     position: relative;
     max-height: 200px;
-    box-shadow: 0px 2px 4px  rgba(0,0,0,0.2);
-    -moz-box-shadow: 0px 2px 4px  rgba(0,0,0,0.2);
-    -webkit-box-shadow: 0px 2px 4px  rgba(0,0,0,0.2);
-    -o-box-shadow: 0px 2px 4px  rgba(0,0,0,0.2);
     width: 100%;
     right: 0;
     opacity: 1;
     transition: right 0.5s ease, opacity 0.5s ease, max-height 0.5s ease;
 }
 
-#line {
-    width: 100%;
-    background-color: #00000011;
-    height: 1px;
+.flex-wrapper {
+    border-bottom: 1px solid #00000011;
 }
 
-#arrow {
-    padding: 0px 16px 0px 8px; 
-    width: 16px;
-    min-width: 16px;
+mat-checkbox {
+    display: contents;
 }
 
-#text {
+.text {
     color: var(--text-primary-color);
     padding: 10px 0px 10px 0px;
 }
 
-#title {
+.title {
     font-size: 16px;
     font-weight: bold;
     color: #222;
     letter-spacing: .0125em;
 }
 
-#subtitle {
+.subtitle {
     font-size: 13px;
     color: var(--text-primary-color);
     letter-spacing: .0125em;
@@ -49,21 +40,21 @@
     padding-top: 2px;
 }
 
-#subtitle ion-icon {
+.subtitle ion-icon {
     font-size: 16px;
     margin-top: -3px;    
     vertical-align: middle;
 }
 
-#priority1 {
+.priority1 {
     color: darkcyan;
 }
 
-#priority2 {
+.priority2 {
     color: orange;
 }
 
-#priority3 {
+.priority3 {
     color: red;
 }
 
@@ -78,4 +69,8 @@
     float: left;
     margin-right: 0.5rem;
     margin-top: 4px;
+}
+
+.drag-handle {
+    color: lightgray;
 }

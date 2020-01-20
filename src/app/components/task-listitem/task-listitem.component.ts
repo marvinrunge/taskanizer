@@ -30,8 +30,7 @@ export class TaskListitemComponent implements OnInit {
         this.store$.dispatch(
           TaskActions.deleteRequest({ task: this.task })
         );
-      },
-      1000);
+      }, 1000);
     }
   }
 
@@ -43,4 +42,20 @@ export class TaskListitemComponent implements OnInit {
     }
   }
 
+  check() {
+    const task = this.task;
+    task.isDone = this.task.isDone;
+    this.store$.dispatch(
+      TaskActions.updateRequest({ task })
+    );
+  }
+
+  hasSubtitle() {
+    if (this.task.priority || this.task.deadline || this.task.reminder ||
+        this.task.repeat || this.task.attachment || this.task.tags) {
+        return true;
+    } else {
+        return false;
+    }
+}
 }

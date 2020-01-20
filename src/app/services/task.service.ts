@@ -22,6 +22,13 @@ export class TaskService {
       });
   }
 
+  addUpdateMultipleDocs(tasks: Task[]) {
+    const taskRepresentations: TaskRepresentation[] = tasks.map(task => {
+       return new TaskRepresentation(task);
+    });
+    return this.db.bulkDocs(taskRepresentations);
+  }
+
   add(task: Task): Promise<any> {
     const taskRepresentation = new TaskRepresentation(task);
     return this.db.post(taskRepresentation);
@@ -62,6 +69,12 @@ export class TaskService {
           // change.doc.Date = new Date(change.doc.Date);
           observer.next(change);
         });
+    });
+  }
+
+  reset(): Promise<any> {
+    return this.db.destroy().then(() => {
+      this.db = new PouchDB('tasks');
     });
   }
 }

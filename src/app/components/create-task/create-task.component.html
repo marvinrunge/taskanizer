@@ -25,6 +25,12 @@
       </div>
       <div>
         <mat-form-field appearance="fill" class="input">
+          <mat-label>Time</mat-label>
+          <input matInput [(ngModel)]="time" type="time">
+        </mat-form-field>
+      </div>
+      <div>
+        <mat-form-field appearance="fill" class="input">
           <mat-label>Description</mat-label>
           <textarea matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10 
           #autosize="matTextareaAutosize"></textarea>

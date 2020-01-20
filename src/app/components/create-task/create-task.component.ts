@@ -1,8 +1,9 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output } from '@angular/core';
-import { RootStoreState, TaskActions } from 'src/app/root-store';
-import { Store } from '@ngrx/store';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
+import { RootStoreState, TaskActions, TaskSelectors } from 'src/app/root-store';
+import { Store, select } from '@ngrx/store';
 import { Task } from 'src/app/models';
 import * as moment from 'moment';
+import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-task',
@@ -11,6 +12,7 @@ import * as moment from 'moment';
 })
 export class TaskCreateComponent implements OnInit {
 
+  @Input() maxIndex;
   @Output() arrowPressed = new EventEmitter<boolean>();
   @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
 
@@ -18,6 +20,7 @@ export class TaskCreateComponent implements OnInit {
 
   title = '';
   deadline: string;
+  time: string;
   details: string;
 
   createState = false;
@@ -33,15 +36,25 @@ export class TaskCreateComponent implements OnInit {
   }
 
   addTask() {
-    const task = new Task();
-    task.title = this.title ;
-    task.deadline = this.deadline ? moment(this.deadline) : undefined;
-    task.details = this.details;
-    this.title = '';
-    this.titleInput.nativeElement.focus();
+    if (this.title !== '') {
+      const task = new Task();
+      task.title = this.title;
+      task.isDone = false;
 
-    this.store$.dispatch(
-      TaskActions.addRequest({ task })
-    );
+      if (this.deadline && !this.time) {
+        task.deadline = moment(this.deadline).startOf('day');
+      } else if (this.deadline && this.time) {
+        task.deadline = moment(this.deadline).add(this.time.substring(0, 2), 'hours').add(this.time.substring(3, 5), 'minutes');
+      }
+
+      task.details = this.details;
+      task.index = this.maxIndex;
+      this.title = '';
+      this.titleInput.nativeElement.focus();
+
+      this.store$.dispatch(
+        TaskActions.addRequest({ task })
+      );
+    }
   }
 }

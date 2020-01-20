@@ -14,15 +14,15 @@ export class ListsPage {
   tasks$: Observable<Task[]>;
   error$: Observable<any>;
   isLoading$: Observable<boolean>;
-
-  @ViewChild(IonReorderGroup, { static: true }) reorderGroup: IonReorderGroup;
+  maxIndex$: Observable<number>;
 
   top = 'calc(100% - 4.5rem)';
   overflowY = 'hidden';
+  showDoneTasks = false;
 
   constructor(private store$: Store<RootStoreState.State>) {
     this.tasks$ = this.store$.pipe(
-      select(TaskSelectors.selectAllTasks)
+      select(TaskSelectors.selectDoneTasks(this.showDoneTasks))
     );
 
     this.error$ = this.store$.pipe(
@@ -31,6 +31,10 @@ export class ListsPage {
 
     this.isLoading$ = this.store$.pipe(
       select(TaskSelectors.selectTaskIsLoading)
+    );
+
+    this.maxIndex$ = this.store$.pipe(
+      select(TaskSelectors.selectMaxIndex)
     );
   }
 
@@ -48,19 +52,13 @@ export class ListsPage {
     state ? this.onSwipeDown() : this.onSwipeUp();
   }
 
-  doReorder(ev: any) {
-    // The `from` and `to` properties contain the index of the item
-    // when the drag started and ended, respectively
-    console.log('Dragged from index', ev.detail.from, 'to', ev.detail.to);
-
-    // Finish the reorder and position the item in the DOM based on
-    // where the gesture ended. This method can also be called directly
-    // by the reorder group
-    ev.detail.complete();
-  }
-
-  toggleReorderGroup() {
-    this.reorderGroup.disabled = !this.reorderGroup.disabled;
+  toggleShowDoneTasks() {
+    setTimeout(() => {
+      this.showDoneTasks = !this.showDoneTasks;
+      this.tasks$ = this.store$.pipe(
+        select(TaskSelectors.selectDoneTasks(this.showDoneTasks))
+      );
+    }, 200);
   }
 }
 

@@ -11,7 +11,9 @@ export class Task {
     repeat: boolean;
     attachment: boolean;
     mainTask: boolean;
+    index: number;
     tags: string[];
+    isDone: boolean;
     _id: string;
     _rev: string;
 
@@ -30,16 +32,9 @@ export class Task {
             this.repeat = taskRepresentation.repeat;
             this.attachment = taskRepresentation.attachment;
             this.mainTask = taskRepresentation.mainTask;
+            this.index = taskRepresentation.index;
+            this.isDone = taskRepresentation.isDone;
             this.tags = taskRepresentation.tags;
-        }
-    }
-
-    hasSubtitle() {
-        if (this.priority || this.deadline || this.reminder ||
-            this.repeat || this.attachment || this.tags) {
-            return true;
-        } else {
-            return false;
         }
     }
 }

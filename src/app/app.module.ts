@@ -17,7 +17,7 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RootStoreModule } from './root-store';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatInputModule, MatFormFieldModule } from '@angular/material';
+import { MatInputModule, MatFormFieldModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
@@ -65,7 +65,8 @@ export class HammerConfig extends HammerGestureConfig {
     {
       provide: HAMMER_GESTURE_CONFIG,
       useClass: HammerConfig
-    }
+    },
+    { provide: MAT_SNACK_BAR_DEFAULT_OPTIONS, useValue: { duration: 2500, verticalPosition: 'bottom', panelClass: ['snackbar'] } }
   ],
   bootstrap: [AppComponent]
 })

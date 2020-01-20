@@ -16,7 +16,7 @@ export function selectTaskId(task: Task): string {
 export const taskAdapter: EntityAdapter<Task> = createEntityAdapter<Task>({
   selectId: selectTaskId,
   sortComparer: (a: Task, b: Task): number =>
-    b.title.localeCompare(a.title)
+    a.index - b.index
 });
 
 export const initialTaskState: TaskState = taskAdapter.getInitialState(

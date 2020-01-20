@@ -3,14 +3,23 @@
     <ion-title>
       {{ 'lists.lists' | translate }}
     </ion-title>
+    <ion-buttons slot="end">
+      <button mat-icon-button [matMenuTriggerFor]="options" aria-label="more">
+        <mat-icon>more_vert</mat-icon>
+      </button>
+    </ion-buttons>
+    <mat-menu #options="matMenu">
+      <button *ngIf="!showDoneTasks" (click)="toggleShowDoneTasks()" mat-menu-item>
+        <mat-icon>visibility</mat-icon>
+        {{ 'overview.showChecked' | translate }}</button>
+      <button *ngIf="showDoneTasks" (click)="toggleShowDoneTasks()" mat-menu-item>
+        <mat-icon>visibility_off</mat-icon>
+        {{ 'overview.hideChecked' | translate }}</button>
+    </mat-menu>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-create-task (arrowPressed)="toggle($event)" [style.overflowY]="overflowY" [style.top]="top"></app-create-task>
-  <ion-reorder-group (ionItemReorder)="doReorder($event)" disabled="false">
-    <ion-reorder *ngFor="let task of (tasks$ | async)">
-      <app-task-listitem [task]="task"></app-task-listitem>
-    </ion-reorder>
-  </ion-reorder-group>
+  <app-create-task [maxIndex]="(maxIndex$ | async)" (arrowPressed)="toggle($event)" [style.overflowY]="overflowY" [style.top]="top"></app-create-task>
+  <app-task-list [tasks]="(tasks$ | async)" [draggable]="true"></app-task-list>
 </ion-content>

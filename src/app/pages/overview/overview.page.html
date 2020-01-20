@@ -1,34 +1,48 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">    
-      <button [matMenuTriggerFor]="menu" mat-icon-button aria-label="select time span">
+      <button mat-icon-button *ngIf="!searchMode" [matMenuTriggerFor]="timespan" aria-label="select time span">
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
     </ion-buttons>
-    <ion-title>
+    <ion-title *ngIf="!searchMode">
       {{ 'overview.' + title | translate }}
     </ion-title>
+    <ion-searchbar *ngIf="searchMode" (input)="search($event)"></ion-searchbar>
     <ion-buttons slot="end">    
-      <button mat-icon-button aria-label="search task">
-        <mat-icon>search</mat-icon>
+      <button mat-icon-button aria-label="search task" (click)="toggleSearchMode()">
+        <mat-icon *ngIf="!searchMode">search</mat-icon>
+        <mat-icon *ngIf="searchMode">clear</mat-icon>
       </button>
-      <button mat-icon-button aria-label="search task">
+      <button mat-icon-button [matMenuTriggerFor]="options" aria-label="more">
         <mat-icon>more_vert</mat-icon>
       </button>
     </ion-buttons>
-    <mat-menu #menu="matMenu">
+    <mat-menu #timespan="matMenu">
       <button mat-menu-item (click)="selectMaxDeadline('today')">
         {{ 'overview.today' | translate }}</button>
       <button mat-menu-item (click)="selectMaxDeadline('week')">
         {{ 'overview.week' | translate }}</button>
       <button mat-menu-item (click)="selectMaxDeadline('overdue')">
         {{ 'overview.overdue' | translate }}</button>
+      <button mat-menu-item (click)="selectMaxDeadline('withoutDeadline')">
+        {{ 'overview.withoutDeadline' | translate }}</button>
+      <button mat-menu-item (click)="selectMaxDeadline('relevant')">
+        {{ 'overview.relevant' | translate }}</button>
       <button mat-menu-item (click)="selectMaxDeadline('all')">
         {{ 'overview.all' | translate }}</button>
+    </mat-menu>
+    <mat-menu #options="matMenu">
+      <button *ngIf="!showDoneTasks" (click)="toggleShowDoneTasks()" mat-menu-item>
+        <mat-icon>visibility</mat-icon>
+        {{ 'overview.showChecked' | translate }}</button>
+      <button *ngIf="showDoneTasks" (click)="toggleShowDoneTasks()" mat-menu-item>
+        <mat-icon>visibility_off</mat-icon>
+        {{ 'overview.hideChecked' | translate }}</button>
     </mat-menu>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  <app-task-listitem *ngFor="let task of (tasks$ | async)" [task]="task"></app-task-listitem>
+  <app-task-list [tasks]="(tasks$ | async)" [draggable]="false"></app-task-list>
 </ion-content>

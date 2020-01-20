@@ -6,4 +6,16 @@
   </ion-toolbar>
 </ion-header>
 
-<ion-content></ion-content>
+<ion-content>
+  <mat-card>
+    <mat-card-header>
+      <div mat-card-avatar class="header-image"></div>
+      <mat-card-title>Taskanizer {{ 'notifications.version' | translate }} 0.0.1</mat-card-title>
+      <mat-card-subtitle>{{ 'notifications.features' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider><br />
+    <mat-card-content class="content">
+      {{ 'notifications.content' | translate }}
+    </mat-card-content>
+  </mat-card>
+</ion-content>

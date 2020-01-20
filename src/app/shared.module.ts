@@ -3,18 +3,19 @@ import { TaskListitemComponent } from './components/task-listitem/task-listitem.
 import { CommonModule } from '@angular/common';
 import { IonicModule } from '@ionic/angular';
 import { MaterialModule } from './material.module';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { TranslateModule } from '@ngx-translate/core';
+import { HttpClientModule } from '@angular/common/http';
 import { TaskCreateComponent } from './components/create-task/create-task.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatFormFieldModule } from '@angular/material';
+import { TaskListComponent } from './components/task-list/task-list.component';
 
 @NgModule({
   declarations: [
     TaskListitemComponent,
-    TaskCreateComponent
+    TaskCreateComponent,
+    TaskListComponent
   ],
   imports: [
     CommonModule,
@@ -26,16 +27,17 @@ import { MatInputModule, MatFormFieldModule } from '@angular/material';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule,
+    MatFormFieldModule
   ],
   exports: [
     TaskListitemComponent,
     TaskCreateComponent,
+    TaskListComponent,
     TranslateModule,
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule,
+    MatFormFieldModule
   ]
 })
 export class SharedModule { }
