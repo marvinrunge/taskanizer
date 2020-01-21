@@ -19,17 +19,23 @@
       </button>
     </ion-buttons>
     <mat-menu #timespan="matMenu">
-      <button mat-menu-item (click)="selectMaxDeadline('today')">
+      <button mat-menu-item (click)="selectMaxDeadline('today')"
+        [style.background]="title === 'today' ? '#2c2c2c0a' : ''">
         {{ 'overview.today' | translate }}</button>
-      <button mat-menu-item (click)="selectMaxDeadline('week')">
+      <button mat-menu-item (click)="selectMaxDeadline('week')"
+        [style.background]="title === 'week' ? '#2c2c2c0a' : ''">
         {{ 'overview.week' | translate }}</button>
-      <button mat-menu-item (click)="selectMaxDeadline('overdue')">
+      <button mat-menu-item (click)="selectMaxDeadline('overdue')"
+        [style.background]="title === 'overdue' ? '#2c2c2c0a' : ''">
         {{ 'overview.overdue' | translate }}</button>
-      <button mat-menu-item (click)="selectMaxDeadline('withoutDeadline')">
+      <button mat-menu-item (click)="selectMaxDeadline('withoutDeadline')"
+        [style.background]="title === 'withoutDeadline' ? '#2c2c2c0a' : ''">
         {{ 'overview.withoutDeadline' | translate }}</button>
-      <button mat-menu-item (click)="selectMaxDeadline('relevant')">
+      <button mat-menu-item (click)="selectMaxDeadline('relevant')"
+        [style.background]="title === 'relevant' ? '#2c2c2c0a' : ''">
         {{ 'overview.relevant' | translate }}</button>
-      <button mat-menu-item (click)="selectMaxDeadline('all')">
+      <button mat-menu-item (click)="selectMaxDeadline('all')"
+        [style.background]="title === 'all' ? '#2c2c2c0a' : ''">
         {{ 'overview.all' | translate }}</button>
     </mat-menu>
     <mat-menu #options="matMenu">

@@ -16,7 +16,23 @@
     "notifications": "Notifications",
     "features": "Features - 12/01/2020",
     "version": "Version",
-    "content": "Lists\n  - add tasks\n    - title\n    - date + time\n    - description\n  - sort tasks by drag-and-drop\n\nOverview\n  - choose a timespan\n  - search tasks\n\nGeneral\n  - delete tasks (left swipe)\n  - check Tasks\n  - hide and show checked tasks (3-dot-menu)\n  - german and english translations\n  - reset to factory defaults"
+    "content": {
+      "my-list": "My List",
+      "add-tasks": "Add tasks",
+      "title": "Title",
+      "datetime": "Date & Time",
+      "description": "Description",
+      "sort-drag": "Sort tasks with drag-and-drop",
+      "overview": "Overview",
+      "filter": "Choose filters",
+      "search": "Search tasks",
+      "general-changes": "General changes",
+      "delete-tasks": "Delete tasks (swipe left)",
+      "check-tasks": "Check tasks",
+      "hide-checked-tasks": "Hide & show checked tasks",
+      "translations": "English and german translations",
+      "reset": "Reset Taskanizer to factory defaults"
+    }
   },
   "settings": {
     "settings": "Settings",
