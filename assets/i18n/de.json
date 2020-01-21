@@ -1,0 +1,44 @@
+{
+  "overview": {
+    "today": "Heute",
+    "week": "Innerhalb einer Woche",
+    "overdue": "Überfällig",
+    "withoutDeadline": "Ohne Fälligkeitsdatum",
+    "relevant": "Relevante Aufgaben",
+    "all": "Alle",
+    "showChecked": "erledigte Aufgaben anzeigen",
+    "hideChecked": "erledigte Aufgaben ausblenden"
+  },
+  "lists": {
+    "lists": "Meine Liste"
+  },
+  "notifications": {
+    "notifications": "Benachrichtigungen",
+    "features": "Funktionsumfang - 12.01.2020",
+    "version": "Version",
+    "content": {
+      "my-list": "Meine Liste",
+      "add-tasks": "Aufgaben hinzufügen",
+      "title": "Titel",
+      "datetime": "Datum & Zeit",
+      "description": "Beschreibung",
+      "sort-drag": "Aufgaben sortieren per Drag-and-Drop",
+      "overview": "Übersicht",
+      "filter": "Filter wählen",
+      "search": "Suchen",
+      "general-changes": "Allgemeine Änderungen",
+      "delete-tasks": "Aufgaben löschen (nach links wischen)",
+      "check-tasks": "Aufgaben als erledigt markieren",
+      "hide-checked-tasks": "Erledigte Aufgaben ein- und ausblenden",
+      "translations": "Englische und deutsche Übersetzungen",
+      "reset": "App auf Werkseinstellungen zurücksetzen"
+    }
+  },
+  "settings": {
+    "settings": "Einstellungen",
+    "reset": "Auf Werkseinstellungen zurücksetzen"
+  },
+  "task_item": {
+    "due": "fällig"
+  }
+}
