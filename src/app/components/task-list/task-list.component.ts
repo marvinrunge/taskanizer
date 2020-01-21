@@ -13,6 +13,7 @@ export class TaskListComponent implements OnInit {
 
   @Input() tasks: Task[];
   @Input() draggable: boolean;
+  @Input() showChecked: boolean;
 
   constructor(private store$: Store<RootStoreState.State>) { }
 

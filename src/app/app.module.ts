@@ -28,7 +28,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 export class HammerConfig extends HammerGestureConfig {
   overrides = {
-    swipe: { direction: Hammer.DIRECTION_ALL }
+    swipe: { direction: Hammer.DIRECTION_HORIZONTAL },
+    pinch: { enable: false },
+    rotate: { enable: false }
   } as any;
 }
 

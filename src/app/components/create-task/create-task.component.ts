@@ -1,9 +1,8 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
-import { RootStoreState, TaskActions, TaskSelectors } from 'src/app/root-store';
-import { Store, select } from '@ngrx/store';
+import { RootStoreState, TaskActions } from 'src/app/root-store';
+import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models';
 import * as moment from 'moment';
-import { Observable } from 'rxjs';
 
 @Component({
   selector: 'app-create-task',
@@ -56,5 +55,9 @@ export class TaskCreateComponent implements OnInit {
         TaskActions.addRequest({ task })
       );
     }
+  }
+  
+  getMinDate() {
+    return moment().toDate();
   }
 }

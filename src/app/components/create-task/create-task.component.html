@@ -18,7 +18,7 @@
       <div>
         <mat-form-field appearance="fill" class="input">
           <mat-label>Deadline</mat-label>
-          <input matInput [(ngModel)]="deadline" [matDatepicker]="picker">
+          <input matInput [min]="getMinDate()" [(ngModel)]="deadline" [matDatepicker]="picker">
           <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
           <mat-datepicker touchUi #picker></mat-datepicker>
         </mat-form-field>

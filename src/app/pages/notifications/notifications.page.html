@@ -15,7 +15,23 @@
     </mat-card-header>
     <mat-divider></mat-divider><br />
     <mat-card-content class="content">
-      {{ 'notifications.content' | translate }}
+      <h4>{{ 'notifications.content.my-list' | translate }}</h4>
+        <li>{{ 'notifications.content.add-tasks' | translate }}</li>
+        <ul>
+          <li>{{ 'notifications.content.title' | translate }}</li>
+          <li>{{ 'notifications.content.datetime' | translate }}</li>
+          <li>{{ 'notifications.content.description' | translate }}</li>
+        </ul>
+        <li>{{ 'notifications.content.sort-drag' | translate }}</li>
+      <h4>{{ 'notifications.content.overview' | translate }}</h4>
+        <li>{{ 'notifications.content.filter' | translate }}</li>
+        <li>{{ 'notifications.content.search' | translate }}</li>
+      <h4>{{ 'notifications.content.general-changes' | translate }}</h4>
+        <li>{{ 'notifications.content.delete-tasks' | translate }}</li>
+        <li>{{ 'notifications.content.check-tasks' | translate }}</li>
+        <li>{{ 'notifications.content.hide-checked-tasks' | translate }}</li>
+        <li>{{ 'notifications.content.translations' | translate }}</li>
+        <li>{{ 'notifications.content.reset' | translate }}</li>
     </mat-card-content>
   </mat-card>
 </ion-content>

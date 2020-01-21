@@ -13,6 +13,7 @@ import { delay } from 'rxjs/operators';
 export class TaskListitemComponent implements OnInit {
 
   @Input() task: Task;
+  @Input() showChecked: boolean;
   right = '';
   opacity = '1';
   maxHeight = '200px';
@@ -23,14 +24,13 @@ export class TaskListitemComponent implements OnInit {
 
   onSwipeLeft(e) {
     if (e.direction === 2) {
-      this.right = '3.5rem';
-      this.opacity = '0';
+      this.right = '150%';
       this.maxHeight = '0px';
       setTimeout(() => {
         this.store$.dispatch(
           TaskActions.deleteRequest({ task: this.task })
         );
-      }, 1000);
+      }, 800);
     }
   }
 
@@ -45,9 +45,15 @@ export class TaskListitemComponent implements OnInit {
   check() {
     const task = this.task;
     task.isDone = this.task.isDone;
-    this.store$.dispatch(
-      TaskActions.updateRequest({ task })
-    );
+    if (this.task.isDone === true && this.showChecked === false) {
+      this.opacity = '0';
+      this.maxHeight = '0px';
+    }
+    setTimeout(() => {
+      this.store$.dispatch(
+        TaskActions.updateRequest({ task })
+      );
+    }, 800);
   }
 
   hasSubtitle() {

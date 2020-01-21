@@ -1,6 +1,6 @@
 <div *ngIf="draggable" cdkDropList class="list" (cdkDropListDropped)="drop($event)">
     <div class="item" fxLayout="row" *ngFor="let task of tasks" cdkDrag cdkDragLockAxis="y">
-        <app-task-listitem fxFlex [task]="task">  
+        <app-task-listitem [showChecked]="showChecked" fxFlex [task]="task">  
             <div class="drag-handle" cdkDragHandle>
                 <mat-icon>drag_handle</mat-icon>
             </div>
@@ -9,6 +9,6 @@
 </div>
 <div *ngIf="!draggable" class="list">
     <div class="item" fxLayout="row" *ngFor="let task of tasks">
-        <app-task-listitem fxFlex [task]="task"></app-task-listitem>
+        <app-task-listitem [showChecked]="showChecked" fxFlex [task]="task"></app-task-listitem>
     </div>
 </div>

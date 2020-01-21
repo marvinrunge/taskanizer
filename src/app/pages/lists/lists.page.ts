@@ -1,9 +1,9 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import { Task } from 'src/app/models';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
-import { RootStoreState, TaskSelectors, TaskActions } from 'src/app/root-store';
-import { IonReorderGroup } from '@ionic/angular';
+import { RootStoreState, TaskSelectors } from 'src/app/root-store';
+import * as moment from 'moment';
 
 @Component({
   selector: 'app-lists',

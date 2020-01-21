@@ -16,7 +16,23 @@
     "notifications": "Benachrichtigungen",
     "features": "Funktionsumfang - 12.01.2020",
     "version": "Version",
-    "content": "Listen\n  - Aufgaben hinzufügen\n    - Titel\n    - Datum + Zeit\n    - Beschreibung\n  - Aufgaben sortieren per Drag-and-Drop\n\nÜbersicht\n  - Zeitspanne wählen\n  - Suchen\n\nAllgemein\n  - Aufgaben löschen (nach links wischen)\n  - Aufgaben als erledigt markieren\n  - Erledigte Aufgaben ein- und ausblenden\n  - Englische und deutsche Übersetzungen\n  - App auf Werkseinstellungen zurücksetzen"
+    "content": {
+      "my-list": "Meine Liste",
+      "add-tasks": "Aufgaben hinzufügen",
+      "title": "Titel",
+      "datetime": "Datum & Zeit",
+      "description": "Beschreibung",
+      "sort-drag": "Aufgaben sortieren per Drag-and-Drop",
+      "overview": "Übersicht",
+      "filter": "Filter wählen",
+      "search": "Suchen",
+      "general-changes": "Allgemeine Änderungen",
+      "delete-tasks": "Aufgaben löschen (nach links wischen)",
+      "check-tasks": "Aufgaben als erledigt markieren",
+      "hide-checked-tasks": "Erledigte Aufgaben ein- und ausblenden",
+      "translations": "Englische und deutsche Übersetzungen",
+      "reset": "App auf Werkseinstellungen zurücksetzen"
+    }
   },
   "settings": {
     "settings": "Einstellungen",
