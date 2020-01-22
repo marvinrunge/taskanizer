@@ -1,4 +1,4 @@
-<div class="listitem" [style.right]="right" [style.transform]="transform" [style.opacity]="opacity" [style.maxHeight]="maxHeight" [style.padding-left.px]="(task.level*12)" (swipeleft)="onSwipeLeft($event)">
+<div class="listitem" [style.right]="right" [style.opacity]="opacity" [style.maxHeight]="maxHeight" [style.padding-left.px]="(task.level*12)" (swipeleft)="onSwipeLeft($event)">
     <div class="flex-wrapper" fxLayout="row" fxLayoutAlign="start center" [style.height]="50">
         <div fxFlex="15%" fxLayoutAlign="center center">
             <mat-checkbox [(ngModel)]="task.isDone" (change)="check()"></mat-checkbox>
