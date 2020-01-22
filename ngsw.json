@@ -1,6 +1,6 @@
 {
   "configVersion": 1,
-  "timestamp": 1579694245665,
+  "timestamp": 1579694887802,
   "index": "https://marvinrunge.github.io/taskanizer/index.html",
   "assetGroups": [
     {
@@ -209,8 +209,8 @@
         "https://marvinrunge.github.io/taskanizer/common-es2015.ee8504606d725708aa64.js",
         "https://marvinrunge.github.io/taskanizer/common-es5.ee8504606d725708aa64.js",
         "https://marvinrunge.github.io/taskanizer/index.html",
-        "https://marvinrunge.github.io/taskanizer/main-es2015.6a509f03f1a3d7056d1b.js",
-        "https://marvinrunge.github.io/taskanizer/main-es5.6a509f03f1a3d7056d1b.js",
+        "https://marvinrunge.github.io/taskanizer/main-es2015.d8c37b5e5f7058b8587b.js",
+        "https://marvinrunge.github.io/taskanizer/main-es5.d8c37b5e5f7058b8587b.js",
         "https://marvinrunge.github.io/taskanizer/polyfills-es2015.8c11ba2771e53382297b.js",
         "https://marvinrunge.github.io/taskanizer/polyfills-es5.90e2191c4ab43f89c910.js",
         "https://marvinrunge.github.io/taskanizer/runtime-es2015.396293215aa70501da8d.js",
@@ -449,9 +449,9 @@
     "https://marvinrunge.github.io/taskanizer/assets/icons/icon-96x96.png": "451d73b6b16c12b204556c01e9d795a1594eb872",
     "https://marvinrunge.github.io/taskanizer/common-es2015.ee8504606d725708aa64.js": "5dcdfe407ee0872181c46fb524133c72ae9bcae9",
     "https://marvinrunge.github.io/taskanizer/common-es5.ee8504606d725708aa64.js": "2e30128ce31bdd5633b2e63fa2fc893ddadfefbd",
-    "https://marvinrunge.github.io/taskanizer/index.html": "24b3e54a66dcd884d6178e1210a36fea13d1ab70",
-    "https://marvinrunge.github.io/taskanizer/main-es2015.6a509f03f1a3d7056d1b.js": "7852865ac2f0dab2e30c2ac9beeabb60d8d869e1",
-    "https://marvinrunge.github.io/taskanizer/main-es5.6a509f03f1a3d7056d1b.js": "d27911450a242f1186471374608df3863d6d9172",
+    "https://marvinrunge.github.io/taskanizer/index.html": "f694db0f03050f8e4ebf75c23fa94db4b234c9bb",
+    "https://marvinrunge.github.io/taskanizer/main-es2015.d8c37b5e5f7058b8587b.js": "68838498d7cc6f1f470a46182f1f494659311465",
+    "https://marvinrunge.github.io/taskanizer/main-es5.d8c37b5e5f7058b8587b.js": "b2348fca1b542566f9dd8ae786cb0c6ced4c0819",
     "https://marvinrunge.github.io/taskanizer/polyfills-es2015.8c11ba2771e53382297b.js": "26df1f3472e642cfe4663a74f2536eb6e76c8ae1",
     "https://marvinrunge.github.io/taskanizer/polyfills-es5.90e2191c4ab43f89c910.js": "5d944c4c93164f155fadf7a70c86d2af08da9891",
     "https://marvinrunge.github.io/taskanizer/runtime-es2015.396293215aa70501da8d.js": "ee4e26590b78002bd8730797e508f6d1afa3b761",
