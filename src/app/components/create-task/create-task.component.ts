@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input }
 import { RootStoreState, TaskActions } from 'src/app/root-store';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models';
+import { AmazingTimePickerService } from 'amazing-time-picker';
 import * as moment from 'moment';
 
 @Component({
@@ -15,7 +16,7 @@ export class TaskCreateComponent implements OnInit {
   @Output() arrowPressed = new EventEmitter<boolean>();
   @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
 
-  constructor(private store$: Store<RootStoreState.State>) { }
+  constructor(private store$: Store<RootStoreState.State>, private atp: AmazingTimePickerService) { }
 
   title = '';
   deadline: string;
@@ -29,7 +30,6 @@ export class TaskCreateComponent implements OnInit {
   }
 
   press() {
-    this.arrowRotation = this.createState ? 'rotate(0deg)' : 'rotate(180deg)';
     this.arrowPressed.emit(this.createState);
     this.createState = !this.createState;
   }
@@ -56,8 +56,24 @@ export class TaskCreateComponent implements OnInit {
       );
     }
   }
-  
+
   getMinDate() {
     return moment().toDate();
   }
+
+  openTimepicker() {
+    const amazingTimePicker = this.atp.open({
+      time:  this.time,
+      theme: 'light',
+      locale: moment.locale(),
+      arrowStyle: {
+        background: '#ff6600',
+        color: 'white'
+      }
+    });
+
+    amazingTimePicker.afterClose().subscribe(time => {
+      this.time = time;
+    });
+}
 }

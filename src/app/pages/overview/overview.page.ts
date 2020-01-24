@@ -1,7 +1,7 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/models';
-import { TaskSelectors, RootStoreState, TaskActions } from 'src/app/root-store';
+import { TaskSelectors, RootStoreState } from 'src/app/root-store';
 import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 
@@ -11,7 +11,6 @@ import * as moment from 'moment';
   styleUrls: ['overview.page.scss']
 })
 export class OverviewPage {
-
   tasks$: Observable<Task[]>;
   error$: Observable<any>;
   isLoading$: Observable<boolean>;

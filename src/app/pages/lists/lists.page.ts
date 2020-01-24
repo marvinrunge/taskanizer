@@ -3,7 +3,6 @@ import { Task } from 'src/app/models';
 import { Observable } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { RootStoreState, TaskSelectors } from 'src/app/root-store';
-import * as moment from 'moment';
 
 @Component({
   selector: 'app-lists',
@@ -16,8 +15,7 @@ export class ListsPage {
   isLoading$: Observable<boolean>;
   maxIndex$: Observable<number>;
 
-  top = 'calc(100% - 4.5rem)';
-  overflowY = 'hidden';
+  top = 'calc(100% - 72px)';
   showDoneTasks = false;
 
   constructor(private store$: Store<RootStoreState.State>) {
@@ -39,13 +37,11 @@ export class ListsPage {
   }
 
   onSwipeUp() {
-    this.top = '3.5rem';
-    this.overflowY = 'auto';
+    this.top = 'calc(100% - 72px)';
   }
 
   onSwipeDown() {
-    this.top = 'calc(100% - 4.5rem)';
-    this.overflowY = 'hidden';
+    this.top = '0px';
   }
 
   toggle(state: boolean) {
