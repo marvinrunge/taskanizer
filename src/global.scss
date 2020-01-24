@@ -39,6 +39,11 @@ ion-list {
     --background: #ffffffff;
 }
 
+.sc-ion-searchbar-ios-h {
+    height: 36px !important;
+    padding: 0px 0.5rem 0px 0.5rem !important;
+}
+
 .snackbar {
     background-color: white;
     margin-bottom: 4rem !important;
