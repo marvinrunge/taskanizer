@@ -200,6 +200,9 @@ MIT
 @ngx-translate/http-loader
 MIT
 
+amazing-time-picker
+MIT
+
 core-js
 MIT
 Copyright (c) 2014-2019 Denis Pushkarev
