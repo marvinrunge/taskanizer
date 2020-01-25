@@ -1,6 +1,6 @@
-<div class="create-task-container">
-  <mat-icon (click)="press()" class="drag-handle">drag_handle</mat-icon>
-  <div class="task-header">
+<div class="create-task-container" id="create">
+  <mat-icon (click)="scrollToBottom()" class="drag-handle">drag_handle</mat-icon>
+  <div class="task-header" id="header">
     <div fxLayout="row wrap" fxLayoutGap="1rem" class="header-row">
       <div fxFlex fxLayoutAlign="start end">
         <mat-form-field class="title">

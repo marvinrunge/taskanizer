@@ -13,7 +13,7 @@ import * as moment from 'moment';
 export class TaskCreateComponent implements OnInit {
 
   @Input() maxIndex;
-  @Output() arrowPressed = new EventEmitter<boolean>();
+  @Output() handlePress = new EventEmitter<boolean>();
   @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
 
   constructor(private store$: Store<RootStoreState.State>, private atp: AmazingTimePickerService) { }
@@ -23,15 +23,21 @@ export class TaskCreateComponent implements OnInit {
   time: string;
   details: string;
 
-  createState = false;
-  arrowRotation = 'rotate(0deg)';
+  scrollUp = true;
 
   ngOnInit() {
   }
 
-  press() {
-    this.arrowPressed.emit(this.createState);
-    this.createState = !this.createState;
+  scrollToBottom() {
+    if (this.scrollUp) {
+      console.log('up');
+      document.getElementById("create").scrollIntoView({block: "end", behavior: "smooth"});
+    } else {
+      console.log('down');
+      document.getElementById("header").scrollIntoView({block: "end", behavior: "smooth"});
+    }
+    
+    this.scrollUp = !this.scrollUp;
   }
 
   addTask() {
