@@ -31,10 +31,10 @@ export class TaskCreateComponent implements OnInit {
   scrollToBottom() {
     if (this.scrollUp) {
       console.log('up');
-      document.getElementById("create").scrollIntoView({block: "end", behavior: "smooth"});
+      document.getElementById('create').scrollIntoView({block: 'end', behavior: 'smooth'});
     } else {
       console.log('down');
-      document.getElementById("header").scrollIntoView({block: "end", behavior: "smooth"});
+      document.getElementById('header').scrollIntoView({block: 'end', behavior: 'smooth'});
     }
     
     this.scrollUp = !this.scrollUp;
@@ -66,20 +66,4 @@ export class TaskCreateComponent implements OnInit {
   getMinDate() {
     return moment().toDate();
   }
-
-  openTimepicker() {
-    const amazingTimePicker = this.atp.open({
-      time:  this.time,
-      theme: 'light',
-      locale: moment.locale(),
-      arrowStyle: {
-        background: '#ff6600',
-        color: 'white'
-      }
-    });
-
-    amazingTimePicker.afterClose().subscribe(time => {
-      this.time = time;
-    });
-}
 }

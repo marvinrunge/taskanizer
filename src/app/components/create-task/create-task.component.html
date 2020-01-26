@@ -1,5 +1,5 @@
 <div class="create-task-container" id="create">
-  <mat-icon (click)="scrollToBottom()" class="drag-handle">drag_handle</mat-icon>
+  <mat-icon class="drag-handle">drag_handle</mat-icon>
   <div class="task-header" id="header">
     <div fxLayout="row wrap" fxLayoutGap="1rem" class="header-row">
       <div fxFlex fxLayoutAlign="start end">
@@ -26,7 +26,7 @@
     <div>
       <mat-form-field appearance="fill" class="input">
         <mat-label>Time</mat-label>
-        <input matInput [(ngModel)]="time" type="time" (click)="openTimepicker()">
+        <input matInput [(ngModel)]="time" type="time">
       </mat-form-field>
     </div>
     <div>
