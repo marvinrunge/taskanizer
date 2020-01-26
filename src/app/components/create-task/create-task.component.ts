@@ -11,11 +11,14 @@ import * as moment from 'moment';
 })
 export class TaskCreateComponent implements OnInit {
 
-  @Input() maxIndex;
+  @Input() maxIndex: number;
+  @Input() editMode: boolean;
   @Output() handlePress = new EventEmitter<boolean>();
   @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
 
-  constructor(private store$: Store<RootStoreState.State>) { }
+  constructor(private store$: Store<RootStoreState.State>) {
+    
+  }
 
   title = '';
   deadline: string;

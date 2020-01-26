@@ -1,0 +1,15 @@
+<ion-header>
+    <ion-toolbar>
+        <ion-title>
+            {{ 'lists.lists' | translate }}
+        </ion-title>
+        <ion-buttons slot="end">
+        <button mat-icon-button [matMenuTriggerFor]="options" aria-label="more">
+            <mat-icon>more_vert</mat-icon>
+        </button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+<ion-content>
+    <app-create-task></app-create-task>
+</ion-content>
