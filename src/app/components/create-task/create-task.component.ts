@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input }
 import { RootStoreState, TaskActions } from 'src/app/root-store';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models';
-import { AmazingTimePickerService } from 'amazing-time-picker';
 import * as moment from 'moment';
 
 @Component({
@@ -16,7 +15,7 @@ export class TaskCreateComponent implements OnInit {
   @Output() handlePress = new EventEmitter<boolean>();
   @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
 
-  constructor(private store$: Store<RootStoreState.State>, private atp: AmazingTimePickerService) { }
+  constructor(private store$: Store<RootStoreState.State>) { }
 
   title = '';
   deadline: string;
