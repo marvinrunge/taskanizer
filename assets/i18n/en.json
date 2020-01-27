@@ -38,7 +38,14 @@
     "settings": "Settings",
     "reset": "Reset to factory defaults"
   },
-  "task_item": {
+  "edit-task": {
+    "edit-task": "Edit Task",
+    "title": "Title",
+    "deadline": "Deadline",
+    "time": "Time",
+    "description": "Description"
+  },
+  "task-item": {
     "due": "due"
   }
 }
