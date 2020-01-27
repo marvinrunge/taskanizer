@@ -10,7 +10,6 @@ import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule, MatFormFieldModule } from '@angular/material';
 import { TaskListComponent } from './components/task-list/task-list.component';
-import { AmazingTimePickerModule } from 'amazing-time-picker';
 
 @NgModule({
   declarations: [
@@ -28,8 +27,7 @@ import { AmazingTimePickerModule } from 'amazing-time-picker';
     FormsModule,
     ReactiveFormsModule,
     MatInputModule,
-    MatFormFieldModule,
-    AmazingTimePickerModule
+    MatFormFieldModule
   ],
   exports: [
     TaskListitemComponent,

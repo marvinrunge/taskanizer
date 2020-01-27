@@ -1,13 +1,14 @@
-<div class="create-task-container">
-  <mat-icon (click)="press()" class="drag-handle">drag_handle</mat-icon>
-  <div class="task-header">
+<div class="create-task-container" id="create">
+  <mat-icon *ngIf="!task" class="drag-handle">drag_handle</mat-icon>
+  <div class="task-header" id="header">
     <div fxLayout="row wrap" fxLayoutGap="1rem" class="header-row">
       <div fxFlex fxLayoutAlign="start end">
         <mat-form-field class="title">
-          <input matInput #titleInput [(ngModel)]="title" (keyup.enter)="addTask()" class="title" placeholder="Title" autocomplete="off" type="text">
+          <mat-label>{{ 'edit-task.title' | translate }}</mat-label>
+          <input matInput #titleInput [(ngModel)]="title" (keyup.enter)="addTask()" class="title" autocomplete="off" type="text">
         </mat-form-field>
       </div>
-      <div fxFlex="none" fxLayoutAlign="start center" class="button">
+      <div *ngIf="!task" fxFlex="none" fxLayoutAlign="start center" class="button">
         <button class="add-button" (click)="addTask()" color="primary" mat-icon-button type="submit" aria-label="add task button">
           <mat-icon>send</mat-icon>
         </button>
@@ -15,23 +16,29 @@
     </div>
   </div>
   <div class="task-body">
-    <div>
+    <div fxLayout="row" fxFlexAlign="center center" fxLayoutGap="1rem">
       <mat-form-field appearance="fill" class="input">
-        <mat-label>Deadline</mat-label>
+        <mat-label>{{ 'edit-task.deadline' | translate }}</mat-label>
         <input matInput readonly [min]="getMinDate()" (click)="picker.open()" [(ngModel)]="deadline" [matDatepicker]="picker">
         <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker touchUi #picker></mat-datepicker>
       </mat-form-field>
+      <button mat-stroked-button class="clear-button" (click)="clearDate()">
+        <mat-icon>clear</mat-icon>
+      </button>
     </div>
-    <div>
+    <div fxLayout="row" fxFlexAlign="center center" fxLayoutGap="1rem">
       <mat-form-field appearance="fill" class="input">
-        <mat-label>Time</mat-label>
-        <input matInput [(ngModel)]="time" type="time" (click)="openTimepicker()">
+        <mat-label>{{ 'edit-task.time' | translate }}</mat-label>
+        <input matInput [(ngModel)]="time" type="time">
       </mat-form-field>
+      <button mat-stroked-button class="clear-button" (click)="clearTime()">
+        <mat-icon>clear</mat-icon>
+      </button>
     </div>
     <div>
       <mat-form-field appearance="fill" class="input">
-        <mat-label>Description</mat-label>
+        <mat-label>{{ 'edit-task.description' | translate }}</mat-label>
         <textarea matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10 
         #autosize="matTextareaAutosize"></textarea>
       </mat-form-field>

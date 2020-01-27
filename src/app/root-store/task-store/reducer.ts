@@ -62,6 +62,9 @@ export const taskReducer = createReducer(
   on(TaskActions.resetFailure, (state, { error }) => ({
     ...state, isLoading: false, error
   })),
+  on(TaskActions.setSelectedTaskId, (state, { selectedTaskId }) => ({
+    ...state, selectedTaskId
+  }))
 );
 
 export function taskreducer(state: TaskState | undefined, action: Action) {

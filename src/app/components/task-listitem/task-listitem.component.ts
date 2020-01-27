@@ -4,6 +4,7 @@ import { RootStoreState, TaskActions } from 'src/app/root-store';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { delay } from 'rxjs/operators';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-task-listitem',
@@ -18,7 +19,7 @@ export class TaskListitemComponent implements OnInit {
   opacity = '1';
   maxHeight = '200px';
 
-  constructor(private store$: Store<RootStoreState.State>) { }
+  constructor(private store$: Store<RootStoreState.State>, private router: Router) { }
 
   ngOnInit() {}
 
@@ -63,5 +64,13 @@ export class TaskListitemComponent implements OnInit {
     } else {
         return false;
     }
-}
+  }
+
+
+  editSelectedTask() {
+    this.store$.dispatch(
+      TaskActions.setSelectedTaskId({ selectedTaskId: this.task._id })
+    );
+    this.router.navigate(['edit-task']);
+  }
 }
