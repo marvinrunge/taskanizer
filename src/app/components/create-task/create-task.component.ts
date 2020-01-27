@@ -3,6 +3,8 @@ import { RootStoreState, TaskActions } from 'src/app/root-store';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models';
 import * as moment from 'moment';
+import { Observable, Subscription } from 'rxjs';
+import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'app-create-task',
@@ -12,22 +14,36 @@ import * as moment from 'moment';
 export class TaskCreateComponent implements OnInit {
 
   @Input() maxIndex: number;
-  @Input() editMode: boolean;
-  @Output() handlePress = new EventEmitter<boolean>();
+  @Input() task: Task;
+  @Input() update: Observable<void>;
+  @Output() voted = new EventEmitter<boolean>();
   @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
 
-  constructor(private store$: Store<RootStoreState.State>) {
-    
+  constructor(private store$: Store<RootStoreState.State>, private navCtrl: NavController) {
   }
 
   title = '';
-  deadline: string;
+  deadline: Date;
   time: string;
   details: string;
 
-  scrollUp = true;
+  private scrollUp = true;
+  private updateSubscription: Subscription;
 
   ngOnInit() {
+    if (this.update !== undefined) {
+      this.updateSubscription = this.update.subscribe(() => this.updateTask());
+    }
+    if (this.task) {
+      this.title = this.task.title;
+      if (this.task.deadline) {
+        this.deadline = this.task.deadline.toDate();
+        this.time = this.task.deadline.format('HH:mm');
+      }
+      if (this.task.details) {
+        this.details = this.task.details;
+      }
+    }
   }
 
   scrollToBottom() {
@@ -38,7 +54,7 @@ export class TaskCreateComponent implements OnInit {
       console.log('down');
       document.getElementById('header').scrollIntoView({block: 'end', behavior: 'smooth'});
     }
-    
+
     this.scrollUp = !this.scrollUp;
   }
 
@@ -65,7 +81,44 @@ export class TaskCreateComponent implements OnInit {
     }
   }
 
+  updateTask() {
+    if (this.title !== '') {
+      const task = this.task;
+      task.title = this.title;
+      task.isDone = false;
+
+      if (this.deadline && !this.time) {
+        task.deadline = moment(this.deadline).startOf('day');
+      } else if (this.deadline && this.time) {
+        task.deadline = moment(this.deadline).add(this.time.substring(0, 2), 'hours').add(this.time.substring(3, 5), 'minutes');
+      }
+
+      task.details = this.details;
+      task.index = this.maxIndex;
+      this.title = '';
+      this.titleInput.nativeElement.focus();
+
+      this.store$.dispatch(
+        TaskActions.updateRequest({ task })
+      );
+
+      this.navCtrl.back();
+    }
+  }
+
+  clearDate() {
+    this.deadline = undefined;
+  }
+
+  clearTime() {
+    this.time = undefined;
+  }
+
   getMinDate() {
     return moment().toDate();
+  }
+
+  ngOnDestroy() {
+    this.updateSubscription.unsubscribe();
   }
 }

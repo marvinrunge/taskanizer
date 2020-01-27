@@ -8,7 +8,7 @@
             <div class="subtitle" *ngIf="hasSubtitle()">
                 <ion-icon class="priority" *ngIf="task.priority" name="ios-flame" [id]="'priority' + task.priority"></ion-icon>
                 <span *ngIf="task.deadline && (task.priority)"> - </span>
-                <span *ngIf="task.deadline">{{ 'task_item.due' | translate }} {{ getDueTime() }}</span>
+                <span *ngIf="task.deadline">{{ 'task-item.due' | translate }} {{ getDueTime() }}</span>
                 <span *ngIf="task.reminder || task.attachment || task.repeat"> - </span>
                 <ion-icon name="md-alarm" *ngIf="task.reminder"></ion-icon>
                 <ion-icon name="md-repeat" *ngIf="task.repeat"></ion-icon>

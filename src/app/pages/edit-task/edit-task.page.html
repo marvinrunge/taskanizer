@@ -1,15 +1,18 @@
 <ion-header>
     <ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
         <ion-title>
-            {{ 'lists.lists' | translate }}
+            {{ 'edit-task.edit-task' | translate }}
         </ion-title>
         <ion-buttons slot="end">
-        <button mat-icon-button [matMenuTriggerFor]="options" aria-label="more">
-            <mat-icon>more_vert</mat-icon>
-        </button>
+            <ion-button (click)="emitSave()">
+                <ion-icon name="checkmark"></ion-icon>
+            </ion-button>
         </ion-buttons>
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <app-create-task></app-create-task>
+    <app-create-task [task]="(task$ | async)" [update]="saveEvents.asObservable()"></app-create-task>
 </ion-content>

@@ -6,6 +6,7 @@ import { Task } from '../../models';
 export interface TaskState extends EntityState<Task> {
   isLoading: boolean;
   error: any;
+  selectedTaskId: string;
 }
 
 /** function to determine which field to use as a ID inside the store */
@@ -22,7 +23,8 @@ export const taskAdapter: EntityAdapter<Task> = createEntityAdapter<Task>({
 export const initialTaskState: TaskState = taskAdapter.getInitialState(
   {
     isLoading: false,
-    error: undefined
+    error: undefined,
+    selectedTaskId: undefined
   }
 );
 

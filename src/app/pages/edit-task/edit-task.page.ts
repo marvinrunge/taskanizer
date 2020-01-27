@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { Task } from 'src/app/models';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { Store, select } from '@ngrx/store';
 import { RootStoreState, TaskSelectors } from 'src/app/root-store';
 
@@ -10,51 +10,18 @@ import { RootStoreState, TaskSelectors } from 'src/app/root-store';
   styleUrls: ['edit-task.page.scss']
 })
 export class EditTaskPage {
-  tasks$: Observable<Task[]>;
-  error$: Observable<any>;
-  isLoading$: Observable<boolean>;
-  maxIndex$: Observable<number>;
+  task$: Observable<Task>;
 
-  top = 'calc(100% - 72px)';
-  showDoneTasks = false;
+  saveEvents: Subject<void> = new Subject<void>();
+
+  emitSave() {
+    this.saveEvents.next();
+  }
 
   constructor(private store$: Store<RootStoreState.State>) {
-    this.tasks$ = this.store$.pipe(
-      select(TaskSelectors.selectDoneTasks(this.showDoneTasks))
+    this.task$ = this.store$.pipe(
+      select(TaskSelectors.selectTaskBySelectedId)
     );
-
-    this.error$ = this.store$.pipe(
-      select(TaskSelectors.selectTaskError)
-    );
-
-    this.isLoading$ = this.store$.pipe(
-      select(TaskSelectors.selectTaskIsLoading)
-    );
-
-    this.maxIndex$ = this.store$.pipe(
-      select(TaskSelectors.selectMaxIndex)
-    );
-  }
-
-  onSwipeUp() {
-    this.top = 'calc(100% - 72px)';
-  }
-
-  onSwipeDown() {
-    this.top = '0px';
-  }
-
-  toggle(state: boolean) {
-    state ? this.onSwipeDown() : this.onSwipeUp();
-  }
-
-  toggleShowDoneTasks() {
-    setTimeout(() => {
-      this.showDoneTasks = !this.showDoneTasks;
-      this.tasks$ = this.store$.pipe(
-        select(TaskSelectors.selectDoneTasks(this.showDoneTasks))
-      );
-    }, 200);
   }
 }
 

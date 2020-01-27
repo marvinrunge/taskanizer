@@ -31,6 +31,16 @@ export const selectTaskIsLoading = createSelector(
   (state: fromTasks.TaskState) => state.isLoading
 );
 
+export const selectSelectedTaskId = createSelector(
+  selectTaskState,
+  (state: fromTasks.TaskState) => state.selectedTaskId
+);
+
+export const selectTaskBySelectedId = createSelector(
+  selectAllTasks,
+  selectSelectedTaskId,
+  (tasks, selectedId) => tasks.filter(task => task._id === selectedId)[0]
+);
 
 export const selectMaxIndex = createSelector(
   selectAllTasks,

@@ -68,7 +68,9 @@ export class TaskListitemComponent implements OnInit {
 
 
   editSelectedTask() {
-    // this.store$.dispatch(TaskActions.setSelectedTaskId({ selectedMeetingId: this.task._id }));
+    this.store$.dispatch(
+      TaskActions.setSelectedTaskId({ selectedTaskId: this.task._id })
+    );
     this.router.navigate(['edit-task']);
   }
 }

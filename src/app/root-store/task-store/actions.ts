@@ -19,3 +19,4 @@ export const deleteSuccess = createAction('[Task] Delete Success', props<{id: st
 export const resetRequest = createAction('[Task] Reset Request');
 export const resetFailure = createAction('[Task] Reset Failure', props<{error: string}>());
 export const resetSuccess = createAction('[Task] Reset Success');
+export const setSelectedTaskId = createAction('[Task] Set Selected Task Id', props<{selectedTaskId: string}>());

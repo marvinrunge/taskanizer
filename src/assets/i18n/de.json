@@ -38,7 +38,14 @@
     "settings": "Einstellungen",
     "reset": "Auf Werkseinstellungen zurücksetzen"
   },
-  "task_item": {
+  "edit-task": {
+    "edit-task": "Aufgabe bearbeiten",
+    "title": "Titel",
+    "deadline": "Fälligkeitsdatum",
+    "time": "Uhrzeit",
+    "description": "Beschreibung"
+  },
+  "task-item": {
     "due": "fällig"
   }
 }
