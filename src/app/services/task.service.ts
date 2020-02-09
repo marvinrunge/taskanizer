@@ -4,6 +4,7 @@ import { Task } from '../models';
 import * as PouchDB from 'pouchdb/dist/pouchdb';
 import { Platform } from '@ionic/angular';
 import { TaskRepresentation } from '../models/taskRepresentation';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
@@ -19,6 +20,7 @@ export class TaskService {
     return this.platform.ready()
       .then(() => {
         this.db = new PouchDB('tasks');
+        this.db.sync(environment.remoteCouch + 'tasks', { live: true });
       });
   }
 
