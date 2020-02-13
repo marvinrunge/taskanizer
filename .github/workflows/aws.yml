@@ -61,6 +61,7 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
+        npm init
         npm i
         npm run lint
         npm build www
