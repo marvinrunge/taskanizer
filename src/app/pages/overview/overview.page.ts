@@ -1,4 +1,4 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/models';
 import { TaskSelectors, RootStoreState } from 'src/app/root-store';
@@ -19,6 +19,7 @@ export class OverviewPage {
   minDeadline: moment.Moment = moment().startOf('day');
   title = 'relevant';
 
+  searchbarMaxHeight = '0px';
   showDoneTasks = false;
   searchMode = false;
 
@@ -78,16 +79,26 @@ export class OverviewPage {
   toggleSearchMode() {
     this.searchMode = !this.searchMode;
     if (this.searchMode === false) {
+      this.searchbarMaxHeight = '0px';
+      this.selectMaxDeadline(this.title);
+    } else {
       this.tasks$ = this.store$.pipe(
-        select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
+        select(TaskSelectors.selectTasksByName(''))
       );
+      setTimeout(() => {
+        this.searchbarMaxHeight = '58px';
+      }, 200);
     }
   }
 
   search(event) {
     if (this.searchMode) {
+      let searchTerm = event.target.value;
+      if (searchTerm === '*') {
+        searchTerm = '';
+      }
       this.tasks$ = this.store$.pipe(
-        select(TaskSelectors.selectTasksByName(event.target.value))
+        select(TaskSelectors.selectTasksByName(searchTerm))
       );
     }
   }

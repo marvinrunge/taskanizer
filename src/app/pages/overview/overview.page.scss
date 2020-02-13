@@ -1,0 +1,7 @@
+@import '../../../theme/variables.scss';
+
+#searchbox {
+    background-color: var(--accent-lighter-color);
+    max-height: 58px;
+    transition: max-height 0.5s;
+}

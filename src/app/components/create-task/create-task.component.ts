@@ -17,7 +17,7 @@ export class TaskCreateComponent implements OnInit {
   @Input() task: Task;
   @Input() update: Observable<void>;
   @Output() voted = new EventEmitter<boolean>();
-  @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
+  @ViewChild('titleInput', { static: false }) titleInput: ElementRef;
 
   constructor(private store$: Store<RootStoreState.State>, private navCtrl: NavController) {
   }
@@ -27,7 +27,6 @@ export class TaskCreateComponent implements OnInit {
   time: string;
   details: string;
 
-  private scrollUp = true;
   private updateSubscription: Subscription;
 
   ngOnInit() {
@@ -36,6 +35,7 @@ export class TaskCreateComponent implements OnInit {
     }
     if (this.task) {
       this.title = this.task.title;
+      this.details = this.task.details;
       if (this.task.deadline) {
         this.deadline = this.task.deadline.toDate();
         this.time = this.task.deadline.format('HH:mm');
@@ -44,18 +44,6 @@ export class TaskCreateComponent implements OnInit {
         this.details = this.task.details;
       }
     }
-  }
-
-  scrollToBottom() {
-    if (this.scrollUp) {
-      console.log('up');
-      document.getElementById('create').scrollIntoView({block: 'end', behavior: 'smooth'});
-    } else {
-      console.log('down');
-      document.getElementById('header').scrollIntoView({block: 'end', behavior: 'smooth'});
-    }
-
-    this.scrollUp = !this.scrollUp;
   }
 
   addTask() {
@@ -91,10 +79,11 @@ export class TaskCreateComponent implements OnInit {
         task.deadline = moment(this.deadline).startOf('day');
       } else if (this.deadline && this.time) {
         task.deadline = moment(this.deadline).add(this.time.substring(0, 2), 'hours').add(this.time.substring(3, 5), 'minutes');
+      } else if (this.deadline === undefined) {
+        task.deadline = undefined;
       }
 
       task.details = this.details;
-      task.index = this.maxIndex;
       this.title = '';
       this.titleInput.nativeElement.focus();
 
@@ -108,6 +97,7 @@ export class TaskCreateComponent implements OnInit {
 
   clearDate() {
     this.deadline = undefined;
+    this.time = undefined;
   }
 
   clearTime() {
