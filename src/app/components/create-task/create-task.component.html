@@ -40,7 +40,7 @@
       <mat-form-field appearance="fill" class="input">
         <mat-label>{{ 'edit-task.description' | translate }}</mat-label>
         <textarea matInput matTextareaAutosize matAutosizeMinRows=5 matAutosizeMaxRows=10 
-        #autosize="matTextareaAutosize"></textarea>
+        #autosize="matTextareaAutosize" [(ngModel)]="details" ></textarea>
       </mat-form-field>
     </div>
   </div>

@@ -1,6 +1,5 @@
 import { Task } from '.';
 import * as moment from 'moment';
-import { NumberSymbol } from '@angular/common';
 
 export class TaskRepresentation {
     title: string;

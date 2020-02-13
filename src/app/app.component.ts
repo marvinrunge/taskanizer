@@ -33,6 +33,7 @@ export class AppComponent {
       this.store$.dispatch(
         TaskActions.loadRequest()
       );
+      document.addEventListener('touchstart', ontouchstart, { passive: true });
       this.splashScreen.hide();
     });
   }
