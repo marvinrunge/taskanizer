@@ -1,9 +1,10 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/models';
 import { TaskSelectors, RootStoreState } from 'src/app/root-store';
 import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
+import { IonSearchbar } from '@ionic/angular';
 
 @Component({
   selector: 'app-overview',
@@ -14,6 +15,8 @@ export class OverviewPage {
   tasks$: Observable<Task[]>;
   error$: Observable<any>;
   isLoading$: Observable<boolean>;
+
+  @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
 
   maxDeadline: moment.Moment = moment().add(1, 'd');
   minDeadline: moment.Moment = moment().startOf('day');
@@ -80,14 +83,17 @@ export class OverviewPage {
     this.searchMode = !this.searchMode;
     if (this.searchMode === false) {
       this.searchbarMaxHeight = '0px';
-      this.selectMaxDeadline(this.title);
-    } else {
-      this.tasks$ = this.store$.pipe(
-        select(TaskSelectors.selectTasksByName(''))
-      );
       setTimeout(() => {
-        this.searchbarMaxHeight = '58px';
-      }, 200);
+        this.selectMaxDeadline(this.title);
+      }, 500);
+    } else {
+      this.searchbar.setFocus();
+      this.searchbarMaxHeight = '58px';
+      setTimeout(() => {
+        this.tasks$ = this.store$.pipe(
+          select(TaskSelectors.selectTasksByName(''))
+        );
+      }, 500);
     }
   }
 
