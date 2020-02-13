@@ -14,8 +14,11 @@ export class TaskRepresentation {
     index: number;
     tags: string[];
     isDone: boolean;
+    // tslint:disable-next-line: variable-name
     _id: string;
+    // tslint:disable-next-line: variable-name
     _deleted: boolean;
+    // tslint:disable-next-line: variable-name
     _rev: string;
 
     constructor(task: Task) {

@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
 import { RootStoreState, TaskActions } from 'src/app/root-store';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models';
@@ -11,7 +11,7 @@ import { NavController } from '@ionic/angular';
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss'],
 })
-export class TaskCreateComponent implements OnInit {
+export class TaskCreateComponent implements OnInit, OnDestroy {
 
   @Input() maxIndex: number;
   @Input() task: Task;
