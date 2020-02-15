@@ -60,7 +60,10 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
 
       task.details = this.details;
       task.index = this.maxIndex;
-      this.title = '';
+      this.title = undefined;
+      this.deadline = undefined;
+      this.time = undefined;
+      this.details = undefined;
       this.titleInput.nativeElement.focus();
 
       this.store$.dispatch(
