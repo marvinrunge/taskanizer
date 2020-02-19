@@ -51,5 +51,5 @@
   <div id="searchbox" [style.maxHeight]="searchbarMaxHeight">
     <ion-searchbar (input)="search($event)" #searchbar></ion-searchbar>
   </div>
-  <app-task-list [tasks]="(tasks$ | async)" [draggable]="false"></app-task-list>
+  <app-task-list [showChecked]="showDoneTasks" [tasks]="(tasks$ | async)" [draggable]="false"></app-task-list>
 </ion-content>
