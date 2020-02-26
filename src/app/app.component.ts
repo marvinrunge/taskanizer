@@ -1,4 +1,4 @@
-import { Component, Injector, OnInit } from '@angular/core';
+import { Component, Injector } from '@angular/core';
 
 import { Platform } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
@@ -14,7 +14,7 @@ import { RootStoreState, TaskActions } from './root-store';
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss']
 })
-export class AppComponent implements OnInit {
+export class AppComponent {
   constructor(
     private platform: Platform,
     private splashScreen: SplashScreen,
@@ -24,10 +24,6 @@ export class AppComponent implements OnInit {
     private store$: Store<RootStoreState.State>
   ) {
     this.initializeApp();
-  }
-
-  ngOnInit() {
-    document.addEventListener('touchstart', ontouchstart, { passive: true });
   }
 
   private initializeApp() {
