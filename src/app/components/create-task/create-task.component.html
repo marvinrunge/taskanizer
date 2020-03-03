@@ -9,7 +9,7 @@
         </mat-form-field>
       </div>
       <div *ngIf="!task" fxFlex="none" fxLayoutAlign="start center" class="button">
-        <button class="add-button" (click)="addTask()" color="primary" mat-icon-button type="submit" aria-label="add task button">
+        <button [@add]="added" class="add-button" (click)="addTask()" color="primary" mat-icon-button type="submit" aria-label="add task button">
           <mat-icon>send</mat-icon>
         </button>
       </div>
