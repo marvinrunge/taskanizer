@@ -5,9 +5,35 @@ import { Task } from 'src/app/models';
 import * as moment from 'moment';
 import { Observable, Subscription } from 'rxjs';
 import { NavController } from '@ionic/angular';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-create-task',
+  animations: [
+    trigger('add', [
+      state('stay', style({
+        transform: 'scale(1)',
+        opacity: 1
+      })),
+      state('flyaway', style({
+        transform: 'scale(3)',
+        opacity: 0
+      })),
+      state('gone', style({
+        transform: 'scale(0)',
+        opacity: 1
+      })),
+      transition('stay => flyaway', [
+        animate('0.6s ease')
+      ]),
+      transition('flyaway => gone', [
+        animate('0s')
+      ]),
+      transition('gone => stay', [
+        animate('0.3s ease')
+      ])
+    ]),
+  ],
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss'],
 })
@@ -26,6 +52,7 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
   deadline: Date;
   time: string;
   details: string;
+  added = 'stay';
 
   private updateSubscription: Subscription;
 
@@ -60,7 +87,7 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
 
       task.details = this.details;
       task.index = this.maxIndex;
-      this.title = undefined;
+      this.title = '';
       this.deadline = undefined;
       this.time = undefined;
       this.details = undefined;
@@ -69,6 +96,8 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
       this.store$.dispatch(
         TaskActions.addRequest({ task })
       );
+
+      this.fireAddAnimation();
     }
   }
 
@@ -98,6 +127,18 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
     }
   }
 
+  fireAddAnimation() {
+    setTimeout(() => {
+      this.added = 'flyaway';
+    }, 0);
+    setTimeout(() => {
+      this.added = 'gone';
+    }, 600);
+    setTimeout(() => {
+      this.added = 'stay';
+    }, 700);
+  }
+
   clearDate() {
     this.deadline = undefined;
     this.time = undefined;
@@ -112,6 +153,8 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.updateSubscription.unsubscribe();
+    if (this.updateSubscription) {
+      this.updateSubscription.unsubscribe();
+    }
   }
 }
