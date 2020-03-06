@@ -37,14 +37,14 @@
       "header": "Version 0.0.2",
       "date": "03/01/2020",
       "bug_fixes": "Bug fixes",
-      "search_case": "Search is not Case Sensitive anymore",
+      "search_case": "Search is not case sensitive anymore",
       "bulletpoints": "Bulletpoints fix for Safari",
       "header_ios": "Fix header for Safari",
       "new_features": "New features",
-      "search_pos": "Search is now under the header",
+      "search_pos": "Search is now beneath the header",
       "animation": "Animation for adding a task successfully",
-      "relevant": "New Filter Option for relevant tasks. Includes",
-      "relevant1": "Iverdue tasks",
+      "relevant": "New filter option for relevant tasks includes",
+      "relevant1": "Overdue tasks",
       "relevant2": "Tasks within the next 7 days",
       "relevant3": "Tasks without date information"
     }
