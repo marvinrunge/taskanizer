@@ -1,23 +1,49 @@
-import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
 import { RootStoreState, TaskActions } from 'src/app/root-store';
 import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models';
 import * as moment from 'moment';
 import { Observable, Subscription } from 'rxjs';
 import { NavController } from '@ionic/angular';
+import { trigger, state, style, transition, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-create-task',
+  animations: [
+    trigger('add', [
+      state('stay', style({
+        transform: 'scale(1)',
+        opacity: 1
+      })),
+      state('flyaway', style({
+        transform: 'scale(3)',
+        opacity: 0
+      })),
+      state('gone', style({
+        transform: 'scale(0)',
+        opacity: 1
+      })),
+      transition('stay => flyaway', [
+        animate('0.6s ease')
+      ]),
+      transition('flyaway => gone', [
+        animate('0s')
+      ]),
+      transition('gone => stay', [
+        animate('0.3s ease')
+      ])
+    ]),
+  ],
   templateUrl: './create-task.component.html',
   styleUrls: ['./create-task.component.scss'],
 })
-export class TaskCreateComponent implements OnInit {
+export class TaskCreateComponent implements OnInit, OnDestroy {
 
   @Input() maxIndex: number;
   @Input() task: Task;
   @Input() update: Observable<void>;
   @Output() voted = new EventEmitter<boolean>();
-  @ViewChild('titleInput', {static: false}) titleInput: ElementRef;
+  @ViewChild('titleInput', { static: false }) titleInput: ElementRef;
 
   constructor(private store$: Store<RootStoreState.State>, private navCtrl: NavController) {
   }
@@ -26,8 +52,8 @@ export class TaskCreateComponent implements OnInit {
   deadline: Date;
   time: string;
   details: string;
+  added = 'stay';
 
-  private scrollUp = true;
   private updateSubscription: Subscription;
 
   ngOnInit() {
@@ -36,6 +62,7 @@ export class TaskCreateComponent implements OnInit {
     }
     if (this.task) {
       this.title = this.task.title;
+      this.details = this.task.details;
       if (this.task.deadline) {
         this.deadline = this.task.deadline.toDate();
         this.time = this.task.deadline.format('HH:mm');
@@ -44,18 +71,6 @@ export class TaskCreateComponent implements OnInit {
         this.details = this.task.details;
       }
     }
-  }
-
-  scrollToBottom() {
-    if (this.scrollUp) {
-      console.log('up');
-      document.getElementById('create').scrollIntoView({block: 'end', behavior: 'smooth'});
-    } else {
-      console.log('down');
-      document.getElementById('header').scrollIntoView({block: 'end', behavior: 'smooth'});
-    }
-
-    this.scrollUp = !this.scrollUp;
   }
 
   addTask() {
@@ -73,11 +88,16 @@ export class TaskCreateComponent implements OnInit {
       task.details = this.details;
       task.index = this.maxIndex;
       this.title = '';
+      this.deadline = undefined;
+      this.time = undefined;
+      this.details = undefined;
       this.titleInput.nativeElement.focus();
 
       this.store$.dispatch(
         TaskActions.addRequest({ task })
       );
+
+      this.fireAddAnimation();
     }
   }
 
@@ -91,10 +111,11 @@ export class TaskCreateComponent implements OnInit {
         task.deadline = moment(this.deadline).startOf('day');
       } else if (this.deadline && this.time) {
         task.deadline = moment(this.deadline).add(this.time.substring(0, 2), 'hours').add(this.time.substring(3, 5), 'minutes');
+      } else if (this.deadline === undefined) {
+        task.deadline = undefined;
       }
 
       task.details = this.details;
-      task.index = this.maxIndex;
       this.title = '';
       this.titleInput.nativeElement.focus();
 
@@ -106,8 +127,21 @@ export class TaskCreateComponent implements OnInit {
     }
   }
 
+  fireAddAnimation() {
+    setTimeout(() => {
+      this.added = 'flyaway';
+    }, 0);
+    setTimeout(() => {
+      this.added = 'gone';
+    }, 600);
+    setTimeout(() => {
+      this.added = 'stay';
+    }, 700);
+  }
+
   clearDate() {
     this.deadline = undefined;
+    this.time = undefined;
   }
 
   clearTime() {
@@ -119,6 +153,8 @@ export class TaskCreateComponent implements OnInit {
   }
 
   ngOnDestroy() {
-    this.updateSubscription.unsubscribe();
+    if (this.updateSubscription) {
+      this.updateSubscription.unsubscribe();
+    }
   }
 }

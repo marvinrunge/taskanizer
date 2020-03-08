@@ -1,18 +1,16 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">    
-      <button mat-icon-button *ngIf="!searchMode" [matMenuTriggerFor]="timespan" aria-label="select time span">
+      <button mat-icon-button [matMenuTriggerFor]="timespan" aria-label="select time span">
         <mat-icon>arrow_drop_down</mat-icon>
       </button>
     </ion-buttons>
-    <ion-title *ngIf="!searchMode">
+    <ion-title>
       {{ 'overview.' + title | translate }}
     </ion-title>
-    <ion-searchbar *ngIf="searchMode" (input)="search($event)"></ion-searchbar>
     <ion-buttons slot="end">    
       <button mat-icon-button aria-label="search task" (click)="toggleSearchMode()">
-        <mat-icon *ngIf="!searchMode">search</mat-icon>
-        <mat-icon *ngIf="searchMode">clear</mat-icon>
+        <mat-icon>search</mat-icon>
       </button>
       <button mat-icon-button [matMenuTriggerFor]="options" aria-label="more">
         <mat-icon>more_vert</mat-icon>
@@ -50,5 +48,8 @@
 </ion-header>
 
 <ion-content>
-  <app-task-list [tasks]="(tasks$ | async)" [draggable]="false"></app-task-list>
+  <div id="searchbox" [style.maxHeight]="searchbarMaxHeight">
+    <ion-searchbar (input)="search($event)" #searchbar></ion-searchbar>
+  </div>
+  <app-task-list [showChecked]="showDoneTasks" [tasks]="(tasks$ | async)" [draggable]="false"></app-task-list>
 </ion-content>

@@ -1,9 +1,10 @@
-import { Component, ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/models';
 import { TaskSelectors, RootStoreState } from 'src/app/root-store';
 import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
+import { IonSearchbar } from '@ionic/angular';
 
 @Component({
   selector: 'app-overview',
@@ -15,10 +16,13 @@ export class OverviewPage {
   error$: Observable<any>;
   isLoading$: Observable<boolean>;
 
+  @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
+
   maxDeadline: moment.Moment = moment().add(1, 'd');
   minDeadline: moment.Moment = moment().startOf('day');
   title = 'relevant';
 
+  searchbarMaxHeight = '0px';
   showDoneTasks = false;
   searchMode = false;
 
@@ -78,16 +82,29 @@ export class OverviewPage {
   toggleSearchMode() {
     this.searchMode = !this.searchMode;
     if (this.searchMode === false) {
-      this.tasks$ = this.store$.pipe(
-        select(TaskSelectors.selectTasksOrderedByDeadline(this.showDoneTasks, this.minDeadline, this.maxDeadline))
-      );
+      this.searchbarMaxHeight = '0px';
+      setTimeout(() => {
+        this.selectMaxDeadline(this.title);
+      }, 500);
+    } else {
+      this.searchbar.setFocus();
+      this.searchbarMaxHeight = '58px';
+      setTimeout(() => {
+        this.tasks$ = this.store$.pipe(
+          select(TaskSelectors.selectTasksByName(''))
+        );
+      }, 500);
     }
   }
 
   search(event) {
     if (this.searchMode) {
+      let searchTerm = event.target.value;
+      if (searchTerm === '*') {
+        searchTerm = '';
+      }
       this.tasks$ = this.store$.pipe(
-        select(TaskSelectors.selectTasksByName(event.target.value))
+        select(TaskSelectors.selectTasksByName(searchTerm))
       );
     }
   }

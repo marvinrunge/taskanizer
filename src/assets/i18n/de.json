@@ -14,9 +14,9 @@
   },
   "notifications": {
     "notifications": "Benachrichtigungen",
-    "features": "Funktionsumfang - 12.01.2020",
-    "version": "Version",
-    "content": {
+    "001": {
+      "header": "Initiale Version 0.0.1",
+      "date": "12.01.2020",
       "my-list": "Meine Liste",
       "add-tasks": "Aufgaben hinzufügen",
       "title": "Titel",
@@ -32,6 +32,21 @@
       "hide-checked-tasks": "Erledigte Aufgaben ein- und ausblenden",
       "translations": "Englische und deutsche Übersetzungen",
       "reset": "App auf Werkseinstellungen zurücksetzen"
+    },
+    "002": {
+      "header": "Version 0.0.2",
+      "date": "01.03.2020",
+      "bug_fixes": "Anpassungen",
+      "search_case": "Groß- & Kleinschreibung ist nun für die Suche irrelevant",
+      "bulletpoints": "Stichpunkte für Safari angepasst",
+      "header_ios": "Anpassungen an der Menüleiste für Safari",
+      "new_features": "Neuerungen",
+      "search_pos": "Die Suche wird nun unter der Kopfleiste angezeigt",
+      "animation": "Animation beim erfolgreichen Hinzufügen einer Aufgabe",
+      "relevant": "Filter der relevante Aufgaben anzeigt",
+      "relevant1": "überfällige Aufgaben",
+      "relevant2": "Aufgaben der nächsten 7 Tage",
+      "relevant3": "Aufgaben ohne Datum"
     }
   },
   "settings": {

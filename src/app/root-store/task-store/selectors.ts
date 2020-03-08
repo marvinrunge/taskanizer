@@ -93,5 +93,5 @@ export const selectRelevantTasks = (value: boolean) => createSelector(
 export const selectTasksByName = (substring: string) => createSelector(
   selectAllTasks,
   tasks => tasks.filter(
-    task => task.title.includes(substring))
+    task => task.title.toLowerCase().includes(substring.toLowerCase()))
 );

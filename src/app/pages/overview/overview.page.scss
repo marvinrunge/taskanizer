@@ -1,0 +1,8 @@
+@import '../../../theme/variables.scss';
+
+#searchbox {
+    background: #fff;
+    max-height: 58px;
+    transition: max-height 0.5s;
+    overflow: hidden;
+}

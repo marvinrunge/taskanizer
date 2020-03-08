@@ -14,10 +14,13 @@ export class Task {
     index: number;
     tags: string[];
     isDone: boolean;
+    // tslint:disable-next-line: variable-name
     _id: string;
+    // tslint:disable-next-line: variable-name
     _rev: string;
 
     constructor()
+    // tslint:disable-next-line: unified-signatures
     constructor(taskRepresentation: TaskRepresentation)
     constructor(taskRepresentation?: TaskRepresentation) {
         if (taskRepresentation) {
