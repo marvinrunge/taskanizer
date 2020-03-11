@@ -29,7 +29,7 @@ on:
     branches:
       - master
 
-name: Deploy to Amazon ECS
+name: Deploy to Amazon S3
 
 jobs:
   deploy:
@@ -46,6 +46,15 @@ jobs:
 #         aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
 #         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
 #         aws-region: eu-central-1
+    - name: Build
+      run: |
+        # Build a docker container and
+        # push it to ECR so that it can
+        # be deployed to ECS.
+        npm i
+        npm run lint
+        npm run build
+        ls
 
     - name: AWS S3 Sync Action
       uses: awact/s3-action@0.1.1
@@ -55,7 +64,7 @@ jobs:
         # AWS Secret Access Key. [AWS Docs](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         # The Name of the S3 Bucket.
-        AWS_S3_BUCKET: taskanizer
+        AWS_S3_BUCKET: s3://taskanizer
         # Region of the S3 Bucket
         AWS_REGION: eu-central-1
         # Local Directory to Sync/Upload to S3.
