@@ -53,6 +53,19 @@
     "settings": "Einstellungen",
     "reset": "Auf Werkseinstellungen zurücksetzen"
   },
+  "register": {
+    "create_account": "Benutzer anlegen",
+    "register": "Registrieren",
+    "username": "Benutzername",
+    "password": "Passwort",
+    "confirm_password": "Passwort bestätigen",
+    "passwords_not_match": "Passwörter stimmen nicht überein"
+  },
+  "login": {
+    "login": "Einloggen",
+    "username": "Benutzername",
+    "password": "Passwort"
+  },
   "edit-task": {
     "edit-task": "Aufgabe bearbeiten",
     "title": "Titel",

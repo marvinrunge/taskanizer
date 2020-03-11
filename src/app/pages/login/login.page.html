@@ -1,0 +1,27 @@
+<ion-content>
+  <div class="logo" fxLayoutAlign="center center">
+    <img src="../../../assets/icons/icon-128x128.png" />
+  </div>
+  <div class="wrapper" fxLayout="column" fxLayoutAlign="start stretch">
+    <div class="login-container">
+      <form fxLayout="column" fxLayoutAlign="center stretch">
+        <mat-form-field appearance="fill" class="input">
+          <mat-label>{{ 'login.username' | translate }}</mat-label>
+          <mat-icon matSuffix>person</mat-icon>
+          <input matInput [(ngModel)]="username" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text">
+        </mat-form-field>
+
+        <mat-form-field appearance="fill" class="input">
+          <mat-label>{{ 'login.password' | translate }}</mat-label>
+          <mat-icon matSuffix>lock</mat-icon>
+          <input matInput [(ngModel)]="password" [ngModelOptions]="{standalone: true}" autocomplete="off" type="password">
+        </mat-form-field>
+
+        <div fxLayout="column" fxLayoutGap="1rem">
+          <button class="login-button" mat-flat-button color="primary" (click)="login()">{{ 'login.login' | translate }}</button>
+          <button class="register-button" mat-stroked-button (click)="launchRegister()">{{ 'register.register' | translate }}</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</ion-content>

@@ -4,15 +4,14 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatFormFieldModule } from '@angular/material/form-field';
-import {
-  MatInputModule,
-  MatDatepickerModule,
-  MatNativeDateModule,
-  MatMenuModule,
-  MatListModule,
-  MatDividerModule,
-  MatCardModule
-} from '@angular/material';
+import { MatInputModule } from '@angular/material/input';
+import { MatDatepickerModule } from '@angular/material/datepicker';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatListModule } from '@angular/material/list';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatCardModule } from '@angular/material/card';
+
 import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
@@ -30,6 +29,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatListModule,
     MatDividerModule,
     MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
     DragDropModule
   ],
   exports: [
@@ -44,6 +45,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatListModule,
     MatDividerModule,
     MatCardModule,
+    MatInputModule,
+    MatFormFieldModule,
     DragDropModule
   ]
 })

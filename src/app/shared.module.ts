@@ -8,7 +8,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { TaskCreateComponent } from './components/create-task/create-task.component';
 import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { MatInputModule, MatFormFieldModule } from '@angular/material';
 import { TaskListComponent } from './components/task-list/task-list.component';
 
 @NgModule({
@@ -25,19 +24,17 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     MaterialModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule
+    ReactiveFormsModule
   ],
   exports: [
     TaskListitemComponent,
     TaskCreateComponent,
     TaskListComponent,
+    FlexLayoutModule,
+    MaterialModule,
     TranslateModule,
     FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule
+    ReactiveFormsModule
   ]
 })
 export class SharedModule { }

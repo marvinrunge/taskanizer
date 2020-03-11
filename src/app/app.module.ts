@@ -9,18 +9,15 @@ import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MaterialModule } from './material.module';
 import { SharedModule } from './shared.module';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { environment } from '../environments/environment';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { StoreDevtoolsModule } from '@ngrx/store-devtools';
 import { RootStoreModule } from './root-store';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { MatInputModule, MatFormFieldModule, MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { HttpClient } from '@angular/common/http';
+import { MAT_SNACK_BAR_DEFAULT_OPTIONS } from '@angular/material/snack-bar';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -36,13 +33,11 @@ export class HammerConfig extends HammerGestureConfig {
 
 @NgModule({
   declarations: [AppComponent],
-  entryComponents: [],
   imports: [
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
     BrowserAnimationsModule,
-    MaterialModule,
     SharedModule,
     TranslateModule.forRoot({
       loader: {
@@ -51,11 +46,6 @@ export class HammerConfig extends HammerGestureConfig {
         deps: [HttpClient]
       }
     }),
-    FlexLayoutModule,
-    FormsModule,
-    ReactiveFormsModule,
-    MatInputModule,
-    MatFormFieldModule,
     RootStoreModule,
     StoreDevtoolsModule.instrument({ maxAge: 25, logOnly: environment.production }),
     ServiceWorkerModule.register('ngsw-worker.js', { enabled: environment.production })

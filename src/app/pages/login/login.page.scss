@@ -1,0 +1,38 @@
+@import '../../../theme/variables.scss';
+
+.input {
+    width: 100%;
+}
+
+.login-button {
+    color: #fff !important;
+    margin: 0;
+}
+
+.register-button {
+    margin: 0;
+}
+
+.login-container {
+    padding: 1rem;
+}
+
+.logo {
+    height: 40%;
+    animation: fadeIn 1s ease;
+}
+
+.wrapper {
+    height: 60%;
+}
+
+@keyframes fadeIn {
+    0% {
+        transform: scale(0);
+    }
+  
+    100% {
+        transform: scale(1);
+    }
+  }
+  
