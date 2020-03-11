@@ -56,8 +56,7 @@ const routes: Routes = [
   },
   {
     path: '',
-    redirectTo: '/tabs/overview',
-    pathMatch: 'full'
+    redirectTo: 'app/tabs/lists'
   }
 ];
 
