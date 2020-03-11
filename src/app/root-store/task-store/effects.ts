@@ -9,7 +9,7 @@ import { TaskService } from '../../services/task.service';
 
 import * as taskActions from './actions';
 import { Task } from 'src/app/models';
-import { MatSnackBar } from '@angular/material';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Injectable()
 export class TaskStoreEffects {
