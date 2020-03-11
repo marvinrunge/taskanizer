@@ -38,7 +38,7 @@ jobs:
         # AWS Secret Access Key. [AWS Docs](https://docs.aws.amazon.com/general/latest/gr/managing-aws-access-keys.html)
         AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         # The Name of the S3 Bucket.
-        AWS_S3_BUCKET: "taskanizer-dev"
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
         # Region of the S3 Bucket
         AWS_REGION: "eu-central-1"
         # Local Directory to Sync/Upload to S3.
