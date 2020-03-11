@@ -20,7 +20,7 @@ export class TaskService {
     return this.platform.ready()
       .then(() => {
         this.db = new PouchDB('tasks');
-        this.db.sync(environment.remoteCouch + 'tasks', { live: true });
+        // this.db.sync(environment.remoteCouch + 'tasks', { live: true });
       });
   }
 
