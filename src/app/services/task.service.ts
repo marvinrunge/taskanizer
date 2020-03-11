@@ -79,4 +79,5 @@ export class TaskService {
       this.db = new PouchDB('tasks');
     });
   }
+
 }

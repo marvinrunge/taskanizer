@@ -4,11 +4,6 @@
     white-space: pre-wrap;
 }
 
-.header-image {
-    background-image: url('../../../assets/icon/taskanizer.png');
-    background-size: cover;
-}
-
 mat-card-header mat-icon {
     font-size: 40px;
     width: 40px;
@@ -30,7 +25,7 @@ ul {
 }
 
 ul li::before {
-    font-family: Verdana;
+    font-family: Arial, Verdana;
     padding-left: 0rem;
     font-style: inherit;
     line-height: 1.3rem;
@@ -49,7 +44,7 @@ li {
 }
 
 li::before {
-    font-family: Verdana;
+    font-family: Arial, Verdana;
     font-style: inherit;
     line-height: 1.3rem;
     font-size: 1rem;
