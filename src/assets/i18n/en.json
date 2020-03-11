@@ -53,6 +53,19 @@
     "settings": "Settings",
     "reset": "Reset to factory defaults"
   },
+  "register": {
+    "create_account": "Create account",
+    "register": "Register",
+    "username": "Username",
+    "password": "Password",
+    "confirm_password": "Confirm password",
+    "passwords_not_match": "Passwords do not match"
+  },
+  "login": {
+    "login": "Login",
+    "username": "Username",
+    "password": "Password"
+  },
   "edit-task": {
     "edit-task": "Edit Task",
     "title": "Title",
