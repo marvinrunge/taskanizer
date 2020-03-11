@@ -1,31 +1,21 @@
+name: Upload Taskanizer to AWS S3 Bucket
+
 on:
   push:
     branches:
       - master
 
-name: Deploy to Amazon S3
-
 jobs:
   deploy:
-    name: Deploy
     runs-on: ubuntu-latest
-
     steps:
-    - name: Checkout
-      uses: actions/checkout@v2
-      
-    - name: Build
-      run: |
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
-        npm i
-        npm run lint
-        npm run build
-        ls
-
-    - name: AWS S3 Sync Action
-      uses: awact/s3-action@0.1.1
+    - uses: actions/checkout@master
+    - uses: jakejarvis/s3-sync-action@master
       with:
-        AWS_REGION: "eu-central-1"
-        SOURCE_DIR: www
+        args: --acl public-read --follow-symlinks --delete
+      env:
+        SOURCE_DIR: './public'
+        AWS_REGION: 'global'
+        AWS_S3_BUCKET: ${{ secrets.AWS_S3_BUCKET }}
+        AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
