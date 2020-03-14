@@ -1,7 +1,7 @@
-import { Component, ViewChild } from '@angular/core';
+import { Component, ViewChild, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
 import { Task } from 'src/app/models';
-import { TaskSelectors, RootStoreState } from 'src/app/root-store';
+import { TaskSelectors, RootStoreState, TaskActions } from 'src/app/root-store';
 import { select, Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { IonSearchbar } from '@ionic/angular';

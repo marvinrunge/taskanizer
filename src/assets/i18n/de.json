@@ -51,7 +51,8 @@
   },
   "settings": {
     "settings": "Einstellungen",
-    "reset": "Auf Werkseinstellungen zurücksetzen"
+    "reset": "Zurücksetzen",
+    "logout": "Abmelden"
   },
   "register": {
     "create_account": "Benutzer anlegen",

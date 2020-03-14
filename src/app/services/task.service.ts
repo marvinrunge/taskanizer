@@ -1,56 +1,73 @@
-import { Injectable, EventEmitter } from '@angular/core';
-import { Observable, from } from 'rxjs';
+import { Injectable } from '@angular/core';
+import { Observable, of, from } from 'rxjs';
 import { Task } from '../models';
-import * as PouchDB from 'pouchdb/dist/pouchdb';
-import { Platform } from '@ionic/angular';
+import PouchDBAuthentication from 'pouchdb-authentication';
+import PouchDB from 'pouchdb';
 import { TaskRepresentation } from '../models/taskRepresentation';
-import { environment } from 'src/environments/environment';
+import { Router } from '@angular/router';
+
+PouchDB.plugin(PouchDBAuthentication);
 
 @Injectable({
   providedIn: 'root'
 })
 export class TaskService {
-  private db: PouchDB;
+  private local;
+  private db;
 
-  public constructor(private platform: Platform) {
-    this.initDB();
+  public constructor(public router: Router) {
   }
 
-  initDB(): Promise<any> {
-    return this.platform.ready()
-      .then(() => {
-        this.db = new PouchDB('tasks');
-        // this.db.sync(environment.remoteCouch + 'tasks', { live: true });
-      });
+  ascii_to_hexa(str) {
+    const arr1 = [];
+    for (let n = 0, l = str.length; n < l; n ++) {
+      const hex = Number(str.charCodeAt(n)).toString(16);
+      arr1.push(hex);
+    }
+    return arr1.join('');
+  }
+
+  initDb() {
+    console.log('init db');
+    const currentUser = localStorage.getItem('current-user');
+    this.local = new PouchDB(currentUser, { auto_compaction: true });
+    this.db = new PouchDB('http://localhost:5984/userdb-' + this.ascii_to_hexa(currentUser), {
+      fetch(url, opts) {
+        opts.credentials = 'include';
+        return PouchDB.fetch(url, opts);
+      }
+    });
+  }
+
+  sync() {
+    this.local.sync(this.db, {live: true, retry: true}).on('error', console.log.bind(console));
   }
 
   addUpdateMultipleDocs(tasks: Task[]) {
     const taskRepresentations: TaskRepresentation[] = tasks.map(task => {
        return new TaskRepresentation(task);
     });
-    return this.db.bulkDocs(taskRepresentations);
+    return this.local.bulkDocs(taskRepresentations);
   }
 
   add(task: Task): Promise<any> {
     const taskRepresentation = new TaskRepresentation(task);
-    return this.db.post(taskRepresentation);
+    return this.local.post(taskRepresentation);
   }
 
   update(task: Task): Promise<any> {
     const taskRepresentation = new TaskRepresentation(task);
-    return this.db.put(taskRepresentation);
+    return this.local.put(taskRepresentation);
   }
 
   delete(task: Task): Promise<any> {
     const taskRepresentation = new TaskRepresentation(task);
-    return this.db.remove(taskRepresentation);
+    return this.local.remove(taskRepresentation);
   }
 
-  getAll(): Observable<Task[]> {
-    return from(
-      this.initDB().then(() => {
-        return this.db.allDocs({ include_docs: true });
-      })
+  getAll(): Observable<any> {
+    return new Observable(observer => {
+      this.local.allDocs({ include_docs: true })
       .then(docs => {
         let tasks: Task[] = [];
         tasks = docs.rows.map(row => {
@@ -58,14 +75,16 @@ export class TaskService {
           const task = new Task(taskRepresentation);
           return task;
         });
-        return tasks;
-    }));
+        observer.next(tasks);
+        observer.complete();
+      });
+    });
   }
 
   getChanges(): Observable<any> {
     return new Observable(observer => {
       // Listen for changes on the database.
-      this.db.changes({ live: true, since: 'now', include_docs: true })
+      this.local.changes({ live: true, since: 'now', include_docs: true })
         .on('change', change => {
           // Convert string to date, doesn't happen automatically.
           // change.doc.Date = new Date(change.doc.Date);
@@ -74,10 +93,13 @@ export class TaskService {
     });
   }
 
-  reset(): Promise<any> {
-    return this.db.destroy().then(() => {
-      this.db = new PouchDB('tasks');
-    });
+  getDb() {
+    return this.db;
+  }
+
+  reset() {
+    this.db = undefined;
+    this.local = undefined;
   }
 
 }

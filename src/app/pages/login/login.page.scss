@@ -24,6 +24,8 @@
 
 .wrapper {
     height: 60%;
+    max-width: 375px;
+    margin: auto;
 }
 
 @keyframes fadeIn {
@@ -34,5 +36,5 @@
     100% {
         transform: scale(1);
     }
-  }
+}
   
