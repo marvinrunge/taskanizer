@@ -44,10 +44,6 @@ export class ListsPage {
     this.top = '0px';
   }
 
-  toggle(state: boolean) {
-    state ? this.onSwipeDown() : this.onSwipeUp();
-  }
-
   toggleShowDoneTasks() {
     setTimeout(() => {
       this.showDoneTasks = !this.showDoneTasks;
