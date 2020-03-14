@@ -37,6 +37,7 @@ export class TaskService {
         return PouchDB.fetch(url, opts);
       }
     });
+    this.local.sync(this.db, {live: true, retry: true}).on('error', console.log.bind(console));
   }
 
   sync() {
