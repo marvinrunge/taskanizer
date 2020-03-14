@@ -4,8 +4,7 @@
 
 export const environment = {
   production: false,
-  url: 'http://localhost:8100/',
-  remoteCouch: 'http://localhost:5984/'
+  remoteCouch: 'http://3.121.199.126:5984/'
 };
 
 /*

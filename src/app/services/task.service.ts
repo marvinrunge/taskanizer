@@ -5,6 +5,7 @@ import PouchDBAuthentication from 'pouchdb-authentication';
 import PouchDB from 'pouchdb';
 import { TaskRepresentation } from '../models/taskRepresentation';
 import { Router } from '@angular/router';
+import { environment } from 'src/environments/environment';
 
 PouchDB.plugin(PouchDBAuthentication);
 
@@ -30,7 +31,7 @@ export class TaskService {
   initDb() {
     const currentUser = localStorage.getItem('current-user');
     this.local = new PouchDB(currentUser, { auto_compaction: true });
-    this.db = new PouchDB('http://localhost:5984/userdb-' + this.ascii_to_hexa(currentUser), {
+    this.db = new PouchDB(environment.remoteCouch + 'userdb-' + this.ascii_to_hexa(currentUser), {
       fetch(url, opts) {
         opts.credentials = 'include';
         return PouchDB.fetch(url, opts);
