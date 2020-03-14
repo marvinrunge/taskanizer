@@ -28,7 +28,6 @@ export class TaskService {
   }
 
   initDb() {
-    console.log('init db');
     const currentUser = localStorage.getItem('current-user');
     this.local = new PouchDB(currentUser, { auto_compaction: true });
     this.db = new PouchDB('http://localhost:5984/userdb-' + this.ascii_to_hexa(currentUser), {
@@ -37,7 +36,7 @@ export class TaskService {
         return PouchDB.fetch(url, opts);
       }
     });
-    this.local.sync(this.db, {live: true, retry: true}).on('error', console.log.bind(console));
+    this.local.sync(this.db, {live: true, retry: true});
   }
 
   addUpdateMultipleDocs(tasks: Task[]) {
