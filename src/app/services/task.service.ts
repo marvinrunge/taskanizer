@@ -40,10 +40,6 @@ export class TaskService {
     this.local.sync(this.db, {live: true, retry: true}).on('error', console.log.bind(console));
   }
 
-  sync() {
-    this.local.sync(this.db, {live: true, retry: true}).on('error', console.log.bind(console));
-  }
-
   addUpdateMultipleDocs(tasks: Task[]) {
     const taskRepresentations: TaskRepresentation[] = tasks.map(task => {
        return new TaskRepresentation(task);
