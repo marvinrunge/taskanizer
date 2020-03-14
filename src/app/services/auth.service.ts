@@ -3,6 +3,9 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TaskService } from './task.service';
 import { environment } from 'src/environments/environment';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { RootStoreState, TaskActions } from '../root-store';
+import { Store } from '@ngrx/store';
 
 export interface LoginData {
   name: string;
@@ -27,19 +30,76 @@ export class RegistrationData {
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(public router: Router) {
+  constructor(public router: Router, private taskService: TaskService,
+              private snackBar: MatSnackBar, private store$: Store<RootStoreState.State>) {
 
+  }
+
+  checkSession() {
+    console.log('check');
+    if (localStorage.getItem('current-user')) {
+      this.taskService.initDb();
+      this.taskService.getDb().getSession((err, response) => {
+        if (err) {
+          // network error
+        } else if (!response.userCtx.name) {
+          // nobody's logged in
+        } else {
+          console.log(response);
+          this.store$.dispatch(TaskActions.loadRequest());
+          this.router.navigate(['app/tabs/overview']);
+        }
+      });
+    }
   }
 
   public register(loginData: LoginData) {
-    const registrationData = new RegistrationData(loginData);
-    this.login({ name: registrationData.name, password: registrationData.password });
+    localStorage.setItem('current-user', loginData.name);
+    this.taskService.initDb();
+    this.taskService.getDb().signUp(loginData.name, loginData.password, (err) => {
+      if (err) {
+        if (err.name === 'conflict') {
+          this.snackBar.open(loginData.name + ' already exists, choose another username');
+        } else if (err.name === 'forbidden') {
+          this.snackBar.open('invalid username');
+        } else {
+          this.snackBar.open('You are offline');
+        }
+      } else {
+        this.login(loginData);
+      }
+    });
   }
 
   public login(loginData: LoginData) {
-    const headers = new HttpHeaders();
-    headers.append('Content-Type', 'application/json');
+    localStorage.setItem('current-user', loginData.name);
 
-    this.router.navigateByUrl('app/tabs/overview');
+    if (!this.taskService.getDb()) {
+      this.taskService.initDb();
+    }
+
+    this.taskService.getDb().logIn(loginData.name, loginData.password, (err) => {
+      if (err) {
+        if (err.name === 'unauthorized' || err.name === 'forbidden') {
+          this.snackBar.open('Name or password incorrect');
+        } else {
+          // cosmic rays, a meteor, etc.
+        }
+      } else {
+        this.checkSession();
+      }
+    });
+  }
+
+  public logOut() {
+    this.taskService.getDb().logOut((err) => {
+      if (err) {
+        this.snackBar.open('You are offline');
+      } else {
+        this.taskService.reset();
+        localStorage.removeItem('current-user');
+        window.location.href = '/';
+      }
+    });
   }
 }

@@ -1,6 +1,5 @@
-import { Component } from '@angular/core';
-import { TaskService } from 'src/app/services/task.service';
-import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
@@ -14,7 +13,10 @@ export class LoginPage {
   username: string;
   password: string;
 
-  constructor(public router: Router, public http: HttpClient, public authService: AuthService) {
+  constructor(
+    public router: Router,
+    public http: HttpClient,
+    public authService: AuthService) {
 
   }
 

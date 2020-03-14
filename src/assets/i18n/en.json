@@ -51,7 +51,8 @@
   },
   "settings": {
     "settings": "Settings",
-    "reset": "Reset to factory defaults"
+    "reset": "Reset to factory defaults",
+    "logout": "Logout"
   },
   "register": {
     "create_account": "Create account",

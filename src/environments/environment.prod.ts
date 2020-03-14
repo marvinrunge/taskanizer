@@ -1,5 +1,4 @@
 export const environment = {
   production: true,
-  url: 'https://marvinrunge.github.io/taskanizer/',
-  remoteCouch: ''
+  remoteCouch: 'http://3.121.199.126:5984/'
 };

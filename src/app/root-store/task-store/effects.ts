@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
-import { Action } from '@ngrx/store';
-import { Observable, of, concat } from 'rxjs';
+import { Action, INIT } from '@ngrx/store';
+import { Observable, of, concat, defer } from 'rxjs';
 import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
 import { from } from 'rxjs';
 
@@ -43,23 +43,9 @@ export class TaskStoreEffects {
     )
   );
 
-  resetRequestEffect$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(taskActions.resetRequest),
-      mergeMap(() => from(this.taskService.reset()).pipe(
-        switchMap(() => {
-          this.snackBar.open('Reset successful');
-          window.location.href = '/';
-          return [taskActions.resetSuccess(), taskActions.loadRequest()];
-        }),
-        catchError(error => of(taskActions.resetFailure({ error })))
-      ))
-    )
-  );
-
-
   allTasks$ = this.taskService.getAll().pipe(
-    map(tasks => taskActions.loadSuccess({ tasks })));
+    map(tasks => taskActions.loadSuccess({ tasks })
+  ));
 
   changedTasks$: Observable<Action> = this.taskService.getChanges().pipe(
     map(change => {
@@ -69,12 +55,5 @@ export class TaskStoreEffects {
         return taskActions.addUpdateSuccess({ task: new Task(change.doc) });
       }
     })
-  );
-
-  init$ = createEffect(() =>
-    this.actions$.pipe(
-      ofType(ROOT_EFFECTS_INIT),
-      map(() => taskActions.loadRequest())
-    )
   );
 }
