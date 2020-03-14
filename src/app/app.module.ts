@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG } from '@angular/platform-browser';
+import { NgModule, Injectable } from '@angular/core';
+import { BrowserModule, HammerGestureConfig, HAMMER_GESTURE_CONFIG, HammerModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
 import * as Hammer from 'hammerjs';
 import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
@@ -23,6 +23,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
 }
 
+@Injectable()
 export class HammerConfig extends HammerGestureConfig {
   overrides = {
     swipe: { direction: Hammer.DIRECTION_HORIZONTAL },
@@ -39,6 +40,7 @@ export class HammerConfig extends HammerGestureConfig {
     AppRoutingModule,
     BrowserAnimationsModule,
     SharedModule,
+    HammerModule,
     TranslateModule.forRoot({
       loader: {
         provide: TranslateLoader,
