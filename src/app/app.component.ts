@@ -8,6 +8,7 @@ import { LOCATION_INITIALIZED } from '@angular/common';
 import { TranslateService } from '@ngx-translate/core';
 import { Store } from '@ngrx/store';
 import { RootStoreState, TaskActions } from './root-store';
+import { AuthService } from './services/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,8 @@ export class AppComponent {
     private statusBar: StatusBar,
     private injector: Injector,
     private translate: TranslateService,
-    private store$: Store<RootStoreState.State>
+    private store$: Store<RootStoreState.State>,
+    private authService: AuthService
   ) {
     this.initializeApp();
   }
@@ -30,9 +32,7 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
       this.initLocale();
-      this.store$.dispatch(
-        TaskActions.loadRequest()
-      );
+      this.authService.checkSession();
       this.splashScreen.hide();
     });
   }

@@ -25,6 +25,10 @@ ion-toolbar {
     color: var(--text-primary-darker-color);
 }
 
+ion-title {
+    font-weight: 500;
+}
+
 ion-tab-button {
     --background: none;
     --color-selected: var(--primary-color);
@@ -37,6 +41,10 @@ ion-content {
 
 ion-list {
     --background: #ffffffff;
+}
+
+ion-back-button {
+    --color: #fff;
 }
 
 .sc-ion-searchbar-ios-h {
