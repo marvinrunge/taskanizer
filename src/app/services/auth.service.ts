@@ -36,7 +36,6 @@ export class AuthService {
   }
 
   checkSession() {
-    console.log('check');
     if (localStorage.getItem('current-user')) {
       this.taskService.initDb();
       this.taskService.getDb().getSession((err, response) => {
@@ -45,7 +44,6 @@ export class AuthService {
         } else if (!response.userCtx.name) {
           // nobody's logged in
         } else {
-          console.log(response);
           this.store$.dispatch(TaskActions.loadRequest());
           this.router.navigate(['app/tabs/overview']);
         }

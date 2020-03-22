@@ -9,6 +9,24 @@
 <ion-content>
   <mat-card>
     <mat-card-header>
+      <mat-icon mat-card-avatar>account_circle</mat-icon>
+      <mat-card-title>{{ 'notifications.002.header' | translate }}</mat-card-title>
+      <mat-card-subtitle>{{ 'notifications.002.date' | translate }}</mat-card-subtitle>
+    </mat-card-header>
+    <mat-divider></mat-divider><br />
+    <mat-card-content class="content">
+      <h6>{{ 'notifications.010.new_features' | translate }}</h6>
+        <li>{{ 'notifications.010.register_login' | translate }}</li>
+        <li>{{ 'notifications.010.register_login1' | translate }}</li>
+        <li>{{ 'notifications.010.register_login2' | translate }}</li>
+      <h6>{{ 'notifications.010.changes' | translate }}</h6>
+        <li>{{ 'notifications.010.reset' | translate }}</li>
+        <li>{{ 'notifications.010.sign_out' | translate }}</li>
+        <li>{{ 'notifications.010.ios_icon' | translate }}</li>
+    </mat-card-content>
+  </mat-card>
+  <mat-card>
+    <mat-card-header>
       <mat-icon mat-card-avatar>create</mat-icon>
       <mat-card-title>{{ 'notifications.002.header' | translate }}</mat-card-title>
       <mat-card-subtitle>{{ 'notifications.002.date' | translate }}</mat-card-subtitle>

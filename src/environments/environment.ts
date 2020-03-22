@@ -4,7 +4,7 @@
 
 export const environment = {
   production: false,
-  remoteCouch: 'http://3.121.199.126:5984/'
+  remoteCouch: 'https://db.taskanizer.net/'
 };
 
 /*

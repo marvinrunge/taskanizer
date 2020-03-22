@@ -47,6 +47,18 @@
       "relevant1": "Overdue tasks",
       "relevant2": "Tasks within the next 7 days",
       "relevant3": "Tasks without date information"
+    },
+    "010": {
+      "header": "Version 0.1.0",
+      "date": "22/03/2020",
+      "new_features": "New features",
+      "register_login": "Users can sign up and login",
+      "register_login1": "Tasks are saved online",
+      "register_login2": "That enables synchronisation between devices",
+      "changes": "Changes",
+      "reset": "Resetting the App is currently not available",
+      "sign_out": "You can sign out in the settings tab",
+      "ios_icon": "The app icon for iOS devices fixed"
     }
   },
   "settings": {

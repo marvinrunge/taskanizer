@@ -47,6 +47,18 @@
       "relevant1": "überfällige Aufgaben",
       "relevant2": "Aufgaben der nächsten 7 Tage",
       "relevant3": "Aufgaben ohne Datum"
+    },
+    "010": {
+      "header": "Version 0.1.0",
+      "date": "22.03.2020",
+      "new_features": "Neuerungen",
+      "register_login": "Nutzer können sich nun registrieren und anmelden",
+      "register_login1": "Aufgaben werden online gespeichert",
+      "register_login2": "Aufgaben synchronisieren sich mit allen angemeldeten Geräten",
+      "changes": "Änderungen",
+      "reset": "Das Zurücksetzen auf die Werkseinstellungen ist deaktiviert",
+      "sign_out": "Abmelden auf der Einstellungsseite",
+      "ios_icon": "Fix für das App-Icon für iOS-Geräte"
     }
   },
   "settings": {

@@ -80,11 +80,8 @@ export class TaskService {
 
   getChanges(): Observable<any> {
     return new Observable(observer => {
-      // Listen for changes on the database.
       this.local.changes({ live: true, since: 'now', include_docs: true })
         .on('change', change => {
-          // Convert string to date, doesn't happen automatically.
-          // change.doc.Date = new Date(change.doc.Date);
           observer.next(change);
         });
     });
