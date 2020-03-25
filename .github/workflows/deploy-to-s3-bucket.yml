@@ -13,11 +13,8 @@ jobs:
       
     - name: Build PWA
       run: |
-        # Build a docker container and
-        # push it to ECR so that it can
-        # be deployed to ECS.
         npm i
-        npm install -g @ionic/cli
+        sudo npm install -g @ionic/cli
         npm install @ionic/angular@latest --save
         ionic build --prod
         
