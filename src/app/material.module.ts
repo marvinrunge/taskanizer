@@ -21,7 +21,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
-    MatFormFieldModule,
     MatInputModule,
     MatDatepickerModule,
     MatNativeDateModule,
@@ -46,7 +45,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDividerModule,
     MatCardModule,
     MatInputModule,
-    MatFormFieldModule,
     DragDropModule
   ]
 })

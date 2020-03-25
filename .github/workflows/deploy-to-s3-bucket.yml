@@ -14,9 +14,7 @@ jobs:
     - name: Build PWA
       run: |
         npm i
-        sudo npm install -g @ionic/cli
-        npm install @ionic/angular@latest --save
-        ionic build --prod
+        npm run build
         
     - uses: jakejarvis/s3-sync-action@master
       with:
