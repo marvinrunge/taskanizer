@@ -16,8 +16,9 @@ jobs:
         # Build a docker container and
         # push it to ECR so that it can
         # be deployed to ECS.
-        npm install -g @ionic/cli
         npm i
+        npm install -g @ionic/cli
+        npm install @ionic/angular@latest --save
         ionic build --prod
         
     - uses: jakejarvis/s3-sync-action@master
