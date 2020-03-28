@@ -31,7 +31,7 @@ export class TaskService {
   initDb() {
     const currentUser = localStorage.getItem('current-user');
     this.local = new PouchDB(currentUser, { auto_compaction: true });
-    this.db = new PouchDB(environment.remoteCouch + 'userdb-' + this.ascii_to_hexa(currentUser), {
+    this.db = new PouchDB(environment.remoteCouch + 'userdb-' + this.ascii_to_hexa(currentUser), { skip_setup: true,
       fetch(url, opts) {
         opts.credentials = 'include';
         return PouchDB.fetch(url, opts);
