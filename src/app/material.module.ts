@@ -17,7 +17,6 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
 @NgModule({
   declarations: [],
   imports: [
-    CommonModule,
     MatCheckboxModule,
     MatButtonModule,
     MatIconModule,
@@ -30,7 +29,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatCardModule,
     MatInputModule,
     MatFormFieldModule,
-    DragDropModule
+    DragDropModule,
+    MatListModule
   ],
   exports: [
     MatCheckboxModule,
@@ -45,7 +45,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop';
     MatDividerModule,
     MatCardModule,
     MatInputModule,
-    DragDropModule
+    DragDropModule,
+    MatListModule
   ]
 })
 export class MaterialModule { }
