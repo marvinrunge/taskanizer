@@ -28,6 +28,6 @@
         <mat-error *ngIf="registerForm.hasError('notSame')">{{ 'register.passwords_not_match' | translate }}</mat-error>
       </mat-form-field>
 
-      <button class="register-button" mat-stroked-button color="primary" (click)="register()">{{ 'register.register' | translate }}</button>
+      <button class="register-button" mat-stroked-button (click)="register()">{{ 'register.register' | translate }}</button>
     </form>
 </ion-content>
