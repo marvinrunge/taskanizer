@@ -65,29 +65,23 @@ export const selectTasksWithoutDeadline = (value: boolean) => createSelector(
     task => (!task.deadline))
 );
 
-export const selectTasksWithoutDeadlineOrderedByTitle = (value: boolean) => createSelector(
-  selectTasksWithoutDeadline(value),
-  tasks => tasks.sort(
-    (a, b) => a.title.localeCompare(b.title))
-);
-
-export const selectTasksByMaxDeadline = (value: boolean, min: moment.Moment, max: moment.Moment) => createSelector(
+export const selectTasksByTimeSpan = (value: boolean, min: moment.Moment, max: moment.Moment) => createSelector(
   selectDoneTasks(value),
   tasks => tasks.filter(
-    task => task.deadline ? task.deadline.isBefore(max) && task.deadline.isAfter(min) : false)
+    task => task.deadline ? task.deadline.isBetween(min, max) : false)
 );
 
-export const selectTasksOrderedByDeadline = (value: boolean, min: moment.Moment, max: moment.Moment) => createSelector(
-  selectTasksByMaxDeadline(value, min, max),
+export const selectTasksByTimeSpanAndOrderedByDeadline = (value: boolean, min: moment.Moment, max: moment.Moment) => createSelector(
+  selectTasksByTimeSpan(value, min, max),
   tasks => tasks.sort(
     (a, b) => a.deadline.diff(b.deadline))
 );
 
 export const selectRelevantTasks = (value: boolean) => createSelector(
-  selectTasksOrderedByDeadline(value, moment().subtract(10, 'years'), moment().add(7, 'days')),
-  selectTasksWithoutDeadlineOrderedByTitle(value),
-  (tasksOrderedByDeadline: Task[], tasksWithoutDeadlineOrderedByTitle: Task[]) =>
-    tasksOrderedByDeadline.concat(tasksWithoutDeadlineOrderedByTitle)
+  selectTasksByTimeSpanAndOrderedByDeadline(value, moment().subtract(10, 'years'), moment().add(7, 'days')),
+  selectTasksWithoutDeadline(value),
+  (tasksOrderedByDeadline: Task[], tasksWithoutDeadline: Task[]) =>
+    tasksOrderedByDeadline.concat(tasksWithoutDeadline)
 );
 
 export const selectTasksByName = (substring: string) => createSelector(
