@@ -5,14 +5,7 @@ export class Task {
     title: string;
     details: string;
     deadline: moment.Moment;
-    level: number;
-    priority: number;
-    reminder: boolean;
-    repeat: boolean;
-    attachment: boolean;
-    mainTask: boolean;
     index: number;
-    tags: string[];
     isDone: boolean;
     // tslint:disable-next-line: variable-name
     _id: string;
@@ -29,15 +22,8 @@ export class Task {
             this.title = taskRepresentation.title;
             this.details = taskRepresentation.details;
             this.deadline = taskRepresentation.deadline ? moment.utc(taskRepresentation.deadline).local() : undefined;
-            this.level = taskRepresentation.level;
-            this.priority = taskRepresentation.priority;
-            this.reminder = taskRepresentation.reminder;
-            this.repeat = taskRepresentation.repeat;
-            this.attachment = taskRepresentation.attachment;
-            this.mainTask = taskRepresentation.mainTask;
             this.index = taskRepresentation.index;
             this.isDone = taskRepresentation.isDone;
-            this.tags = taskRepresentation.tags;
         }
     }
 }

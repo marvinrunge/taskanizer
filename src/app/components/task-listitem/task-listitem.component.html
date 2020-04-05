@@ -1,4 +1,4 @@
-<div class="listitem" [style.right]="right" [style.opacity]="opacity" [style.maxHeight]="maxHeight" [style.padding-left.px]="(task.level*12)" (swipeleft)="onSwipeLeft($event)">
+<div class="listitem" [style.right]="right" [style.opacity]="opacity" [style.maxHeight]="maxHeight" (swipeleft)="onSwipeLeft($event)">
     <div class="flex-wrapper" fxLayout="row" fxLayoutAlign="start center" [style.height]="50">
         <div fxFlex="15%" fxLayoutAlign="center center">
             <mat-checkbox [(ngModel)]="task.isDone" (change)="check()"></mat-checkbox>
@@ -6,19 +6,7 @@
         <div (click)="editSelectedTask()" fxFlex class="text">
             <div class="title">{{ task.title }}</div>
             <div class="subtitle" *ngIf="hasSubtitle()">
-                <ion-icon class="priority" *ngIf="task.priority" name="ios-flame" [id]="'priority' + task.priority"></ion-icon>
-                <span *ngIf="task.deadline && (task.priority)"> - </span>
                 <span *ngIf="task.deadline">{{ 'task-item.due' | translate }} {{ getDueTime() }}</span>
-                <span *ngIf="task.reminder || task.attachment || task.repeat"> - </span>
-                <ion-icon name="md-alarm" *ngIf="task.reminder"></ion-icon>
-                <ion-icon name="md-repeat" *ngIf="task.repeat"></ion-icon>
-                <ion-icon name="attach" *ngIf="task.attachment"></ion-icon>
-            </div>
-            <div class="tags">
-                <div class="tag" *ngFor="let tag of task.tags">
-                    •
-                    <span>{{ tag }}</span>
-                </div>   
             </div>
         </div>
         <div fxFlex="15%" fxLayoutAlign="center center">

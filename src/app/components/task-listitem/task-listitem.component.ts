@@ -3,7 +3,6 @@ import { Task } from 'src/app/models/task';
 import { RootStoreState, TaskActions } from 'src/app/root-store';
 import { Store } from '@ngrx/store';
 import * as moment from 'moment';
-import { delay } from 'rxjs/operators';
 import { Router } from '@angular/router';
 
 @Component({
@@ -58,8 +57,7 @@ export class TaskListitemComponent implements OnInit {
   }
 
   hasSubtitle() {
-    if (this.task.priority || this.task.deadline || this.task.reminder ||
-        this.task.repeat || this.task.attachment || this.task.tags) {
+    if (this.task.deadline) {
         return true;
     } else {
         return false;
