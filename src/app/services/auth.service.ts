@@ -1,8 +1,6 @@
 import { Injectable } from '@angular/core';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { TaskService } from './task.service';
-import { environment } from 'src/environments/environment';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { RootStoreState, TaskActions } from '../root-store';
 import { Store } from '@ngrx/store';
@@ -40,7 +38,7 @@ export class AuthService {
       this.taskService.initDb();
       this.taskService.getDb().getSession((err, response) => {
         if (err) {
-          // network error
+          this.snackBar.open('Network error');
         } else if (!response.userCtx.name) {
           // nobody's logged in
         } else {
@@ -59,7 +57,7 @@ export class AuthService {
         if (err.name === 'conflict') {
           this.snackBar.open(loginData.name + ' already exists, choose another username');
         } else if (err.name === 'forbidden') {
-          this.snackBar.open('invalid username');
+          this.snackBar.open('Invalid username');
         } else {
           this.snackBar.open('You are offline');
         }
@@ -81,7 +79,7 @@ export class AuthService {
         if (err.name === 'unauthorized' || err.name === 'forbidden') {
           this.snackBar.open('Name or password incorrect');
         } else {
-          // cosmic rays, a meteor, etc.
+          this.snackBar.open('Network error');
         }
       } else {
         this.checkSession();
