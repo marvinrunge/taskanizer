@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, from } from 'rxjs';
+import { Observable } from 'rxjs';
 import { Task } from '../models';
 import PouchDBAuthentication from 'pouchdb-authentication';
 import PouchDB from 'pouchdb';
