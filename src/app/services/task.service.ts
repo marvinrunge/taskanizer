@@ -13,8 +13,8 @@ PouchDB.plugin(PouchDBAuthentication);
   providedIn: 'root'
 })
 export class TaskService {
-  private local;
-  private db;
+  private localDb;
+  private remoteDb;
 
   public constructor(public router: Router) {
   }
@@ -30,41 +30,37 @@ export class TaskService {
 
   initDb() {
     const currentUser = localStorage.getItem('current-user');
-    this.local = new PouchDB(currentUser, { auto_compaction: true });
-    this.db = new PouchDB(environment.remoteCouch + 'userdb-' + this.ascii_to_hexa(currentUser), { skip_setup: true,
-      fetch(url, opts) {
-        opts.credentials = 'include';
-        return PouchDB.fetch(url, opts);
-      }
-    });
-    this.local.sync(this.db, {live: true, retry: true});
+    this.localDb = new PouchDB(currentUser, { auto_compaction: true });
+    this.remoteDb = new PouchDB(environment.remoteCouch + 'userdb-'
+      + this.ascii_to_hexa(currentUser), { skip_setup: true });
+    this.localDb.sync(this.remoteDb, {live: true, retry: true});
   }
 
   addUpdateMultipleDocs(tasks: Task[]) {
     const taskRepresentations: TaskRepresentation[] = tasks.map(task => {
        return new TaskRepresentation(task);
     });
-    return this.local.bulkDocs(taskRepresentations);
+    return this.localDb.bulkDocs(taskRepresentations);
   }
 
   add(task: Task): Promise<any> {
     const taskRepresentation = new TaskRepresentation(task);
-    return this.local.post(taskRepresentation);
+    return this.localDb.post(taskRepresentation);
   }
 
   update(task: Task): Promise<any> {
     const taskRepresentation = new TaskRepresentation(task);
-    return this.local.put(taskRepresentation);
+    return this.localDb.put(taskRepresentation);
   }
 
   delete(task: Task): Promise<any> {
     const taskRepresentation = new TaskRepresentation(task);
-    return this.local.remove(taskRepresentation);
+    return this.localDb.remove(taskRepresentation);
   }
 
   getAll(): Observable<any> {
     return new Observable(observer => {
-      this.local.allDocs({ include_docs: true })
+      this.localDb.allDocs({ include_docs: true })
       .then(docs => {
         let tasks: Task[] = [];
         tasks = docs.rows.map(row => {
@@ -78,22 +74,22 @@ export class TaskService {
     });
   }
 
-  getChanges(): Observable<any> {
+  getChanges(): Observable<TaskRepresentation> {
     return new Observable(observer => {
-      this.local.changes({ live: true, since: 'now', include_docs: true })
+      this.localDb.changes({ live: true, since: 'now', include_docs: true })
         .on('change', change => {
-          observer.next(change);
+          observer.next(change.doc);
         });
     });
   }
 
   getDb() {
-    return this.db;
+    return this.remoteDb;
   }
 
   reset() {
-    this.db = undefined;
-    this.local = undefined;
+    this.remoteDb = undefined;
+    this.localDb = undefined;
   }
 
 }

@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Actions, createEffect, ofType, ROOT_EFFECTS_INIT } from '@ngrx/effects';
-import { Action, INIT } from '@ngrx/store';
-import { Observable, of, concat, defer } from 'rxjs';
-import { catchError, map, mergeMap, switchMap, tap } from 'rxjs/operators';
+import { Actions, createEffect, ofType } from '@ngrx/effects';
+import { Action } from '@ngrx/store';
+import { Observable, concat } from 'rxjs';
+import { map, switchMap, tap } from 'rxjs/operators';
 import { from } from 'rxjs';
 
 import { TaskService } from '../../services/task.service';
@@ -10,6 +10,7 @@ import { TaskService } from '../../services/task.service';
 import * as taskActions from './actions';
 import { Task } from 'src/app/models';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { TaskRepresentation } from 'src/app/models/taskRepresentation';
 
 @Injectable()
 export class TaskStoreEffects {
@@ -48,11 +49,11 @@ export class TaskStoreEffects {
   ));
 
   changedTasks$: Observable<Action> = this.taskService.getChanges().pipe(
-    map(change => {
-      if (change.doc._deleted) {
-        return taskActions.deleteSuccess({ id: change.doc._id });
+    map(taskRepresentation => {
+      if (taskRepresentation._deleted) {
+        return taskActions.deleteSuccess({ id: taskRepresentation._id });
       } else {
-        return taskActions.addUpdateSuccess({ task: new Task(change.doc) });
+        return taskActions.addUpdateSuccess({ task: new Task(taskRepresentation) });
       }
     })
   );
