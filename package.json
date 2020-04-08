@@ -7,8 +7,8 @@
     "ng": "ng",
     "start": "ng serve",
     "build": "ng build --prod",
-    "test": "ng test --browser ChromeHeadlessCI --code-coverage=true --single-run=true",
-    "lint": "ng lint",
+    "test": "ng test",
+    "test-headless": "ng test --browsers=ChromeHeadlessNoSandbox --watch=false",
     "e2e": "ng e2e",
     "deploy-gh": "ionic build --prod -- --base-href https://marvinrunge.github.io/taskanizer/ && npx angular-cli-ghpages --dir=www"
   },

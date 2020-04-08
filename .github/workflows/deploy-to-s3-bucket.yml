@@ -14,8 +14,7 @@ jobs:
     - name: Build PWA
       run: |
         npm i
-        apt-get install -y --no-install-recommends chromium
-        npm run test
+        npm run test-headless
         npm run build
         
     - uses: jakejarvis/s3-sync-action@master
