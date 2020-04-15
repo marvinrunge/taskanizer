@@ -1,10 +1,10 @@
-<div class="listitem" [style.right]="right" [style.opacity]="opacity"
-    [style.maxHeight]="maxHeight" (swipeleft)="onSwipeLeft($event)">
-    <div class="flex-wrapper" fxLayout="row" fxLayoutAlign="start center" [style.height]="50">
+<div class="listitem" (swipeleft)="onSwipeLeft($event)"
+    [@delete]="animationState" (@delete.done)="setClosedState()">
+    <div fxLayout="row" fxLayoutAlign="start center" class="flex-wrapper" [style.height]="50">
         <div fxFlex="15%" fxLayoutAlign="center center">
             <mat-checkbox [(ngModel)]="task.isDone" (change)="check()"></mat-checkbox>
         </div>
-        <div (click)="editSelectedTask()" fxFlex class="text">
+        <div fxFlex (click)="editSelectedTask()" class="text">
             <div class="title">{{ task.title }}</div>
             <div class="subtitle" *ngIf="hasSubtitle()">
                 <span *ngIf="task.deadline">{{ 'task-item.due' | translate }} {{ getDueTime() }}</span>
