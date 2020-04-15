@@ -10,17 +10,15 @@ import { Router } from '@angular/router';
   templateUrl: './task-listitem.component.html',
   styleUrls: ['./task-listitem.component.scss'],
 })
-export class TaskListitemComponent implements OnInit {
-
+export class TaskListitemComponent {
   @Input() task: Task;
   @Input() showChecked: boolean;
+
   right = '';
   opacity = '1';
   maxHeight = '200px';
 
   constructor(private store$: Store<RootStoreState.State>, private router: Router) { }
-
-  ngOnInit() {}
 
   onSwipeLeft(e) {
     if (e.direction === 2) {
@@ -63,7 +61,6 @@ export class TaskListitemComponent implements OnInit {
         return false;
     }
   }
-
 
   editSelectedTask() {
     this.store$.dispatch(

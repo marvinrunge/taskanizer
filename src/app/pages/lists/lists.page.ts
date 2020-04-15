@@ -15,7 +15,6 @@ export class ListsPage {
   isLoading$: Observable<boolean>;
   maxIndex$: Observable<number>;
 
-  top = 'calc(100% - 72px)';
   showDoneTasks = false;
 
   constructor(private store$: Store<RootStoreState.State>) {
@@ -34,14 +33,6 @@ export class ListsPage {
     this.maxIndex$ = this.store$.pipe(
       select(TaskSelectors.selectMaxIndex)
     );
-  }
-
-  onSwipeUp() {
-    this.top = 'calc(100% - 72px)';
-  }
-
-  onSwipeDown() {
-    this.top = '0px';
   }
 
   toggleShowDoneTasks() {
