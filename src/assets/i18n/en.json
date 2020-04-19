@@ -72,7 +72,8 @@
     "username": "Username",
     "password": "Password",
     "confirm_password": "Confirm password",
-    "passwords_not_match": "Passwords do not match"
+    "passwords_not_match": "Passwords do not match",
+    "password_expression": "Password must consists of at least 8 characters and not more than 15 characters."
   },
   "login": {
     "login": "Login",

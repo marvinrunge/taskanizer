@@ -72,7 +72,8 @@
     "username": "Benutzername",
     "password": "Passwort",
     "confirm_password": "Passwort bestätigen",
-    "passwords_not_match": "Passwörter stimmen nicht überein"
+    "passwords_not_match": "Passwörter stimmen nicht überein",
+    "password_expression": "Das Passwort muss aus mehr als 8 und weniger als 16 Zeichen bestehen."
   },
   "login": {
     "login": "Einloggen",

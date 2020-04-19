@@ -8,7 +8,7 @@
 </ion-header>
 
 <ion-content>
-  <form [formGroup]="registerForm" class="registration-container" fxLayout="column" fxLayoutAlign="center stretch">
+  <form [formGroup]="registerForm" class="registration-container" fxLayoutGap="1rem" fxLayout="column" fxLayoutAlign="center stretch">
     <mat-form-field appearance="fill" class="input">
       <mat-label>{{ 'register.username' | translate }}</mat-label>
       <mat-icon matSuffix>person</mat-icon>
@@ -19,6 +19,7 @@
       <mat-label>{{ 'register.password' | translate }}</mat-label>
       <mat-icon matSuffix>lock</mat-icon>
       <input matInput autocomplete="off" type="password" formControlName="password" required>
+      <mat-error *ngIf="registerForm.controls.password.invalid">{{ 'register.password_expression' | translate }}</mat-error>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="input">

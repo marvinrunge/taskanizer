@@ -29,7 +29,7 @@ export class RegisterPage {
     private router: Router,) {
     this.registerForm = this.formBuilder.group({
       username: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-      password: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^([a-zA-Z0-9@*#]{8,15})$')]),
+      password: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9@*#]{8,15})$')]),
       confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(30)])
     }, { validator: this.checkPassword });
   }
@@ -39,12 +39,14 @@ export class RegisterPage {
   }
 
   register() {
-    return this.authService.register(
-      {
-        name: this.registerForm.get('username').value,
-        password: this.registerForm.get('password').value
-      }
-    );
+    if (this.registerForm.valid) {
+      return this.authService.register(
+        {
+          name: this.registerForm.get('username').value,
+          password: this.registerForm.get('password').value
+        }
+      );
+    }
   }
 
   checkPassword(group: FormGroup) {
