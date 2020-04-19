@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AuthService } from 'src/app/services/auth.service';
 import { FormControl, FormGroupDirective, NgForm, Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { ErrorStateMatcher } from '@angular/material/core';
+import { Router } from '@angular/router';
 
 export class MyErrorStateMatcher implements ErrorStateMatcher {
   isErrorState(control: FormControl | null, form: FormGroupDirective | NgForm | null): boolean {
@@ -22,10 +23,13 @@ export class RegisterPage {
 
   public matcher = new MyErrorStateMatcher();
 
-  constructor(private authService: AuthService, private formBuilder: FormBuilder) {
+  constructor(
+    private authService: AuthService,
+    private formBuilder: FormBuilder,
+    private router: Router,) {
     this.registerForm = this.formBuilder.group({
       username: new FormControl('', [Validators.required, Validators.maxLength(30)]),
-      password: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+      password: new FormControl('', [Validators.required, Validators.maxLength(30), Validators.pattern('^([a-zA-Z0-9@*#]{8,15})$')]),
       confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(30)])
     }, { validator: this.checkPassword });
   }
@@ -48,5 +52,13 @@ export class RegisterPage {
     const confirmPass = group.get('confirmPassword').value;
 
     return pass === confirmPass ? null : { notSame: true };
+  }
+
+  navigateToPrivayPolicy() {
+    this.router.navigate(['privacy-policy']);
+  }
+
+  navigateToImprint() {
+    this.router.navigate(['imprint']);
   }
 }

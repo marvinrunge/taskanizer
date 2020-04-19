@@ -21,6 +21,14 @@ const routes: Routes = [
   {
     path: 'register',
     loadChildren: () => import('./pages/register/register.module').then(m => m.RegisterPageModule)
+  },
+  {
+    path: 'imprint',
+    loadChildren: () => import('./pages/imprint/imprint.module').then(m => m.ImprintPageModule)
+  },
+  {
+    path: 'privacy-policy',
+    loadChildren: () => import('./pages/privacy-policy/privacy-policy.module').then(m => m.PrivacyPolicyPageModule)
   }
 ];
 @NgModule({

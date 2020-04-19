@@ -10,7 +10,17 @@
     margin-top: 1rem;
 }
 
-.registration-contianer {
+.registration-container {
+    height: 90%;
     text-align: center;
     padding: 1rem;
+}
+
+.links {
+    height: 10%;
+    text-align: center;
+}
+
+.link {
+    color: var(--primary-color)
 }

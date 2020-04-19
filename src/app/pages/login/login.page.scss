@@ -23,9 +23,18 @@
 }
 
 .wrapper {
-    height: 60%;
+    height: 50%;
     max-width: 500px;
     margin: auto;
+}
+
+.links {
+    height: 10%;
+    text-align: center;
+}
+
+.link {
+    color: var(--primary-color)
 }
 
 @keyframes fadeIn {

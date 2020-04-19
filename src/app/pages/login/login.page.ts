@@ -27,4 +27,12 @@ export class LoginPage {
   launchRegister() {
     this.router.navigate(['register']);
   }
+
+  navigateToPrivayPolicy() {
+    this.router.navigate(['privacy-policy']);
+  }
+
+  navigateToImprint() {
+    this.router.navigate(['imprint']);
+  }
 }

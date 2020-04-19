@@ -8,26 +8,31 @@
 </ion-header>
 
 <ion-content>
-    <form [formGroup]="registerForm" class="registration-contianer" fxLayout="column" fxLayoutAlign="center stretch">
-      <mat-form-field appearance="fill" class="input">
-        <mat-label>{{ 'register.username' | translate }}</mat-label>
-        <mat-icon matSuffix>person</mat-icon>
-        <input matInput formControlName="username" autocomplete="off" type="text" required>
-      </mat-form-field>
+  <form [formGroup]="registerForm" class="registration-container" fxLayout="column" fxLayoutAlign="center stretch">
+    <mat-form-field appearance="fill" class="input">
+      <mat-label>{{ 'register.username' | translate }}</mat-label>
+      <mat-icon matSuffix>person</mat-icon>
+      <input matInput formControlName="username" autocomplete="off" type="text" required>
+    </mat-form-field>
 
-      <mat-form-field appearance="fill" class="input">
-        <mat-label>{{ 'register.password' | translate }}</mat-label>
-        <mat-icon matSuffix>lock</mat-icon>
-        <input matInput autocomplete="off" type="password" formControlName="password" required>
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="input">
+      <mat-label>{{ 'register.password' | translate }}</mat-label>
+      <mat-icon matSuffix>lock</mat-icon>
+      <input matInput autocomplete="off" type="password" formControlName="password" required>
+    </mat-form-field>
 
-      <mat-form-field appearance="fill" class="input">
-        <mat-label>{{ 'register.confirm_password' | translate }}</mat-label>
-        <mat-icon matSuffix>lock</mat-icon>
-        <input matInput autocomplete="off" type="password" formControlName="confirmPassword" [errorStateMatcher]="matcher" required>
-        <mat-error *ngIf="registerForm.hasError('notSame')">{{ 'register.passwords_not_match' | translate }}</mat-error>
-      </mat-form-field>
+    <mat-form-field appearance="fill" class="input">
+      <mat-label>{{ 'register.confirm_password' | translate }}</mat-label>
+      <mat-icon matSuffix>lock</mat-icon>
+      <input matInput autocomplete="off" type="password" formControlName="confirmPassword" [errorStateMatcher]="matcher" required>
+      <mat-error *ngIf="registerForm.hasError('notSame')">{{ 'register.passwords_not_match' | translate }}</mat-error>
+    </mat-form-field>
 
-      <button class="register-button" mat-stroked-button (click)="register()">{{ 'register.register' | translate }}</button>
-    </form>
+    <button class="register-button" mat-stroked-button (click)="register()">{{ 'register.register' | translate }}</button>
+  </form>
+  
+  <div class="links">
+    <span class="link" (click)="navigateToImprint()">{{ 'imprint.imprint' | translate }}</span> |
+    <span class="link" (click)="navigateToPrivayPolicy()">{{ 'privacy_policy.privacy_policy' | translate }}</span>
+  </div>
 </ion-content>

@@ -12,6 +12,14 @@
       <mat-icon matListIcon>power_settings_new</mat-icon>
       <span matLine>{{ 'settings.logout' | translate }}</span>
     </mat-list-item>
+    <mat-list-item (click)="navigateToImprint()">
+      <mat-icon matListIcon>contact_mail</mat-icon>
+      <span matLine>{{ 'imprint.imprint' | translate }}</span>
+    </mat-list-item>
+    <mat-list-item (click)="navigateToPrivayPolicy()">
+      <mat-icon matListIcon>policy</mat-icon>
+      <span matLine>{{ 'privacy_policy.privacy_policy' | translate }}</span>
+    </mat-list-item>
   </mat-action-list>
   <mat-list>
     <mat-list-item>

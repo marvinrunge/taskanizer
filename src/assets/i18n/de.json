@@ -79,6 +79,12 @@
     "username": "Benutzername",
     "password": "Passwort"
   },
+  "privacy_policy": {
+    "privacy_policy": "Datenschutzerklärung"
+  },
+  "imprint": {
+    "imprint": "Impressum"
+  },
   "edit-task": {
     "edit-task": "Aufgabe bearbeiten",
     "title": "Titel",
