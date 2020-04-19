@@ -11,8 +11,6 @@ import { RootStoreState, TaskSelectors } from 'src/app/root-store';
 })
 export class ListsPage {
   tasks$: Observable<Task[]>;
-  error$: Observable<any>;
-  isLoading$: Observable<boolean>;
   maxIndex$: Observable<number>;
 
   showDoneTasks = false;
@@ -20,14 +18,6 @@ export class ListsPage {
   constructor(private store$: Store<RootStoreState.State>) {
     this.tasks$ = this.store$.pipe(
       select(TaskSelectors.selectDoneTasks(this.showDoneTasks))
-    );
-
-    this.error$ = this.store$.pipe(
-      select(TaskSelectors.selectTaskError)
-    );
-
-    this.isLoading$ = this.store$.pipe(
-      select(TaskSelectors.selectTaskIsLoading)
     );
 
     this.maxIndex$ = this.store$.pipe(

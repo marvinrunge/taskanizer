@@ -42,7 +42,6 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
   @Input() maxIndex: number;
   @Input() task: Task;
   @Input() update: Observable<void>;
-  @Output() voted = new EventEmitter<boolean>();
   @ViewChild('titleInput', { static: false }) titleInput: ElementRef;
 
   constructor(private store$: Store<RootStoreState.State>, private navCtrl: NavController) {

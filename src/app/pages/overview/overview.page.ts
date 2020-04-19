@@ -13,8 +13,6 @@ import { IonSearchbar } from '@ionic/angular';
 })
 export class OverviewPage {
   tasks$: Observable<Task[]>;
-  error$: Observable<any>;
-  isLoading$: Observable<boolean>;
 
   @ViewChild('searchbar', { static: false }) searchbar: IonSearchbar;
 
@@ -29,14 +27,6 @@ export class OverviewPage {
   constructor(
     private store$: Store<RootStoreState.State>) {
     this.selectMaxDeadline(this.title);
-
-    this.error$ = this.store$.pipe(
-      select(TaskSelectors.selectTaskError)
-    );
-
-    this.isLoading$ = this.store$.pipe(
-      select(TaskSelectors.selectTaskIsLoading)
-    );
   }
 
   selectMaxDeadline(deadline: string) {
