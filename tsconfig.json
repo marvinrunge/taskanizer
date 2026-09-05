@@ -19,6 +19,7 @@
       "dom"
     ],
     "allowSyntheticDefaultImports": true
+    ,"skipLibCheck": true
   },
   "angularCompilerOptions": {
     "fullTemplateTypeCheck": true,

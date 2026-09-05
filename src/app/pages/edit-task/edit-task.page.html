@@ -14,5 +14,5 @@
     </ion-toolbar>
 </ion-header>
 <ion-content>
-    <app-create-task [task]="(task$ | async)" [update]="saveEvents.asObservable()"></app-create-task>
+    <app-create-task [task]="task()" [update]="saveEvents.asObservable()"></app-create-task>
 </ion-content>

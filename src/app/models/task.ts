@@ -1,29 +1,21 @@
-import { TaskRepresentation } from './taskRepresentation';
 import * as moment from 'moment';
 
 export class Task {
-    title: string;
-    details: string;
-    deadline: moment.Moment;
-    index: number;
-    isDone: boolean;
-    // tslint:disable-next-line: variable-name
-    _id: string;
-    // tslint:disable-next-line: variable-name
-    _rev: string;
+    title = '';
+    details?: string;
+    deadline?: moment.Moment;
+    index = 0;
+    isDone = false;
+    _id?: string;
 
-    constructor()
-    // tslint:disable-next-line: unified-signatures
-    constructor(taskRepresentation: TaskRepresentation)
-    constructor(taskRepresentation?: TaskRepresentation) {
-        if (taskRepresentation) {
-            this._id = taskRepresentation._id;
-            this._rev = taskRepresentation._rev;
-            this.title = taskRepresentation.title;
-            this.details = taskRepresentation.details;
-            this.deadline = taskRepresentation.deadline ? moment.utc(taskRepresentation.deadline).local() : undefined;
-            this.index = taskRepresentation.index;
-            this.isDone = taskRepresentation.isDone;
+    constructor(task?: Partial<Task> & { deadline?: moment.Moment | string }) {
+        if (task) {
+            this._id = task._id;
+            this.title = task.title ?? '';
+            this.details = task.details;
+            this.deadline = task.deadline ? moment(task.deadline) : undefined;
+            this.index = task.index ?? 0;
+            this.isDone = task.isDone ?? false;
         }
     }
 }

@@ -1,12 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Task } from 'src/app/models/task';
-import { RootStoreState, TaskActions } from 'src/app/root-store';
-import { Store } from '@ngrx/store';
 import * as moment from 'moment';
 import { Router } from '@angular/router';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TaskStore } from 'src/app/services/task-store.service';
 
 @Component({
+  standalone: false,
   selector: 'app-task-listitem',
   animations: [
     trigger('delete', [
@@ -44,15 +44,13 @@ export class TaskListitemComponent {
 
   animationState = 'present';
 
-  constructor(private store$: Store<RootStoreState.State>, private router: Router) { }
+  constructor(private taskStore: TaskStore, private router: Router) { }
 
   onSwipeLeft(e) {
     if (e.direction === 2) {
       this.animationState = 'left';
       setTimeout(() => {
-        this.store$.dispatch(
-          TaskActions.deleteRequest({ task: this.task })
-        );
+        void this.taskStore.delete(this.task);
       }, 1000);
     }
   }
@@ -72,9 +70,7 @@ export class TaskListitemComponent {
       this.animationState = 'closed';
     }
     setTimeout(() => {
-      this.store$.dispatch(
-        TaskActions.updateRequest({ task })
-      );
+      void this.taskStore.update(task);
     }, 500);
   }
 
@@ -87,9 +83,7 @@ export class TaskListitemComponent {
   }
 
   editSelectedTask() {
-    this.store$.dispatch(
-      TaskActions.setSelectedTaskId({ selectedTaskId: this.task._id })
-    );
+    this.taskStore.selectTask(this.task._id);
     this.router.navigate(['edit-task']);
   }
 

@@ -12,7 +12,7 @@ const routes: Routes = [
   },
   {
     path: 'edit-task',
-    loadChildren: './pages/edit-task/edit-task.module#EditTaskPageModule'
+    loadChildren: () => import('./pages/edit-task/edit-task.module').then(m => m.EditTaskPageModule)
   },
   {
     path: 'login',

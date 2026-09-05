@@ -1,101 +1,73 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { TaskService } from './task.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { RootStoreState, TaskActions } from '../root-store';
-import { Store } from '@ngrx/store';
+import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut } from 'firebase/auth';
+import { TaskStore } from './task-store.service';
+import { firebaseAuth } from '../firebase';
 
 export interface LoginData {
-  name: string;
+  email: string;
   password: string;
-}
-
-export class RegistrationData {
-  constructor(loginData: LoginData) {
-    this.name = loginData.name;
-    this.password = loginData.password;
-    this.roles = [];
-    this.type = 'user';
-  }
-
-  name: string;
-  password: string;
-  roles: string[];
-  type: string;
 }
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  constructor(public router: Router, private taskService: TaskService,
-              private snackBar: MatSnackBar, private store$: Store<RootStoreState.State>) {
+  constructor(
+    public router: Router,
+    private snackBar: MatSnackBar,
+    private taskStore: TaskStore
+  ) {}
 
-  }
-
-  checkSession() {
-    if (localStorage.getItem('current-user')) {
-      this.taskService.initDb();
-      this.taskService.getDb().getSession((err, response) => {
-        if (err) {
-          this.snackBar.open('Network error');
-        } else if (!response.userCtx.name) {
-          // nobody's logged in
-        } else {
-          this.store$.dispatch(TaskActions.loadRequest());
-          this.router.navigate(['app/tabs/overview']);
-        }
-      });
+  async checkSession(): Promise<void> {
+    await firebaseAuth.authStateReady();
+    if (firebaseAuth.currentUser) {
+      this.taskStore.load();
+      await this.router.navigate(['app/tabs/overview']);
     }
   }
 
-  public register(loginData: LoginData) {
-    localStorage.setItem('current-user', loginData.name);
-    this.taskService.initDb();
-    this.taskService.getDb().signUp(loginData.name, loginData.password, (err) => {
-      if (err) {
-        if (err.name === 'conflict') {
-          this.snackBar.open(loginData.name + ' already exists, choose another username');
-        } else if (err.name === 'forbidden') {
-          this.snackBar.open('Invalid username');
-        } else {
-          this.snackBar.open('You are offline');
-        }
-      } else {
-        this.login(loginData);
-      }
-    });
-  }
-
-  public login(loginData: LoginData) {
-    localStorage.setItem('current-user', loginData.name);
-
-    if (!this.taskService.getDb()) {
-      this.taskService.initDb();
+  async register(loginData: LoginData): Promise<void> {
+    try {
+      await createUserWithEmailAndPassword(firebaseAuth, loginData.email, loginData.password);
+      await this.finishLogin();
+    } catch (error) {
+      this.snackBar.open(this.authError(error));
     }
-
-    this.taskService.getDb().logIn(loginData.name, loginData.password, (err) => {
-      if (err) {
-        if (err.name === 'unauthorized' || err.name === 'forbidden') {
-          this.snackBar.open('Name or password incorrect');
-        } else {
-          this.snackBar.open('Network error');
-        }
-      } else {
-        this.checkSession();
-      }
-    });
   }
 
-  public logOut() {
-    this.taskService.getDb().logOut((err) => {
-      if (err) {
-        this.snackBar.open('You are offline');
-      } else {
-        this.taskService.reset();
-        localStorage.removeItem('current-user');
-        window.location.href = '/';
-      }
-    });
+  async login(loginData: LoginData): Promise<void> {
+    try {
+      await signInWithEmailAndPassword(firebaseAuth, loginData.email, loginData.password);
+      await this.finishLogin();
+    } catch (error) {
+      this.snackBar.open(this.authError(error));
+    }
+  }
+
+  async logOut(): Promise<void> {
+    await signOut(firebaseAuth);
+    this.taskStore.reset();
+    await this.router.navigate(['/']);
+  }
+
+  private async finishLogin(): Promise<void> {
+    this.taskStore.load();
+    await this.router.navigate(['app/tabs/overview']);
+  }
+
+  private authError(error: unknown): string {
+    const code = typeof error === 'object' && error && 'code' in error ? String(error.code) : '';
+    if (code.includes('invalid-credential')) {
+      return 'Email or password incorrect';
+    }
+    if (code.includes('email-already-in-use')) {
+      return 'This email address is already registered';
+    }
+    if (code.includes('invalid-email')) {
+      return 'Invalid email address';
+    }
+    return 'Authentication failed';
   }
 }

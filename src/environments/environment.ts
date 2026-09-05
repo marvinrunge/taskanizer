@@ -4,7 +4,14 @@
 
 export const environment = {
   production: false,
-  remoteCouch: 'https://db.taskanizer.net/'
+  firebase: {
+    apiKey: '',
+    authDomain: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+    appId: ''
+  }
 };
 
 /*

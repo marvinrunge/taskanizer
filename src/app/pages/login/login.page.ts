@@ -4,13 +4,14 @@ import { Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
+  standalone: false,
   selector: 'app-login',
   templateUrl: './login.page.html',
   styleUrls: ['./login.page.scss'],
 })
 export class LoginPage {
 
-  username: string;
+  email: string;
   password: string;
 
   constructor(
@@ -21,7 +22,7 @@ export class LoginPage {
   }
 
   login() {
-    this.authService.login({ name: this.username, password: this.password });
+    this.authService.login({ email: this.email, password: this.password });
   }
 
   launchRegister() {

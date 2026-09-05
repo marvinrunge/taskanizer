@@ -1,4 +1,11 @@
 export const environment = {
   production: true,
-  remoteCouch: 'https://db.taskanizer.net/'
+  firebase: {
+    apiKey: '',
+    authDomain: '',
+    projectId: '',
+    storageBucket: '',
+    messagingSenderId: '',
+    appId: ''
+  }
 };
