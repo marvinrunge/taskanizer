@@ -9,8 +9,8 @@ Authentication and Cloud Firestore.
 2. Enable Email/Password authentication.
 3. Create a Cloud Firestore database.
 4. Add the web app configuration to both files in `src/environments/`.
-5. Restrict Firestore access to the signed-in user's task collection:
-   `users/{userId}/tasks/{taskId}`.
+5. Deploy the included per-user Firestore rules with
+   `firebase deploy --only firestore:rules`.
 
 ## Development
 
