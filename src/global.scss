@@ -19,6 +19,47 @@
 @import '~@ionic/angular/css/display.css';
 
 @import 'theme/variables.scss';
+
+[fxLayout^='row'] {
+  display: flex;
+  flex-direction: row;
+}
+
+[fxLayout*='wrap'] {
+  flex-wrap: wrap;
+}
+
+[fxLayout='column'] {
+  display: flex;
+  flex-direction: column;
+}
+
+[fxLayoutGap='1rem'] {
+  gap: 1rem;
+}
+
+[fxLayoutAlign='center center'] {
+  align-items: center;
+  justify-content: center;
+}
+
+[fxLayoutAlign='center stretch'] {
+  align-items: stretch;
+  justify-content: center;
+}
+
+[fxLayoutAlign='start end'] {
+  align-items: flex-end;
+  justify-content: flex-start;
+}
+
+[fxFlex] {
+  flex: 1 1 auto;
+}
+
+[fxFlex='none'] {
+  flex: none;
+}
 @import url("https://fonts.googleapis.com/icon?family=Material+Icons");
 
 ion-toolbar {

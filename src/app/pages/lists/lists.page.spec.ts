@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { ListsPage } from './lists.page';
 import { SharedModule } from 'src/app/shared.module';
@@ -6,25 +6,22 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { RouterTestingModule } from '@angular/router/testing';
 import { NoopAnimationsModule } from '@angular/platform-browser/animations';
-import { TaskStoreModule, RootStoreModule } from 'src/app/root-store';
-import { EffectsModule } from '@ngrx/effects';
+import { IonicModule } from '@ionic/angular';
 
 describe('ListsPage', () => {
   let component: ListsPage;
   let fixture: ComponentFixture<ListsPage>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ListsPage],
       imports: [
         RouterTestingModule,
+        IonicModule.forRoot(),
         HttpClientModule,
         TranslateModule.forRoot(),
         SharedModule,
         NoopAnimationsModule,
-        TaskStoreModule,
-        RootStoreModule,
-        EffectsModule.forRoot([]),
         RouterTestingModule
       ]
     }).compileComponents();
