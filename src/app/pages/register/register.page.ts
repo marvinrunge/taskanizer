@@ -14,6 +14,7 @@ export class MyErrorStateMatcher implements ErrorStateMatcher {
 }
 
 @Component({
+  standalone: false,
   selector: 'app-register',
   templateUrl: './register.page.html',
   styleUrls: ['./register.page.scss'],
@@ -28,7 +29,7 @@ export class RegisterPage {
     private formBuilder: FormBuilder,
     private router: Router,) {
     this.registerForm = this.formBuilder.group({
-      username: new FormControl('', [Validators.required, Validators.maxLength(30)]),
+      email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required, Validators.pattern('^([a-zA-Z0-9@*#]{8,15})$')]),
       confirmPassword: new FormControl('', [Validators.required, Validators.maxLength(30)])
     }, { validator: this.checkPassword });
@@ -42,7 +43,7 @@ export class RegisterPage {
     if (this.registerForm.valid) {
       return this.authService.register(
         {
-          name: this.registerForm.get('username').value,
+          email: this.registerForm.get('email').value,
           password: this.registerForm.get('password').value
         }
       );

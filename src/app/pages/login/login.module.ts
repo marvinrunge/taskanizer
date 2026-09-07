@@ -10,7 +10,6 @@ import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatIconModule } from '@angular/material/icon';
 import { TranslateModule } from '@ngx-translate/core';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { MatButtonModule } from '@angular/material/button';
 
 @NgModule({
@@ -18,7 +17,6 @@ import { MatButtonModule } from '@angular/material/button';
     CommonModule,
     FormsModule,
     IonicModule,
-    FlexLayoutModule,
     MatInputModule,
     MatIconModule,
     MatButtonModule,

@@ -69,7 +69,7 @@
   "register": {
     "create_account": "Benutzer anlegen",
     "register": "Registrieren",
-    "username": "Benutzername",
+    "email": "E-Mail",
     "password": "Passwort",
     "confirm_password": "Passwort bestätigen",
     "passwords_not_match": "Passwörter stimmen nicht überein",
@@ -77,7 +77,7 @@
   },
   "login": {
     "login": "Einloggen",
-    "username": "Benutzername",
+    "email": "E-Mail",
     "password": "Passwort"
   },
   "privacy_policy": {

@@ -6,7 +6,6 @@ import { MaterialModule } from './material.module';
 import { TranslateModule } from '@ngx-translate/core';
 import { HttpClientModule } from '@angular/common/http';
 import { TaskCreateComponent } from './components/create-task/create-task.component';
-import { FlexLayoutModule } from '@angular/flex-layout';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { TaskListComponent } from './components/task-list/task-list.component';
 
@@ -20,7 +19,6 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     CommonModule,
     IonicModule,
     HttpClientModule,
-    FlexLayoutModule,
     MaterialModule,
     TranslateModule,
     FormsModule,
@@ -30,7 +28,6 @@ import { TaskListComponent } from './components/task-list/task-list.component';
     TaskListitemComponent,
     TaskCreateComponent,
     TaskListComponent,
-    FlexLayoutModule,
     MaterialModule,
     TranslateModule,
     FormsModule,

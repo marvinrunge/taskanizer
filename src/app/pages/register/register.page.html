@@ -10,9 +10,9 @@
 <ion-content>
   <form [formGroup]="registerForm" class="registration-container" fxLayoutGap="1rem" fxLayout="column" fxLayoutAlign="center stretch">
     <mat-form-field appearance="fill" class="input">
-      <mat-label>{{ 'register.username' | translate }}</mat-label>
+      <mat-label>{{ 'register.email' | translate }}</mat-label>
       <mat-icon matSuffix>person</mat-icon>
-      <input matInput formControlName="username" autocomplete="off" type="text" required>
+      <input matInput formControlName="email" autocomplete="email" type="email" required>
     </mat-form-field>
 
     <mat-form-field appearance="fill" class="input">

@@ -6,9 +6,9 @@
     <div class="login-container">
       <form fxLayout="column" fxLayoutAlign="center stretch">
         <mat-form-field appearance="fill" class="input">
-          <mat-label>{{ 'login.username' | translate }}</mat-label>
+          <mat-label>{{ 'login.email' | translate }}</mat-label>
           <mat-icon matSuffix>person</mat-icon>
-          <input matInput [(ngModel)]="username" [ngModelOptions]="{standalone: true}" autocomplete="off" type="text">
+          <input matInput [(ngModel)]="email" [ngModelOptions]="{standalone: true}" autocomplete="email" type="email">
         </mat-form-field>
 
         <mat-form-field appearance="fill" class="input">

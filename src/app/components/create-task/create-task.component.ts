@@ -1,13 +1,13 @@
 import { Component, OnInit, ViewChild, ElementRef, EventEmitter, Output, Input, OnDestroy } from '@angular/core';
-import { RootStoreState, TaskActions } from 'src/app/root-store';
-import { Store } from '@ngrx/store';
 import { Task } from 'src/app/models';
 import * as moment from 'moment';
 import { Observable, Subscription } from 'rxjs';
 import { NavController } from '@ionic/angular';
 import { trigger, state, style, transition, animate } from '@angular/animations';
+import { TaskStore } from 'src/app/services/task-store.service';
 
 @Component({
+  standalone: false,
   selector: 'app-create-task',
   animations: [
     trigger('add', [
@@ -44,7 +44,7 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
   @Input() update: Observable<void>;
   @ViewChild('titleInput', { static: false }) titleInput: ElementRef;
 
-  constructor(private store$: Store<RootStoreState.State>, private navCtrl: NavController) {
+  constructor(private taskStore: TaskStore, private navCtrl: NavController) {
   }
 
   title = '';
@@ -92,9 +92,7 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
       this.details = undefined;
       this.titleInput.nativeElement.focus();
 
-      this.store$.dispatch(
-        TaskActions.addRequest({ task })
-      );
+      void this.taskStore.add(task);
 
       this.fireAddAnimation();
     }
@@ -118,9 +116,7 @@ export class TaskCreateComponent implements OnInit, OnDestroy {
       this.title = '';
       this.titleInput.nativeElement.focus();
 
-      this.store$.dispatch(
-        TaskActions.updateRequest({ task })
-      );
+      void this.taskStore.update(task);
 
       this.navCtrl.back();
     }

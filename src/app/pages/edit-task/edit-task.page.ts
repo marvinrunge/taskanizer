@@ -1,16 +1,15 @@
 import { Component } from '@angular/core';
-import { Task } from 'src/app/models';
-import { Observable, Subject } from 'rxjs';
-import { Store, select } from '@ngrx/store';
-import { RootStoreState, TaskSelectors } from 'src/app/root-store';
+import { Subject } from 'rxjs';
+import { TaskStore } from 'src/app/services/task-store.service';
 
 @Component({
+  standalone: false,
   selector: 'app-edit-task',
   templateUrl: 'edit-task.page.html',
   styleUrls: ['edit-task.page.scss']
 })
 export class EditTaskPage {
-  task$: Observable<Task>;
+  readonly task = this.taskStore.selectedTask;
 
   saveEvents: Subject<void> = new Subject<void>();
 
@@ -18,10 +17,5 @@ export class EditTaskPage {
     this.saveEvents.next();
   }
 
-  constructor(private store$: Store<RootStoreState.State>) {
-    this.task$ = this.store$.pipe(
-      select(TaskSelectors.selectTaskBySelectedId)
-    );
-  }
+  constructor(private taskStore: TaskStore) {}
 }
-

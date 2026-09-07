@@ -1,19 +1,16 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 
 import { SettingsPage } from './settings.page';
 import { TranslateModule } from '@ngx-translate/core';
 import { RouterTestingModule } from '@angular/router/testing';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import { provideMockStore } from '@ngrx/store/testing';
 import { SharedModule } from 'src/app/shared.module';
 
 describe('SettingsPage', () => {
   let component: SettingsPage;
   let fixture: ComponentFixture<SettingsPage>;
-  const initialState = {};
-
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [SettingsPage],
       imports: [
@@ -23,7 +20,6 @@ describe('SettingsPage', () => {
         RouterTestingModule,
         MatSnackBarModule
       ],
-      providers: [ provideMockStore({ initialState }) ]
     }).compileComponents();
 
     fixture = TestBed.createComponent(SettingsPage);
