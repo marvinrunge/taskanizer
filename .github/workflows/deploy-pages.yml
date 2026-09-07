@@ -1,0 +1,74 @@
+name: Deploy Taskanizer to GitHub Pages
+
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: pages
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4.2.2
+      - uses: actions/setup-node@v4.4.0
+        with:
+          node-version: 22
+          cache: npm
+      - name: Configure Firebase
+        env:
+          FIREBASE_API_KEY: ${{ vars.FIREBASE_API_KEY }}
+          FIREBASE_AUTH_DOMAIN: ${{ vars.FIREBASE_AUTH_DOMAIN }}
+          FIREBASE_PROJECT_ID: ${{ vars.FIREBASE_PROJECT_ID }}
+          FIREBASE_STORAGE_BUCKET: ${{ vars.FIREBASE_STORAGE_BUCKET }}
+          FIREBASE_MESSAGING_SENDER_ID: ${{ vars.FIREBASE_MESSAGING_SENDER_ID }}
+          FIREBASE_APP_ID: ${{ vars.FIREBASE_APP_ID }}
+        run: |
+          node <<'NODE'
+          const fs = require('node:fs');
+          const names = [
+            'FIREBASE_API_KEY',
+            'FIREBASE_AUTH_DOMAIN',
+            'FIREBASE_PROJECT_ID',
+            'FIREBASE_STORAGE_BUCKET',
+            'FIREBASE_MESSAGING_SENDER_ID',
+            'FIREBASE_APP_ID'
+          ];
+          const missing = names.filter(name => !process.env[name]);
+          if (missing.length) {
+            throw new Error(`Missing GitHub repository variables: ${missing.join(', ')}`);
+          }
+          const firebase = Object.fromEntries(names.map(name => [
+            name.replace('FIREBASE_', '').toLowerCase().replace(/_([a-z])/g, (_, letter) => letter.toUpperCase()),
+            process.env[name]
+          ]));
+          fs.writeFileSync(
+            'src/environments/environment.prod.ts',
+            `export const environment = ${JSON.stringify({ production: true, firebase }, null, 2)};\n`
+          );
+          NODE
+      - run: npm ci
+      - run: npm test
+      - name: Build for GitHub Pages
+        run: npm run build -- --base-href "/${{ github.event.repository.name }}/"
+      - name: Add SPA fallback
+        run: cp www/index.html www/404.html
+      - uses: actions/configure-pages@v5.0.0
+      - uses: actions/upload-pages-artifact@v3.0.1
+        with:
+          path: www
+      - name: Deploy
+        id: deployment
+        uses: actions/deploy-pages@v4.0.5

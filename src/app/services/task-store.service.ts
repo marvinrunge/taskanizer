@@ -45,16 +45,16 @@ export class TaskStore {
     this.isLoading.set(false);
   }
 
-  async add(task: Task): Promise<void> {
-    await this.run(() => this.taskService.add(task));
+  add(task: Task): void {
+    this.run(() => this.taskService.add(task));
   }
 
-  async update(task: Task): Promise<void> {
-    await this.run(() => this.taskService.update(task));
+  update(task: Task): void {
+    this.run(() => this.taskService.update(task));
   }
 
-  async delete(task: Task): Promise<void> {
-    await this.run(() => this.taskService.delete(task));
+  delete(task: Task): void {
+    this.run(() => this.taskService.delete(task));
   }
 
   selectTask(id?: string): void {
@@ -89,16 +89,11 @@ export class TaskStore {
     return this.taskList().filter(task => task.title.toLowerCase().includes(normalizedTerm));
   }
 
-  private async run(operation: () => Promise<void>): Promise<void> {
+  private run(operation: () => Promise<void>): void {
     this.isLoading.set(true);
     this.error.set(undefined);
-    try {
-      await operation();
-    } catch (error) {
-      this.error.set(this.messageFor(error));
-    } finally {
-      this.isLoading.set(false);
-    }
+    void operation().catch(error => this.error.set(this.messageFor(error)));
+    this.isLoading.set(false);
   }
 
   private messageFor(error: unknown): string {
